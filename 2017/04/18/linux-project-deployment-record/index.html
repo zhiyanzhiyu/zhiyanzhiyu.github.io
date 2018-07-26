@@ -68,7 +68,7 @@
 
 
 
-  <meta name="keywords" content="Mysql,Linux,Nginx,Node," />
+  <meta name="keywords" content="Linux,Mysql,Nginx,Node," />
 
 
 
@@ -80,7 +80,7 @@
 
 
 <meta name="description" content="Mysql相关Mysql采用RPM的方式安装，安装过程碰到了几个问题。 启动用户的问题第一个问题是执行mysqld -initialize的时候，报如下错误：[ERROR] Fatal error: Please read “Security” section of the manual to find out how to run mysqld as root!这是因为在测试的时候，使用root">
-<meta name="keywords" content="Mysql,Linux,Nginx,Node">
+<meta name="keywords" content="Linux,Mysql,Nginx,Node">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Linux项目部署总结">
 <meta property="og:url" content="http://zhiyanzhiyu.net.cn/2017/04/18/linux-project-deployment-record/index.html">
@@ -366,7 +366,7 @@
         <h3 id="Mysql相关"><a href="#Mysql相关" class="headerlink" title="Mysql相关"></a>Mysql相关</h3><p>Mysql采用RPM的方式安装，安装过程碰到了几个问题。</p>
 <h4 id="启动用户的问题"><a href="#启动用户的问题" class="headerlink" title="启动用户的问题"></a>启动用户的问题</h4><p>第一个问题是执行mysqld -initialize的时候，报如下错误：[ERROR] Fatal error: Please read “Security” section of the manual to find out how to run mysqld as root!<br>这是因为在测试的时候，使用root来启动的。而从安全角度来讲，不建议用root用户启动。在my.cnf中指定用户：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">user=mysql</span><br></pre></td></tr></table></figure></p>
 <h4 id="SELinux导致启动失败"><a href="#SELinux导致启动失败" class="headerlink" title="SELinux导致启动失败"></a>SELinux导致启动失败</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Initializing MySQL database:  mysqld: Can not create directory /data/mysql/ (Errcode: 17 - File exists)</span><br><span class="line">2016-09-20T01:51:47.062108Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated.</span><br><span class="line">Please use --explicit_defaults_for_timestamp server option (see documentation for more details).</span><br><span class="line">2016-09-20T01:51:47.064457Z 0 [ERROR] Aborting</span><br><span class="line">[FAILED]</span><br></pre></td></tr></table></figure>
-<p>确认datadir 目录属主 属组均为mysql 用户，应该不是用户权限的问题，这时想起SELinux 默认是开启状态，会不会是SELinux 的问题，为了确认问题，临时关闭SELINUX<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span><span class="bash">setenforce 0</span></span><br></pre></td></tr></table></figure></p>
+<p>确认datadir 目录属主 属组均为mysql 用户，应该不是用户权限的问题，这时想起SELinux 默认是开启状态，会不会是SELinux 的问题，为了确认问题，临时关闭SELINUX<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>setenforce 0</span><br></pre></td></tr></table></figure></p>
 <p>一段时间之后，机器被重启，MYSQL启动的时候又起不了了，报如下错误：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2017-05-18T07:25:02.333924Z 0 [ERROR] InnoDB: Operating system error number 13 in a file operation.</span><br><span class="line">2017-05-18T07:25:02.333944Z 0 [ERROR] InnoDB: The error means mysqld does not have the access rights to the directory.</span><br><span class="line">2017-05-18T07:25:02.333952Z 0 [ERROR] InnoDB: os_file_get_status() failed on ./ibdata1. Cant determine file permissions</span><br><span class="line">2017-05-18T07:25:02.333961Z 0 [ERROR] InnoDB: Plugin initialization aborted with error Generic error</span><br><span class="line">2017-05-18T07:25:02.974436Z 0 [ERROR] Plugin 'InnoDB' init function returned error.</span><br><span class="line">2017-05-18T07:25:02.974455Z 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.</span><br><span class="line">2017-05-18T07:25:02.974463Z 0 [ERROR] Failed to initialize plugins.</span><br><span class="line">2017-05-18T07:25:02.974469Z 0 [ERROR] Aborting</span><br></pre></td></tr></table></figure></p>
 <p>问题同样是因为SELinux没有关闭导致的。</p>
 <h4 id="字符集配置的问题"><a href="#字符集配置的问题" class="headerlink" title="字符集配置的问题"></a>字符集配置的问题</h4><p>启动失败，LOG中报错。原来在5.1版本时，为了解决中文乱码问题设置默认字符集为utf8时，在my.cnf内的 [mysql] 和 [mysqld] 项中都是写：default-character-set=utf8 ，到了5.5版本以后的版本， [mysql] 项内可以这么写， [mysqld] 项内不能再这么写了，而是必须写：character-set-server=utf8，否则报错。  </p>
@@ -414,9 +414,9 @@ configure: error: no acceptable C compiler found in $PATH See</code>config.log�
       
         <div class="post-tags">
           
-            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
-          
             <a href="/tags/Linux/" rel="tag"># Linux</a>
+          
+            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
           
             <a href="/tags/Nginx/" rel="tag"># Nginx</a>
           
@@ -809,7 +809,7 @@ configure: error: no acceptable C compiler found in $PATH See</code>config.log�
         var gitalk = new Gitalk({
           clientID: 'db8367ec7edcff995bab',
           clientSecret: '12f2274d1cb32e7468deb0f180d669314b844b81',
-          repo: 'zhiyanzhiyu.github.io',
+          repo: 'https://github.com/zhiyanzhiyu/zhiyanzhiyu.github.io.git',
           owner: 'zhaozhi@alumni.sjtu.edu.cn',
           admin: ['zhaozhi@alumni.sjtu.edu.cn'],
           id: location.pathname,
