@@ -83,7 +83,7 @@
 <meta name="keywords" content="程序员 AI Java 深度学习 ML 志哥 志言志语">
 <meta property="og:type" content="website">
 <meta property="og:title" content="志言志语">
-<meta property="og:url" content="http://zhiyanzhiyu.net.cn/tags/MySQL/index.html">
+<meta property="og:url" content="http://zhiyanzhiyu.net.cn/tags/Mysql/index.html">
 <meta property="og:site_name" content="志言志语">
 <meta property="og:description" content="问舍求田，原无大志">
 <meta property="og:locale" content="zh-Hans">
@@ -119,13 +119,13 @@
 
 
 
-  <link rel="canonical" href="http://zhiyanzhiyu.net.cn/tags/MySQL/"/>
+  <link rel="canonical" href="http://zhiyanzhiyu.net.cn/tags/Mysql/"/>
 
 
 
 
 
-  <title>标签: MySQL | 志言志语</title>
+  <title>标签: Mysql | 志言志语</title>
   
 
 
@@ -255,7 +255,7 @@
 
     <div id="posts" class="posts-collapse">
       <div class="collection-title">
-        <h1>MySQL<small>标签</small>
+        <h1>Mysql<small>标签</small>
         </h1>
       </div>
 
@@ -267,9 +267,9 @@
 
       <h2 class="post-title">
         
-            <a class="post-title-link" href="/2017/05/09/mysql-om-notes/" itemprop="url">
+            <a class="post-title-link" href="/2017/11/29/mysql-reset-pwd/" itemprop="url">
               
-                <span itemprop="name">MySQL常用运维命令汇总</span>
+                <span itemprop="name">MacOS下MySQL密码重置</span>
               
             </a>
         
@@ -277,9 +277,65 @@
 
       <div class="post-meta">
         <time class="post-time" itemprop="dateCreated"
-              datetime="2017-05-09T11:58:58+08:00"
-              content="2017-05-09" >
-          05-09
+              datetime="2017-11-29T18:03:23+08:00"
+              content="2017-11-29" >
+          11-29
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2017/04/18/linux-project-deployment-record/" itemprop="url">
+              
+                <span itemprop="name">Linux项目部署总结</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-04-18T15:43:07+08:00"
+              content="2017-04-18" >
+          04-18
+        </time>
+      </div>
+
+    </header>
+  </article>
+
+
+      
+        
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+    <header class="post-header">
+
+      <h2 class="post-title">
+        
+            <a class="post-title-link" href="/2017/04/16/mysql-data-type/" itemprop="url">
+              
+                <span itemprop="name">MSYQL总结之数据类型篇</span>
+              
+            </a>
+        
+      </h2>
+
+      <div class="post-meta">
+        <time class="post-time" itemprop="dateCreated"
+              datetime="2017-04-16T09:50:16+08:00"
+              content="2017-04-16" >
+          04-16
         </time>
       </div>
 
@@ -671,64 +727,6 @@
               },
               error: function(counter, error) {
                 console.log('Failed to save Visitor num, with error message: ' + error.message);
-              }
-            });
-          } else {
-            var newcounter = new Counter();
-            /* Set ACL */
-            var acl = new AV.ACL();
-            acl.setPublicReadAccess(true);
-            acl.setPublicWriteAccess(true);
-            newcounter.setACL(acl);
-            /* End Set ACL */
-            newcounter.set("title", title);
-            newcounter.set("url", url);
-            newcounter.set("time", 1);
-            newcounter.save(null, {
-              success: function(newcounter) {
-                var $element = $(document.getElementById(url));
-                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
-              },
-              error: function(newcounter, error) {
-                console.log('Failed to create');
-              }
-            });
-          }
-        },
-        error: function(error) {
-          console.log('Error:' + error.code + " " + error.message);
-        }
-      });
-    }
-
-    $(function() {
-      var Counter = AV.Object.extend("Counter");
-      if ($('.leancloud_visitors').length == 1) {
-        addCount(Counter);
-      } else if ($('.post-title-link').length > 1) {
-        showTime(Counter);
-      }
-    });
-  </script>
-
-
-
-  
-
-  
-
-  
-  
-
-  
-
-  
-
-  
-
-</body>
-</html>
-ed to save Visitor num, with error message: ' + error.message);
               }
             });
           } else {
