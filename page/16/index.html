@@ -297,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2016/09/27/wy-yydb-alg/">
+    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/01/15/happy-new-year-2007/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zyzy">
@@ -316,7 +316,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2016/09/27/wy-yydb-alg/" itemprop="url">一元夺宝算法设计</a></h1>
+                <a class="post-title-link" href="/2017/01/15/happy-new-year-2007/" itemprop="url">9527，给自己的一碗新年鸡汤</a></h1>
         
 
         <div class="post-meta">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2016-09-27T23:16:06+08:00">
-                2016-09-27
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-01-15T21:54:28+08:00">
+                2017-01-15
               </time>
             
 
@@ -351,8 +351,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/算法设计/" itemprop="url" rel="index">
-                    <span itemprop="name">算法设计</span>
+                  <a href="/categories/时光漫步/" itemprop="url" rel="index">
+                    <span itemprop="name">时光漫步</span>
                   </a>
                 </span>
 
@@ -368,7 +368,7 @@
 
           
           
-             <span id="/2016/09/27/wy-yydb-alg/" class="leancloud_visitors" data-flag-title="一元夺宝算法设计">
+             <span id="/2017/01/15/happy-new-year-2007/" class="leancloud_visitors" data-flag-title="9527，给自己的一碗新年鸡汤">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -401,18 +401,16 @@
       
         
           
-            <h3 id="缘起"><a href="#缘起" class="headerlink" title="缘起"></a>缘起</h3><p>网易“一元夺宝”这个产品已经运营很多年了，现在类似的产品也有好多。虽然此类产品大都宣称自己是以众筹的模式进行商品销售，但本质就是博彩的一种，以小博大，只不过奖金换成实物罢了。此类产品业务逻辑很简单，也很容易理解：将某一商品总销售价格分成N份，每个参与的用户购买一部分份额以赢取商品。前段时间公司也帮客户开发了一套类似的小系统，出现了一些设计上的偏差，本文总结一二,备查！<br><img src="http://od6dlhv8a.bkt.clouddn.com/201609wyyydb.png" alt="网易一元夺宝"></p>
-<h3 id="核心业务流程简要说明："><a href="#核心业务流程简要说明：" class="headerlink" title="核心业务流程简要说明："></a>核心业务流程简要说明：</h3><ul>
-<li>首先商品（GOOD）可以有很多种，每种商品有很多期（ISSUE），某一期销售完成后可以自动添加新一期；每件商品总价被分成很多份，每份价格1元，10元，或者百元，每份对应一个号码；</li>
-<li>用户下单（ORDER）按份数购买某一商品某一期，可以一次购买多份，甚至把某一商品某期全部包号；</li>
-<li>销售期完成之后，系统自动对该期进行开奖，开奖算法如下（参考网易一元夺宝）：<br><img src="http://od6dlhv8a.bkt.clouddn.com/201609yydbsf.png" alt="一元夺宝开奖算法"></li>
-<li>开奖之后，把奖品寄送给中奖用户；</li>
-</ul>
-<p>系统设计方面，整体来讲没有什么难点，因为商品，商品期的发布，状态流转，开奖等流程都比较明确，不过系统开发过程中还是忽略了一下业务细节的特殊姓，比如对幸运号码的处理。其他诸如开期，开奖的流程，也出了一些问题，但都不是设计上的问题，可以按部就班的解决。下面对幸运号码相关设计详细说明一二。</p>
-<h3 id="幸运号码分配算法"><a href="#幸运号码分配算法" class="headerlink" title="幸运号码分配算法"></a>幸运号码分配算法</h3><p>根据业务要求，每种商品每一期的号码池是：10000001（原始数） + P（商品价格），每份对应其中一个号码， 而最终的中奖号码也在这组数据里面产生。问题是用户下单的时候，该怎么把幸运号码随机分配给用户？</p>
-<p><strong>方案A：</strong> 初始方案，是有一个ORDER表，用来记录用户订单，还有一个LUCK_NUM表，用来记录每一条幸运号码，LUCK_NUM表关联到ORDER表和ISSUE表中；用户每次下单购买n（0&lt;n&lt;=N）份，从10000001-P中取n个随机数出来作为幸运号码，但是因为每个幸运号码只能用一次，所以取随机数的时候要把已经用掉的号码去掉，这个地方就要考虑代码的性能问题；后来觉得不太方便，就改成每次创建新ISSUE时，把对应的所有的LUCK_NUM表的记录先创建出来，然后下单的时候从LUCK_NUM表中分配未用的幸运号码，已用的幸运号码设置一个标记位。【注意：这里幸运号码不是中奖号码！】<br>目前系统已经按照方案A上线，但是现在考虑下来，此方案有很多缺点，导致了一些问题。比如因为有LUCK_NUM这个表，导致系统自动创建新的ISSUE时，速度可能不够快，还有当用户购买大单时，要更新LUCK_NUM表的耗时过长，用户体验很差！而且随着系统运营时间的增加，LUCK_NUM表的记录会爆炸性增长，进而影响系统性能。</p>
-<p><strong>方案B：</strong> 根据上面的问题，考虑了一个优化方案，去掉LUCK_NUM表，增加一个LUCK_NUM_POOL表，就是不要对每一期夺宝商品都搞一批幸运号码出来，而是对某一种商品只产生一批幸运号码，然后重复使用，因为同一种商品价格一样，所有幸运号码都是一样的，所以LUCK_NUM的存在有些鸡肋。<br>另外，为了避免每次下单都更新LUCK_NUM_POOL的记录，有一列是无序随机的幸运号码luck_num，还有一列是顺序编号sort_num，还需要在ISSUE表中新增一个游标字段，记录每次用户下单之后尚未使用的sort_num的起始值，这样应该还可以解决一些用户大量访问下达的并发问题。</p>
-<p>因为目前公司规模不大，最近接的一些外包的小项目，需求不完善，业务流程也不甚明确，所以导致设计的往往采取尽可能简化的策略，但是只要称得上一个项目，又往往是麻雀虽小五脏俱全，总是会遗漏一些点，所以做起来还是挺痛苦的！</p>
+            <p>最近新办了张上海移动的手机号，在设备上选号的时候，才翻了两页就看到一个尾号9527的号码，觉得很熟悉念着也挺顺口，就立马去柜台交钱开了卡。说实话，这个时候我只是觉得这个号码很熟悉，并且隐约记得这个号码是电视剧《士兵突击》中许木木在钢七连的编号。</p>
+<p>回到公司跟同事提了一句，说办了一个9527的手机号，同事听了表情夸张的笑笑，提醒我号码有点那啥。我有些诧异，立马上网查了查，发现网上对这个号码的讨论还真是热闹，不但百度百科有专门的页面，知乎也有好几个相关的问题，百度甚至还有一个专门的贴吧。不过看完各种解读，我惊讶的发现自己完全搞错了，许木木在钢七连的编号是4956不是9527，两个号码八杆子打不着！</p>
+<p>可9527这个数字这么热，它到底有什么神奇之处呢？原来，9527是在星爷电影里面屡次出现，尤其是在《唐伯虎点秋香》中被发扬光大的一个梗。不过早在《唐伯虎点秋香》之前，发哥在《监狱风云》中的囚徒编号就是9527，所以很多人认为星爷在《唐伯虎点秋香》中用发哥的这个编号，是暗自自己在华府的囚徒生活。<br><img src="http://od6dlhv8a.bkt.clouddn.com/2017019527-jyfy.jpg" alt="《监狱风云》剧照"><br>因为9527在粤语中的谐音有“小弟弟该硬的时候不硬”，也就是“没种”的意思，再加上星爷的电影和大众各种牵强附会解读，9527也就有了“没种的卑微下人”的专属含义。除去《唐伯虎点秋香》这部电影，星爷在《逃学威龙》中饰演交警的编号也是9527。另外，在《功夫》中也有一张扑克牌的截图，不过我个人觉得有些牵强，毕竟截图能够认出来的牌还有其他几张。<br><img src="http://od6dlhv8a.bkt.clouddn.com/2017019527-txwl.jpg" alt="《逃学威龙》剧照"><br><img src="http://od6dlhv8a.bkt.clouddn.com/2017019527-gf01.jpg" alt="《功夫》剧照"></p>
+<p>抛开星爷，9527还有一种解释是<strong>爱江山更爱美人，因为</strong>在中国古代把数字分为阳数和阴数，奇数为阳，偶数为阴。阳数中九为最高五居正中，因而以“九”和“五”象征帝王的权威，称之为“九五之尊”，而27谐音为爱妻，妻子永远是自己心中最美的，合起来就是爱江山更爱美人。另外，把9527倒过来看，还有LZSB的意思！</p>
+<p>对于9527的诸种解读，大部分都是无厘头甚至牵强附会，而且几种含义还有互相矛盾的地方。我觉得大家之所以这么喜欢这个号码，最主要的还是因为星爷，还是因为《唐伯虎点秋香》这部电影。在电影中星爷饰演的唐伯虎虽然才高八斗风流倜傥，为了追求秋香唐伯虎费尽周折进了华府，不过也成了一个只有编号与狗同级的低等下人，每天被人欺负蹂躏。可唐伯虎毕竟不是真的下等奴仆，而是为了追求幸福而甘愿卖身为奴的唐解元，在华府他从只有编号的9527变成了华安，由下等奴仆变成由书童，又变成老师，最后则做回了唐伯虎，并且迎娶了秋香抱得美人归。这么喜闻乐见又励志的故事，大家怎么能不喜欢呢？<br><img src="http://od6dlhv8a.bkt.clouddn.com/2017019527-tbhdqx01.png" alt="《唐伯虎点秋香01》剧照"><br><img src="http://od6dlhv8a.bkt.clouddn.com/2017019527-tbhdqx02.jpg" alt="《唐伯虎点秋香02》剧照"></p>
+<p>星爷的电影是搞笑，可更多时候是笑中带泪，能让人体味到一种特别的悲怆，我想这应该和他自己成长经历应该有关吧？从跑龙套的士兵丙，再到后来世人膜拜的星爷，其中艰辛可以想见，而9527这样一个梗，何尝不是星爷对亲身经历的解构和自嘲呢？</p>
+<p>再联想的远一点，被我弄混了的许三多最初也是一个9527，是一个被所有人被所有人都看不起甚至厌恶的小角色。从山沟沟走到军营，从新兵连到五班，甚至到了钢七连，他不过是从一个“监狱”走进另一个“监狱”，从一个“华府”走进另一个“华府”，但是他靠着自己简单又朴素的信仰：“<strong>有意义就是好好活，好好活就是做很多有意义的事</strong>”，一步一步将自己淬炼成万里挑一的兵王，一个被誉为陆军巅峰的老A。同样，饰演许三多的王宝强，最初的时候何尝不是一个9527呢？一个农村出来的农家孩子，从群演成长为影帝成了导演，虽然去年的离婚案闹的天下皆知，但是这并不能否认他在事业上的成功！<br><img src="http://od6dlhv8a.bkt.clouddn.com/2017019527-sbtj.jpg" alt="《士兵突击》剧照"></p>
+<p>话说每年年末年初的时候，我总是很焦虑，因为我又长大了一岁，奔三之后就是奔四，可一年下来境况依然如故，工作生活都没什么长进，仍然是一个无足轻重的9527，像一个囚徒一样在生活，这到底是为什么呢？现在看来原因很简单，《士兵突击》中老团长有句话，“<strong>想要和得到，中间还有两个字，那就是要做到，你只有做到，那才能得到嘛</strong>”。</p>
+<p>虽然很早就看过《士兵突击》，虽然不止一遍的看过《唐伯虎点秋香》，可是就像我把两个号码张冠李戴一样，就算我被感动的稀里哗啦，但我仍然只是一个看热闹的，那些简单朴素却又无比珍贵的道理，从来没有真正走进我的内心！电影里面的唐伯虎，现实中的星爷，电视剧里面的许三多，现实中的王宝强，最初都是寂寂无名的小人物，都是靠着自己无坚不摧的信仰，冲破牢笼的勇气以及全身心投入的热情，一步步的走出困境的！可我既没有所谓的信仰，又总是患得患失随波逐流，根本就没有去做过，又何谈“做到”呢？结果也只能是“得不到”了！</p>
+<p>2017年已经过去好几天了，希望在新的一年中自己能够找到所谓的“信仰”，想清楚自己到底想要什么，想得到什么？然后踏踏实实的去做，并且百分之一百的做到！</p>
 
           
         
@@ -452,7 +450,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/15/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/15/">15</a><span class="page-number current">16</span><a class="page-number" href="/page/17/">17</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/17/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -502,7 +500,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -513,7 +511,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -524,7 +522,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>

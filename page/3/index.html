@@ -297,7 +297,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/07/06/win-bat-about/">
+    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2018/01/02/ai-ml-000-introduction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zyzy">
@@ -316,7 +316,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/06/win-bat-about/" itemprop="url">Bat脚本的几点经验总结</a></h1>
+                <a class="post-title-link" href="/2018/01/02/ai-ml-000-introduction/" itemprop="url">ML000.机器学习入门</a></h1>
         
 
         <div class="post-meta">
@@ -328,8 +328,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-06T17:35:08+08:00">
-                2017-07-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T13:31:11+08:00">
+                2018-01-02
               </time>
             
 
@@ -351,8 +351,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/系统运维/" itemprop="url" rel="index">
-                    <span itemprop="name">系统运维</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -368,7 +368,7 @@
 
           
           
-             <span id="/2017/07/06/win-bat-about/" class="leancloud_visitors" data-flag-title="Bat脚本的几点经验总结">
+             <span id="/2018/01/02/ai-ml-000-introduction/" class="leancloud_visitors" data-flag-title="ML000.机器学习入门">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -401,22 +401,38 @@
       
         
           
-            <p>最近有个小项目需要在Window环境下部署，需要写一个bat启动脚本，但是因为对bat脚本语法不太清楚，找了个之前用的模版，算是能用了。期间碰到几个小问题，记录一下：</p>
-<h3 id="简单语法说明"><a href="#简单语法说明" class="headerlink" title="简单语法说明"></a>简单语法说明</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">if exist "%JAVA_HOME%" goto okHome</span><br><span class="line">echo The JAVA_HOME environment variable is not defined correctly</span><br><span class="line">goto end</span><br><span class="line"></span><br><span class="line">:okHome</span><br><span class="line">if exist "%JAVA_HOME%\bin\java.exe" goto run</span><br><span class="line">echo The java.exe is not available</span><br><span class="line">goto end</span><br><span class="line"></span><br><span class="line">:run</span><br><span class="line">set CLASSPATH=.</span><br><span class="line">for %%i in (.\lib\*.jar) do call cpappend.bat %%i</span><br><span class="line"><span class="meta">%</span>JAVA_HOME%\bin\java.exe -classpath %CLASSPATH% com.xxx.JxzkMain 192.xx.xx.xxx 99xx 99xx 90xx</span><br><span class="line"><span class="meta">1&gt;</span>&gt;/var/log/xxx-data.out</span><br><span class="line"><span class="meta">2&gt;</span>&gt;/var/log/xxx-data.alarms &amp;</span><br><span class="line"></span><br><span class="line">:end</span><br></pre></td></tr></table></figure>
-<p>说明：<br>FOR %%variable IN (set) DO command [command-parameters]，%%i应该是代表了”.\lib*.jar”中的每一个jar包</p>
-<p>for %%i in (“.\lib*.jar”) 应该是遍历”.\lib*.jar”中的每一个jar包,同时用%%i来存储名称<br>call setenv.bat %%i 应该是把%%i当参数调用setenv.bat<br>set cp=%cp%;%1 应该是把每一个%%i和%cp%拼接起来，再次赋值给%cp%变量</p>
-<p>set cp=for %%i in (“.\lib*.jar”) do call cpappend.bat %%i，应该是遍历lib包下的每一个jar包，同时把jar包名称用;拼接成起来赋值给cp变量</p>
-<p>java -cp %cp% com.test.DoMain 这个是执行Java main方法<br>1&gt;&gt;/var/log/xxx-data.out  输出日志信息<br>2&gt;&gt;/var/log/xxx-data.alarms &amp;  输出告警信息</p>
-<h4 id="让命令行窗口处于显示等待状态"><a href="#让命令行窗口处于显示等待状态" class="headerlink" title="让命令行窗口处于显示等待状态"></a>让命令行窗口处于显示等待状态</h4><p> pause</p>
-<h3 id="环境变量中的空格"><a href="#环境变量中的空格" class="headerlink" title="环境变量中的空格"></a>环境变量中的空格</h3><p>脚本写好之后，在自己的开发机器上运行正常，可以把应用拉起来，但是放到生产环境上，却报了一个异常：</p>
-<blockquote>
-<p>‘C:\Program’ 不是内部或外部命令，也不是可运行的程序或批处理文件。<br>看着好像是Java的安装目录有问题，以为是环境变量配置的不对，重新配置了一遍，还是不行！因为生产Java安装在了C:\Program Files下，中间有个空格，可能会有问题，网上查了一下，果然！</p>
+            <blockquote>
+<p>本文是机器学习相关的学习笔记，主要参考Andrew Ng、李宏毅等大牛的课程和书籍。<br>本文是0篇之<strong>机器学习入门</strong>，主要内容是机器学习的概念等基础知识。</p>
 </blockquote>
-<p>如果本机环境变量的设置：java_home = C:\Program Files\Java\jdk1.8.0_131<br>*.bat中的命令格式：%java_home%\bin\java 或者 C:\Program Files\Java\jdk1.8.0_131\bin\java<br>运行这个.bat发现提示错误： “c:\Program” 不是内部或外部命令，检查了下，发现路径没有填写错误因此本人推断DOS中可能无法识别路径中有空格的情况，因此就google了一把还发现真的是这样。解决空格问题一共有两种办法：</p>
+<p>AI今年实在太火，每天都能搞出大事情！从去年就计划学习相关知识，还尝试了几次，但每次看点入门知识就放弃了，因为内容确实有点难，感觉智商不太够用，/(ㄒoㄒ)/~~。不过形势所迫，不玩点有难度的早晚要沦落成diduan人口，被AI这玩意驱逐出地球。哎，为了全人类，还是破釜沉舟背水一战吧！</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-072625.jpg" alt="作为程序员的你，感受到压力没？"></p>
+<p>最近找了很多资料，看了好几个公开课，比较流行的有大神Andrew NG在Coursera的机器学习课程，以及台湾李宏毅教授的课程，都比较适合初学者。我会参考这几个课程和其他参考书，结合自己的学习情况，整理一个大纲和笔记。</p>
+<h4 id="1-机器学习入门"><a href="#1-机器学习入门" class="headerlink" title="1 机器学习入门"></a>1 机器学习入门</h4><p><strong>1.1机器学习被用来做什么？</strong></p>
+<p>机器学习已经得到了很广泛的应用，比如谷狗，度娘的搜索技术，Facebook或Apple的图片分类程序，电子邮件垃圾邮件筛选器等等。Andrew Ng的课程中演示了一个自动飞行器，这让我们相信汽车自动驾驶时代很快就会到来。</p>
+<p><strong>1.2机器学习为什么越来越流行?</strong></p>
+<p>目前机器学习不只用于人工智能领域，它已经成为计算机一种新的能力(NewCapability），应用于很多方面，课程中提到了数据挖掘，自动化技术，理解人类思维了解人类大脑等等。下面是一个稍微详细点的分类，说明了机器学习涉及到领域：</p>
 <ul>
-<li>一个是想办法在环境变量设置的时候用特殊字符给他替换掉：C:\PROGRA~1\Java\jdk1.8.0_131</li>
-<li>另外一个就是在写代码的时候用双引号给有空格的路径给它引起来， “C:\Program Files”\Java\jdk1.8.0_131\bin\java<br>需要注意的是，在环境变量中使用C:\PROGRA~1\，在bat中用%JAVA_HOME%引用是没有效果的，只有直接写在bat中才行，即：set JAVA_HOME=C:\PROGRA~1\Java\jdk1.8.0_131</li>
+<li><strong>模式识别</strong> 可以认为模式识别就是机器学习，模式识别是从工业界发展起来的概念，而机器学习则强调计算机学科。</li>
+<li><strong>数据挖掘</strong> 数据挖掘=机器学习+数据库。数据挖掘仅仅是一种思考方式，不必神话之。</li>
+<li><strong>统计学习</strong> 统计学习近似于机器学习，与机器学习高度重合，统计学的发展促进了机器学习的大发展，但是两者侧重点不同。统计学习重点关注统计模型的发展优化，偏数学，而机器学习关注实际问题的解决，偏实际。</li>
+<li><strong>计算机视觉</strong> 计算机视觉 = 图像处理+机器学习。</li>
+<li><strong>语音识别</strong> 语音识别 = 语音处理+机器学习，即音频处理技术与机器学习的结合。</li>
+<li><strong>自然语言处理</strong>自然语言处理 = 文本处理 + 机器学习。自然语言处理是让机器理解人类语言的学科，词法分析，语义理解，机器学习等。</li>
 </ul>
+<p>提到数据挖掘和大数据，有这样一种观点：<strong>成功的机器学习应用不是拥有最好的算法，而是拥有更多的数据。</strong>随着大数据概念的兴起，机器学习和大数据愈发耦合，可以说大数据是机器学习应用的最佳场景，二者互相依赖，共同发展。<strong>大数据的核心是利用数据的价值，机器学习则是利用数据价值的关键技术。 </strong></p>
+<h4 id="2-机器学习是什么？"><a href="#2-机器学习是什么？" class="headerlink" title="2 机器学习是什么？"></a>2 机器学习是什么？</h4><p>机器学习目前不存在被广泛认可的定义，但有两个可以参考：</p>
+<p><strong>2.1 Arthur Samuel(1959)：</strong>在没有明确编程情况下，使计算机能够主动学习研究的领域【原文参考：Field of study that gives computers the ability to learn without being explicitly programmed.】。值得一提的是Arthur Samuel编写了最早的阿尔法狗，不过下的国际象棋；</p>
+<p><strong>2.2 Tom Mitchell(1998)：</strong>一个程序能从经验 E 中学习，解决任务 T，达到性能度量值 P，当且仅当有了经验 E 后，经过 P 评判，程序在处理 T 时的性能有所提升，这就是机器学习【原文参考：A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.】。</p>
+<p>其中第二个定义正式一点，还押韵。具体到下棋的例子：经验E是程序自我练习的经验，而任务T就是下棋，性能度量值P就是它在与新的对手比赛时赢得比赛的概率。Ng课后测验里面有几题目测试对这个定义的理解，其中一道大意是：<strong>天气预报中，T，P，E分别是什么？</strong></p>
+<p>在本小节中，Andrew NG提到了对各种工具应该采取何种态度？值得强调，既：拥有合适的工具很重要，但更重要的是：<strong>你要学会如何恰当地使用这些工具，会用与不会用的人之间存在着鸿沟。</strong></p>
+<h4 id="3-几个容易混淆的概念"><a href="#3-几个容易混淆的概念" class="headerlink" title="3 几个容易混淆的概念"></a>3 几个容易混淆的概念</h4><p>初学者可能会被AI，ML和DL这三个概念搞糊涂，贴张让人神清气爽的图。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-073315.jpg" alt=""></p>
+<p>AI是最早的一个概念，发展一波三折：</p>
+<ul>
+<li>从时间是上来讲，人工智能出现最早，机器学习和深度学习近些年才出现的。</li>
+<li>从逻辑上来讲，人工智能是目标，机器学习和深度学习是实现手段。相对机器学习而言，深度学习听起来高大上，但概并不神秘，就是传统神经网络发展到了多隐藏层的情况。</li>
+</ul>
+<p>-EOF -</p>
 
           
         
@@ -456,7 +472,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/18/">18</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -506,7 +522,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">18</span>
+                  <span class="site-state-item-count">21</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -517,7 +533,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">11</span>
+                  <span class="site-state-item-count">9</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -528,7 +544,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">37</span>
+                  <span class="site-state-item-count">48</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
