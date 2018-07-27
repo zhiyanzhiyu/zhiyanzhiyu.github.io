@@ -2,11 +2,11 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>志言志语</title>
   
-  <subtitle>Zyzy的技术博客</subtitle>
+  <subtitle>一个中年技术男的抗争史</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhiyanzhiyu.net.cn/"/>
-  <updated>2018-07-27T04:58:54.551Z</updated>
+  <updated>2018-07-27T10:35:10.323Z</updated>
   <id>http://zhiyanzhiyu.net.cn/</id>
   
   <author>
@@ -21,7 +21,7 @@
     <link href="http://zhiyanzhiyu.net.cn/2018/07/27/zyzy-restart-md/"/>
     <id>http://zhiyanzhiyu.net.cn/2018/07/27/zyzy-restart-md/</id>
     <published>2018-07-27T09:35:08.000Z</published>
-    <updated>2018-07-27T04:58:54.551Z</updated>
+    <updated>2018-07-27T10:35:10.323Z</updated>
     
     <content type="html"><![CDATA[<h3 id="反省"><a href="#反省" class="headerlink" title="反省"></a>反省</h3><p>自己做事没什么长性，曾经弄了很多个博客，但都没能写出点什么来，这个github的也是！其实去年曾坚持写过一段时间，但后来因为没有找到好的评论功能插件，觉得这个博客不太完美，就渐渐荒废了，其实就算有评论功能，真正用到的时候也不会多，这只是懒人的借口罢了。</p><p>最近查资料的时候，发现有不少人在用gitalk，感觉效果还不错，于是也花时间折腾了一下，顺道把hexo和next也都升级到最新版本，打算重新开始写点东西。不过我这个人缺点太多，除了没有长性，还太随性，做事没有章法。比如想写的东西太多，写代码是工作，文史哲是爱好，炒股也是爱好，都想写，所以最后写的内容就乱七八糟，形不成体系，对自己的成长没多大促进作用，久而久之就会心生厌烦，直到放弃。</p><h3 id="挑战"><a href="#挑战" class="headerlink" title="挑战"></a>挑战</h3><p>因为之前教训实在是深刻，所以我必须有所改变。今后在这个博客上会有所侧重：<strong>一个技术博客，而且是侧重AI相关的技术博客。</strong>为什么会有这种想法？作为一个已经36岁的高龄程序员来说，自己的职业生涯非常惨淡，没有做过什么大项目，也没有写过什么特别成功的产品，大部分代码都成了垃圾无人问津，这是一件非常悲哀的事情。不过作为一个有追求的人，我不打算就这么悲哀下去，我打算做最后的抗争：<strong>从一个传统的Java程序员努力转型成AI相关的程序员。</strong></p><p>对我来说，这是一个相当艰巨的目标，我很怀疑自己能走多远？我有很多理由怀疑自己，比如AI相关的机器学习、深度学习内容太过艰深，而自己智商不太够，再加上年龄偏大，就算能学个一知半解，想换一份相关性质的工作也绝非易事！拦路虎很多，不过这次我还是打算明知山有虎偏向虎山行了。毕竟到了我这个年纪，如果继续再像以前那么蹉跎，真的就要荒废了，现在立即行动说不定还有一丝希望。</p><h3 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h3><p>具体来讲，这个github的技术博客，是用来帮助我进行AI转型的，当然因为现在还在从事传统Java开发（不科学，只是相对AI来讲），也会涉及相关内容，但不是重点。所以，今后我会在本站记录以下几个方面：</p><ul><li><strong>时光漫步</strong> 个人生活杂感，不会多，一年也写不了几篇，不写无病呻吟的内容；</li><li><strong>编程语言</strong> 编程语言使用技巧，经验总结，主要包括Java和Python；</li><li><strong>数据库</strong> 数据库理论，MYSQL使用技巧；</li><li><strong>系统架构</strong> 主要是传统Java项目的系统设计和架构总结；</li><li><strong>机器学习</strong> 机器学习相关内容，模型和算法。</li><li><strong>深度学习</strong> 深度学习相关内容，模型和算法。</li><li><strong>AI项目实战</strong> 机器学习和深度学习的项目总结。</li><li><strong>AI行业观察</strong>  对AI行业相关的观察与思考。</li></ul><p>因为本人特别热衷炒股，但是几年下来成绩也一般，所以对AI的学习和研究，最终会落在金融证券相关的专业领域，毕竟AI涉及的行业太多不可能都兼顾。</p><p>好了，不说太多废话了，现在开始属于我的一个新时代！</p>]]></content>
     
@@ -34,7 +34,7 @@
     
     </summary>
     
-      <category term="博客运营" scheme="http://zhiyanzhiyu.net.cn/categories/%E5%8D%9A%E5%AE%A2%E8%BF%90%E8%90%A5/"/>
+      <category term="自我管理" scheme="http://zhiyanzhiyu.net.cn/categories/%E8%87%AA%E6%88%91%E7%AE%A1%E7%90%86/"/>
     
     
       <category term="机器学习" scheme="http://zhiyanzhiyu.net.cn/tags/%E6%9C%BA%E5%99%A8%E5%AD%A6%E4%B9%A0/"/>
@@ -221,11 +221,11 @@
       <category term="系统架构" scheme="http://zhiyanzhiyu.net.cn/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
     
     
+      <category term="系统架构" scheme="http://zhiyanzhiyu.net.cn/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
+    
       <category term="JWT" scheme="http://zhiyanzhiyu.net.cn/tags/JWT/"/>
     
       <category term="JJWT" scheme="http://zhiyanzhiyu.net.cn/tags/JJWT/"/>
-    
-      <category term="系统架构" scheme="http://zhiyanzhiyu.net.cn/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
     
       <category term="开源软件" scheme="http://zhiyanzhiyu.net.cn/tags/%E5%BC%80%E6%BA%90%E8%BD%AF%E4%BB%B6/"/>
     
@@ -252,11 +252,11 @@
       <category term="系统架构" scheme="http://zhiyanzhiyu.net.cn/categories/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
     
     
-      <category term="系统架构" scheme="http://zhiyanzhiyu.net.cn/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
-    
       <category term="设计模式" scheme="http://zhiyanzhiyu.net.cn/tags/%E8%AE%BE%E8%AE%A1%E6%A8%A1%E5%BC%8F/"/>
     
       <category term="观察者模式" scheme="http://zhiyanzhiyu.net.cn/tags/%E8%A7%82%E5%AF%9F%E8%80%85%E6%A8%A1%E5%BC%8F/"/>
+    
+      <category term="系统架构" scheme="http://zhiyanzhiyu.net.cn/tags/%E7%B3%BB%E7%BB%9F%E6%9E%B6%E6%9E%84/"/>
     
   </entry>
   
