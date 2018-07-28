@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/05/11/design-pattern-observer/">
+    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/06/14/json-web-tokens-notes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zyzy">
@@ -327,7 +327,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/05/11/design-pattern-observer/" itemprop="url">设计模式之观察者模式</a></h1>
+                <a class="post-title-link" href="/2017/06/14/json-web-tokens-notes/" itemprop="url">JWT介绍及Java实现JJWT使用总结</a></h1>
         
 
         <div class="post-meta">
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-11T16:24:54+08:00">
-                2017-05-11
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-14T10:49:15+08:00">
+                2017-06-14
               </time>
             
 
@@ -379,7 +379,7 @@
 
           
           
-             <span id="/2017/05/11/design-pattern-observer/" class="leancloud_visitors" data-flag-title="设计模式之观察者模式">
+             <span id="/2017/06/14/json-web-tokens-notes/" class="leancloud_visitors" data-flag-title="JWT介绍及Java实现JJWT使用总结">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">字数&#58;</span>
                 
                 <span title="字数">
-                  1,917 字
+                  1,677 字
                 </span>
               
 
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  7 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -443,42 +443,46 @@
       
         
           
-            <h2 id="定义"><a href="#定义" class="headerlink" title="定义"></a>定义</h2><p>观察者模式，又可以称之为发布-订阅模式。观察者，顾名思义，就是一个监听者，一旦被观察/监听的目标发生的情况，就会被监听者发现，这么想来目标发生情况到观察者知道情况，其实是由目标把情况通知到观察者的。观察者模式多用于实现订阅功能的场景，例如微博的订阅，当我们订阅了某个人的微博账号，当这个人发布了新的消息，就会通知我们。下面的类图说明的比较清楚：<br><img src="http://od6dlhv8a.bkt.clouddn.com/201705dp-observer.jpg" alt="观察者模式" title="观察者模式"></p>
-<h3 id="角色说明"><a href="#角色说明" class="headerlink" title="角色说明"></a>角色说明</h3><ul>
-<li><strong>抽象被观察者角色</strong>：把所有对观察者对象的引用保存在一个集合中，每个被观察者角色都可以有任意数量的观察者。被观察者提供一个接口，可以增加和删除观察者角色。一般用一个抽象类和接口来实现。</li>
-<li><strong>抽象观察者角色</strong>：为所有具体的观察者定义一个接口，在得到主题的通知时更新自己。</li>
-<li><strong>具体被观察者角色</strong>：在被观察者内部状态改变时，给所有登记过的观察者发出通知。具体被观察者角色通常用一个子类实现。</li>
-<li><strong>具体观察者角色</strong>：该角色实现抽象观察者角色所要求的更新接口，以便使本身的状态与主题的状态相协调。通常用一个子类实现。如果需要，具体观察者角色可以保存一个指向具体主题角色的引用。</li>
+            <h2 id="JWT介绍"><a href="#JWT介绍" class="headerlink" title="JWT介绍"></a>JWT介绍</h2><p>Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC7519)，该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。</p>
+<h2 id="认证方案"><a href="#认证方案" class="headerlink" title="认证方案"></a>认证方案</h2><h3 id="Session认证"><a href="#Session认证" class="headerlink" title="Session认证"></a>Session认证</h3><p>在谈论JWT之前，我们先看一下传统的session认证方案：http协议本身是一种无状态的协议，这意味着用户向应用提供用户名和密码来进行用户认证，那么下一次请求时，用户还要再一次进行用户认证才行，因为根据http协议，我们并不能知道是哪个用户发出的请求，所以为了让我们的应用能识别是哪个用户发出的请求，我们只能在服务器存储一份用户登录的信息，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。但是这种基于session的认证使应用本身很难得到扩展，随着不同客户端用户的增加，独立的服务器已无法承载更多的用户，而这时候基于session认证应用的问题就会暴露出来。</p>
+<p>基于session认证所显露的问题:</p>
+<ul>
+<li>Session: 每个用户经过我们的应用认证之后，我们的应用都要在服务端做一次记录，以方便用户下次请求的鉴别，通常而言session都是保存在内存中，而随着认证用户的增多，服务端的开销会明显增大。</li>
+<li>扩展性: 用户认证之后，服务端做认证记录，如果认证的记录被保存在内存中的话，这意味着用户下次请求还必须要请求在这台服务器上,这样才能拿到授权的资源，这样在分布式的应用上，相应的限制了负载均衡器的能力。这也意味着限制了应用的扩展能力。</li>
+<li>CSRF: 因为是基于cookie来进行用户识别的, cookie如果被截获，用户就会很容易受到跨站请求伪造的攻击。</li>
 </ul>
-<h3 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h3><ul>
-<li>当一个抽象模型有两个方面, 其中一个方面依赖于另一方面。将这二者封装在独立的对象中以使它们可以各自独立地改变和复用。</li>
-<li>当对一个对象的改变需要同时改变其它对象, 而不知道具体有多少对象有待改变。</li>
-<li>当一个对象必须通知其它对象，而它又不能假定其它对象是谁（换言之,你不希望这些对象是紧密耦合的）。</li>
+<h3 id="基于token的鉴权机制"><a href="#基于token的鉴权机制" class="headerlink" title="基于token的鉴权机制"></a>基于token的鉴权机制</h3><p>基于token的鉴权机制类似于http协议也是无状态的，它不需要在服务端去保留用户的认证信息或者会话信息。这就意味着基于token认证机制的应用不需要去考虑用户在哪一台服务器登录了，这就为应用的扩展提供了便利。流程上是这样的：</p>
+<ul>
+<li>用户使用用户名密码来请求服务器</li>
+<li>服务器进行验证用户的信息</li>
+<li>服务器通过验证发送给用户一个token</li>
+<li>客户端存储token，并在每次请求时附送上这个token值</li>
+<li>服务端验证token值，并返回数据</li>
+<li>这个token必须要在每次请求时传递给服务端，它应该保存在请求头里， 另外，服务端要支持CORS(跨来源资源共享)策略，一般我们在服务端这么做就可以了Access-Control-Allow-Origin: *。</li>
 </ul>
-<h2 id="简单实例"><a href="#简单实例" class="headerlink" title="简单实例"></a>简单实例</h2><p>观察者模式还是比较容易理解的，在网上看到了一个运钞车的例子，觉得挺好玩，我也瞎编了一个场景：一个姑娘失恋了，在微博上发了条微博，几个潜在的追求者看到了微博，纷纷出动。</p>
-<p>抽象的观察者<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zyzy.obs;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Watcher</span> </span>&#123;</span><br><span class="line">	  <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span></span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>抽象的被观察者，声明了三个方法，通知观察者方法，增删观察者方法。<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zyzy.obs;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Watched</span> </span>&#123;</span><br><span class="line">	 <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addWatcher</span><span class="params">(Watcher watcher)</span></span>;  </span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeWatcher</span><span class="params">(Watcher watcher)</span></span>;  </span><br><span class="line"></span><br><span class="line">     <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyWatchers</span><span class="params">()</span></span>;  </span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>观察者之屌丝BOY<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zyzy.obs;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DsBoy</span> <span class="keyword">implements</span> <span class="title">Watcher</span> </span>&#123;</span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"屌丝：女神失恋啦，我要去表白，本屌将献诗一首！"</span>);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>观察者之二代BOY<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zyzy.obs;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FedBoy</span> <span class="keyword">implements</span> <span class="title">Watcher</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"二代：妹妹，不要伤心，哥哥这里啥都有，过来跟着哥耍吧！"</span>);  </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>观察者之暖男BOY<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zyzy.obs;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JjBoy</span> <span class="keyword">implements</span> <span class="title">Watcher</span></span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		 System.out.println(<span class="string">"暖男：不要伤心，我是居家暖男，来家里给你做饭吃！"</span>);  </span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>具体的被观察者：Girl<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zyzy.obs;</span><br><span class="line"></span><br><span class="line"><span class="keyword">import</span> java.util.ArrayList;</span><br><span class="line"><span class="keyword">import</span> java.util.List;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">BfmGirl</span> <span class="keyword">implements</span> <span class="title">Watched</span> </span>&#123;</span><br><span class="line"></span><br><span class="line">	<span class="keyword">private</span> List&lt;Watcher&gt; list = <span class="keyword">new</span> ArrayList&lt;Watcher&gt;();</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">addWatcher</span><span class="params">(Watcher watcher)</span> </span>&#123;</span><br><span class="line">		list.add(watcher);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	<span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">removeWatcher</span><span class="params">(Watcher watcher)</span> </span>&#123;</span><br><span class="line">		list.remove(watcher);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">  <span class="meta">@Override</span></span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">notifyWatchers</span><span class="params">()</span> </span>&#123;</span><br><span class="line">		System.out.println(<span class="string">"Girl：哇哇哇，我滴男盆友跟闺蜜跑了，咋办？咋办？咋办？在线等。。。"</span>);</span><br><span class="line">		<span class="keyword">for</span>(Watcher w:list)&#123;</span><br><span class="line">			w.update();</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>测试类<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">package</span> com.zyzy.obs;</span><br><span class="line"></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ObsTest</span> </span>&#123;</span><br><span class="line">	<span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">		BfmGirl girl = <span class="keyword">new</span> BfmGirl();</span><br><span class="line"></span><br><span class="line">		DsBoy dsBoy = <span class="keyword">new</span> DsBoy();</span><br><span class="line">		FedBoy fedBoy = <span class="keyword">new</span> FedBoy();</span><br><span class="line">		JjBoy jjBoy = <span class="keyword">new</span> JjBoy();</span><br><span class="line"></span><br><span class="line">		girl.addWatcher(dsBoy);</span><br><span class="line">		girl.addWatcher(fedBoy);</span><br><span class="line">		girl.addWatcher(jjBoy);</span><br><span class="line"></span><br><span class="line">		girl.notifyWatchers();</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>运行测试类输出：</p>
+<h2 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h2><p><a href="https://jwt.io/" target="_blank" rel="noopener">JWT</a>长什么样？JWT是由三段信息构成的，如下:</p>
 <blockquote>
-<p>Girl：哇哇哇，我滴男盆友跟闺蜜跑了，咋办？咋办？咋办？在线等。。。<br>屌丝：女神失恋啦，我要去表白，本屌将献诗一首！<br>二代：妹妹，不要伤心，哥哥这里啥都有，过来跟着哥耍吧！<br>暖男：不要伤心，我是居家暖男，来家里给你做饭吃！</p>
+<p>eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2UifQ.ipevRNuRP6HflG8cFKnmUPtypruRC4fb1DWtoLL62SY</p>
 </blockquote>
-<h2 id="要点总结"><a href="#要点总结" class="headerlink" title="要点总结"></a>要点总结</h2><h3 id="模式关键"><a href="#模式关键" class="headerlink" title="模式关键"></a>模式关键</h3><p>观察者模式最主要的设计思想是什么呢？第一是针对观察者与被观察者分别定义接口，有利于分别进行扩展。关键点在被观察者的实现中：1）定义观察者集合，并定义针对集合的添加、删除操作，用于增加、删除订阅者（观察者）；2）定义通知方法，用于将新情况通知给观察者用户（订阅者用户）</p>
-<h3 id="和桥接模式的区别"><a href="#和桥接模式的区别" class="headerlink" title="和桥接模式的区别"></a>和桥接模式的区别</h3><p>观察者模式定义的是一对多的依赖关系，一个被观察者可以拥有多个观察者，并且通过接口对观察者与被观察者进行逻辑解耦，降低二者的直接耦合。这种模式与桥接模式有点类似的感觉。桥接模式也是拥有双方，同样是使用接口（抽象类）的方式进行解耦，使双方能够无限扩展而互不影响，不过二者还是有者明显的区别：</p>
+<h3 id="header"><a href="#header" class="headerlink" title="header"></a>header</h3><p>jwt的头部承载两部分信息：声明类型(这里是jwt)和声明加密的算法（通常直接使用 HMAC SHA256），完整的头部就像下面这样的JSON：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  'typ': 'JWT',</span><br><span class="line">  'alg': 'HS256'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>然后将头部进行base64加密（该加密是可以对称解密的),构成了第一部分：eyJhbGciOiJIUzI1NiJ9</p>
+<h3 id="playload"><a href="#playload" class="headerlink" title="playload"></a>playload</h3><p>载荷就是存放有效信息的地方。这个名字像是特指飞机上承载的货品，这些有效信息包含三个部分:即标准中注册的声明，公共的声明，私有的声明<br><strong>标准中注册的声明</strong> (建议但不强制使用) ：</p>
 <ul>
-<li>主要就是使用场景不同，桥接模式主要用于实现抽象与实现的解耦，主要目的也正是如此，为了双方的自由扩展而进行解耦，这是一种多对多的场景。观察者模式侧重于另一方面的解耦，侧重于监听方面，侧重于一对多的情况，侧重于一方发生情况，多方能获得这个情况的场景。</li>
-<li>另一方面就是编码方面的不同，在观察者模式中存在许多独有的内容，如观察者集合的操作，通知的发送与接收，而在桥接模式中只是简单的接口引用。</li>
+<li>iss: jwt签发者</li>
+<li>sub: jwt所面向的用户</li>
+<li>aud: 接收jwt的一方</li>
+<li>exp: jwt的过期时间，这个过期时间必须要大于签发时间</li>
+<li>nbf: 定义在什么时间之前，该jwt都是不可用的.</li>
+<li>iat: jwt的签发时间</li>
+<li>jti: jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。<br><strong>公共的声明</strong> ：公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息.但不建议添加敏感信息，因为该部分在客户端可解密.<br><strong>私有的声明</strong> ：私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为base64是对称解密的，意味着该部分信息可以归类为明文信息。<br>如下：<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"sub"</span>: <span class="string">"1111111"</span>,</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"2222222222"</span>,</span><br><span class="line">  <span class="attr">"admin"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
 </ul>
-<h3 id="推还是拉？"><a href="#推还是拉？" class="headerlink" title="推还是拉？"></a>推还是拉？</h3><p> 小实例中没有关于数据和状态的变化通知，只是简单通知到各个观察者，告诉他们被观察者有行动。观察者模式在关于目标角色、观察者角色通信的具体实现中，有两个版本：</p>
-<ul>
-<li>一种情况便是目标角色在发生变化后，仅仅告诉观察者角色“我变化了”，观察者角色如果想要知道具体的变化细节，则就要自己从目标角色的接口中得到。这种模式被很形象的称为：拉模式——就是说变化的信息是观察者角色主动从目标角色中“拉”出来的。</li>
-<li>还有一种方法，那就是我目标角色“服务一条龙”，通知你发生变化的同时，通过一个参数将变化的细节传递到观察者角色中去。这就是“推模式”——管你要不要，先给你啦。<br>上述两种模式如何选择，取决于系统实际需求。如果目标角色比较复杂，并且观察者角色进行更新时必须得到一些具体变化的信息，则“推模式”比较合适。如果目标角色比较简单，则“拉模式”就很合适。</li>
-</ul>
-<h2 id="实际案例"><a href="#实际案例" class="headerlink" title="实际案例"></a>实际案例</h2><p>观察者模式应用很广泛，下面介绍几个常见的场景。（未完待续）</p>
+<h3 id="signature"><a href="#signature" class="headerlink" title="signature"></a>signature</h3><p>jwt的第三部分是一个签证信息，这个签证信息由三部分组成：header (base64后的),payload (base64后的),secret。这个部分需要base64加密后的header和base64加密后的payload使用.连接组成的字符串，然后通过header中声明的加密方式进行加盐secret组合加密，然后就构成了jwt的第三部分。</p>
+<h2 id="JWT的Java实现JJWT"><a href="#JWT的Java实现JJWT" class="headerlink" title="JWT的Java实现JJWT"></a>JWT的Java实现JJWT</h2><p>JWT现在已经算得上流行了，各种语言都有了不同版本的实现，下面简单说明一下Java版本的实现之一<a href="https://github.com/jwtk/jjwt" target="_blank" rel="noopener">JJWT</a>。</p>
+<p>Maven依赖：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.jsonwebtoken<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jjwt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.7.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
+<p>生成Token：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Key key = MacProvider.generateKey();</span><br><span class="line">String compactJws = Jwts.builder()</span><br><span class="line">  .setSubject(<span class="string">"Joe"</span>)</span><br><span class="line">  .signWith(SignatureAlgorithm.HS512, key)</span><br><span class="line">  .compact();</span><br></pre></td></tr></table></figure></p>
+<p>解析Token：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Jwts.parser().setSigningKey(key).parseClaimsJws(compactJws);</span><br><span class="line">    <span class="comment">//OK, we can trust this JWT,正常解析则表示Token有效</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (SignatureException e) &#123;</span><br><span class="line">    <span class="comment">//don't trust the JWT!，不能解析则表示Token非法，拒绝请求</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最初了解JWT的时候，对其如何验证请求带上来的Token有些疑问，这里在对签名进行加密的时候，是一个固定的Key，保存在服务端，不能泄露，否则就失去了意义！<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SecretKey <span class="title">generalKey</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String stringKey =  JWT_SECRET;<span class="comment">//固定值，比如123456</span></span><br><span class="line">    <span class="keyword">byte</span>[] encodedKey = Base64.decodeBase64(stringKey);</span><br><span class="line">    SecretKey key = <span class="keyword">new</span> SecretKeySpec(encodedKey, <span class="number">0</span>, encodedKey.length, <span class="string">"AES"</span>);</span><br><span class="line">    <span class="keyword">return</span> key;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -522,7 +526,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/21/">21</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/7/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/7/">7</a><span class="page-number current">8</span><a class="page-number" href="/page/9/">9</a><span class="space">&hellip;</span><a class="page-number" href="/page/22/">22</a><a class="extend next" rel="next" href="/page/9/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -572,7 +576,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">22</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -594,7 +598,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">48</span>
+                  <span class="site-state-item-count">52</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -668,7 +672,7 @@
     
       <span class="post-meta-item-text">网站总字数&#58;</span>
     
-    <span title="网站总字数">41.9k字</span>
+    <span title="网站总字数">42.6k字</span>
   
 </div>
 
