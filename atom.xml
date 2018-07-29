@@ -2,7 +2,7 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
   <title>志言志语</title>
   
-  <subtitle>一个中年技术男的抗争史</subtitle>
+  <subtitle>一个中年码农的日常</subtitle>
   <link href="/atom.xml" rel="self"/>
   
   <link href="http://zhiyanzhiyu.net.cn/"/>
@@ -312,9 +312,9 @@
       <category term="数据库" scheme="http://zhiyanzhiyu.net.cn/categories/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
     
     
-      <category term="运维" scheme="http://zhiyanzhiyu.net.cn/tags/%E8%BF%90%E7%BB%B4/"/>
-    
       <category term="数据库" scheme="http://zhiyanzhiyu.net.cn/tags/%E6%95%B0%E6%8D%AE%E5%BA%93/"/>
+    
+      <category term="运维" scheme="http://zhiyanzhiyu.net.cn/tags/%E8%BF%90%E7%BB%B4/"/>
     
       <category term="MySQL" scheme="http://zhiyanzhiyu.net.cn/tags/MySQL/"/>
     
