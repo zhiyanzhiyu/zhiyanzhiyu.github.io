@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2018/01/17/ai-ml-001-alg/">
+    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2018/07/27/zyzy-restart-md/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zyzy">
@@ -327,7 +327,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/17/ai-ml-001-alg/" itemprop="url">ML001.机器学习算法概览</a></h1>
+                <a class="post-title-link" href="/2018/07/27/zyzy-restart-md/" itemprop="url">志言志语，智言智语</a></h1>
         
 
         <div class="post-meta">
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-17T14:10:51+08:00">
-                2018-01-17
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-27T17:35:08+08:00">
+                2018-07-27
               </time>
             
 
@@ -362,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/机器学习/" itemprop="url" rel="index">
-                    <span itemprop="name">机器学习</span>
+                  <a href="/categories/自我管理/" itemprop="url" rel="index">
+                    <span itemprop="name">自我管理</span>
                   </a>
                 </span>
 
@@ -379,7 +379,7 @@
 
           
           
-             <span id="/2018/01/17/ai-ml-001-alg/" class="leancloud_visitors" data-flag-title="ML001.机器学习算法概览">
+             <span id="/2018/07/27/zyzy-restart-md/" class="leancloud_visitors" data-flag-title="志言志语，智言智语">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">字数&#58;</span>
                 
                 <span title="字数">
-                  1,698 字
+                  948 字
                 </span>
               
 
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -443,41 +443,23 @@
       
         
           
-            <blockquote>
-<p>本文是机器学习相关的学习笔记，主要参考Andrew Ng、李宏毅等大牛的课程和书籍。<br>本文是001篇之<strong>机器学习算法概览</strong>，主要内容是对机器学习涉及到的各种学习模型和算法的简介。</p>
-</blockquote>
-<h3 id="1-算法概览"><a href="#1-算法概览" class="headerlink" title="1.算法概览"></a>1.算法概览</h3><p>本节不探讨算法的实现细节，只做总体的概览。机器学习的算法有很多，请看下面一张图，这张图来自台湾李宏毅教授机器学习课程PPT，很好的概括了机器学习的常见算法，可以作为一个学习路线图。</p>
-<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-080146.jpg" alt="机器学习算法概览"></p>
-<h3 id="2-监督学习（Supervised-Learning）"><a href="#2-监督学习（Supervised-Learning）" class="headerlink" title="2.监督学习（Supervised Learning）"></a>2.监督学习（Supervised Learning）</h3><p>首先要理解<strong>监督</strong>的到底是指什么？个人理解就是训练数据有标签，比如面积，价格，房间数等，预测也有目标性，即成交价格，这就是所谓的“监督”。</p>
-<h4 id="2-1-回归（Regression）"><a href="#2-1-回归（Regression）" class="headerlink" title="2.1 回归（Regression）"></a>2.1 回归（Regression）</h4><p>NG课程里面举了一个预测房价的例子，还是比较容易理解的。如下图所示：<img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-081356.jpg" alt="img"></p>
-<p>上图表示根据某一地区房屋历史交易数据，可以在图上标出面积和房价的点，根据这些历史数据，可以拟合出一条面积和价格之间的直线，或者曲线，进而预测房屋价格。</p>
-<p>根据已有房屋历史交易数据（即所谓的“正确答案”）来来预测房屋交易价格（即更多“正确答案”），是典型的监督学习，而且是线性回归算法。这里要理解回归（Regression）是什么含义？简单来说，<strong>回归就意味着预测结果是连续的（Continuous）</strong>。</p>
-<h4 id="2-2-分类（Classification）"><a href="#2-2-分类（Classification）" class="headerlink" title="2.2 分类（Classification）"></a>2.2 分类（Classification）</h4><p>如果预测结果是不连续的呢？这就属于分类问题，比如NG在课程中提到的癌症预测案例，如下图所示：</p>
-<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-081428.jpg" alt="img"></p>
-<p>根据一个人身上肿块大小，预测肿瘤是良性的还是恶性的，即有没有得癌症？因为结果要么是得了癌症，要么是没得癌症，只有两个结果，即<strong>结果是不连续的，离散的</strong>。本实例只有两个结果，即良性和恶性，算是一个Binary Classification，当然有Multi-Class Classification,比如新闻分类，可以有很多种。</p>
-<p>上述两个案例中，都是只有一个特征，实际问题中特征肯定不止一个，比如房间预测案例中房间数目，癌症预测案例病人年龄，都是有价值的特征。有一些算法可以处理多个甚至无限多特征，比如支持向量机（SVM），里面有 一个巧妙的数学技巧，能让计算机处理无限多个特征。 </p>
-<p>另外，监督学习中还有决策树，深度学习等，也属于分类算法，后面的课程笔记中再详细说明。</p>
-<h3 id="3-无监督学习（Unsupervised-Learning）"><a href="#3-无监督学习（Unsupervised-Learning）" class="headerlink" title="3.无监督学习（Unsupervised Learning）"></a>3.无监督学习（Unsupervised Learning）</h3><p>无监督学习肯定是相对监督学习而言，无监督学习不管是训练数据还是学习目标都不明确，没有任何标签（Unlabeled data），没有“正确答案”，只有一个数据集，算法自己从数据中学习出有价值的东西出来。最常见的应该是聚类算法，聚类算法应用很广泛，比如谷歌新闻分类，DNA微观数据集，大型计算机集群，推荐系统，天文数据分析等。</p>
-<p>NG在课程中举了一个鸡尾酒宴问题（Cocktail Party Problem）的案例，即在一个嘈杂的环境中，如何根据两个麦克风输入的声音，提取出某一个人或者某个东西发出的声音，是一个无监督学习的例子。</p>
-<h3 id="4-其他"><a href="#4-其他" class="headerlink" title="4.其他"></a>4.其他</h3><p>除了无监督学习，图中还提到的几个算法，下面逐一简单说明之：</p>
+            <h3 id="反省"><a href="#反省" class="headerlink" title="反省"></a>反省</h3><p>自己做事没什么长性，曾经弄了很多个博客，但都没能写出点什么来，这个github的也是！其实去年曾坚持写过一段时间，但后来因为没有找到好的评论功能插件，觉得这个博客不太完美，就渐渐荒废了，其实就算有评论功能，真正用到的时候也不会多，这只是懒人的借口罢了。</p>
+<p>最近查资料的时候，发现有不少人在用gitalk，感觉效果还不错，于是也花时间折腾了一下，顺道把hexo和next也都升级到最新版本，打算重新开始写点东西。不过我这个人缺点太多，除了没有长性，还太随性，做事没有章法。比如想写的东西太多，写代码是工作，文史哲是爱好，炒股也是爱好，都想写，所以最后写的内容就乱七八糟，形不成体系，对自己的成长没多大促进作用，久而久之就会心生厌烦，直到放弃。</p>
+<h3 id="挑战"><a href="#挑战" class="headerlink" title="挑战"></a>挑战</h3><p>因为之前教训实在是深刻，所以我必须有所改变。今后在这个博客上会有所侧重：<strong>一个技术博客，而且是侧重AI相关的技术博客。</strong>为什么会有这种想法？作为一个已经36岁的高龄程序员来说，自己的职业生涯非常惨淡，没有做过什么大项目，也没有写过什么特别成功的产品，大部分代码都成了垃圾无人问津，这是一件非常悲哀的事情。不过作为一个有追求的人，我不打算就这么悲哀下去，我打算做最后的抗争：<strong>从一个传统的Java程序员努力转型成AI相关的程序员。</strong></p>
+<p>对我来说，这是一个相当艰巨的目标，我很怀疑自己能走多远？我有很多理由怀疑自己，比如AI相关的机器学习、深度学习内容太过艰深，而自己智商不太够，再加上年龄偏大，就算能学个一知半解，想换一份相关性质的工作也绝非易事！拦路虎很多，不过这次我还是打算明知山有虎偏向虎山行了。毕竟到了我这个年纪，如果继续再像以前那么蹉跎，真的就要荒废了，现在立即行动说不定还有一丝希望。</p>
+<h3 id="计划"><a href="#计划" class="headerlink" title="计划"></a>计划</h3><p>具体来讲，这个github的技术博客，是用来帮助我进行AI转型的，当然因为现在还在从事传统Java开发（不科学，只是相对AI来讲），也会涉及相关内容，但不是重点。所以，今后我会在本站记录以下几个方面：</p>
 <ul>
-<li><strong>Semi-supervised Learning，</strong>半监督学习是监督学习与无监督学习相结合的一种方法，同时使用未标记和有标记数据，来进行模式识别工作，能够提升学习效率；</li>
-<li><strong>Transfer Learning，</strong>顾名思义就是就是把已学训练好的模型和参数，迁移到新的模型来帮助新模型训练数据集。</li>
-<li><strong>Reinforcement Learning</strong> 增强学习（或强化学习）是近年来机器学习和智能控制领域的主要方法之一。相比其他学习方法，增强学习更接近生物学习的本质，因此有望获得更高的智能，这一点在棋类游戏中已经得到体现，想必大火的阿尔法狗让你记忆犹新！</li>
+<li><strong>时光漫步</strong> 个人生活杂感，不会多，一年也写不了几篇，不写无病呻吟的内容；</li>
+<li><strong>编程语言</strong> 编程语言使用技巧，经验总结，主要包括Java和Python；</li>
+<li><strong>数据库</strong> 数据库理论，MYSQL使用技巧；</li>
+<li><strong>系统架构</strong> 主要是传统Java项目的系统设计和架构总结；</li>
+<li><strong>机器学习</strong> 机器学习相关内容，模型和算法。</li>
+<li><strong>深度学习</strong> 深度学习相关内容，模型和算法。</li>
+<li><strong>AI项目实战</strong> 机器学习和深度学习的项目总结。</li>
+<li><strong>AI行业观察</strong>  对AI行业相关的观察与思考。</li>
 </ul>
-<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-07-27-062351.jpg" alt="img"></p>
-<h3 id="5-另一种分类"><a href="#5-另一种分类" class="headerlink" title="5.另一种分类"></a>5.另一种分类</h3><p>在网上看到过一篇机器学习的入门文章(《让我们从机器学习谈起》)，总结的也比较好，如下：</p>
-<ul>
-<li><strong>回归算法</strong> 入门算法，包括<strong>线性回归和逻辑回归</strong>。首先是线性回归，比如房价求解问题，寻找一条直线匹配所有数据，常用最小二乘法求解，但效率不高。数值计算用来提升计算的准确性和效率问题，例如梯度下降及牛顿法。其次是逻辑回归，与线性回归类似，但本质不同，线性回归处理的是数值问题，预测结果也为数值，逻辑回归属于分类算法，预测结果是离散分类。</li>
-<li><strong>神经网络</strong>，人工神经网络（ANN），基于大脑机理研究，在语音和视觉识别上效果好，BP算法诞生后发展进入新阶段。分解与整合是主要机理，但训练过程仍然困难，90年代后SVM算法取代了神经网络的地位。</li>
-<li><strong>SVM（支持向量机）</strong>支持向量机算法诞生于统计学界，是一种数学成分很浓的算法，是逻辑回归算法的强化，通过给与逻辑回归算法更严格的优化条件，通过高斯“核”获得比逻辑回归更好的分类界限，所谓“核”事实上就是一种特殊的函数，最典型的特征是可以将低纬空间映射到高纬空间。</li>
-<li><strong>聚类算法</strong> 没有标签，无监督算法的典型代表。计算种群中的距离，根据距离远近将数据划分为多个族群。</li>
-<li><strong>降维算法</strong> 无监督学习算法的一种，将数据从高纬降到低维，主要作用是压缩数据与提升机器学其他算法的效率。</li>
-<li><strong>推荐算法</strong> 电商网站用的最多，根据用户特征推荐可能感兴趣的东西。一个是基于物品内容的推荐，一个基于相似用户的推荐。</li>
-<li><strong>其他</strong> 高斯判别，朴素贝叶斯，决策树等</li>
-</ul>
-<p>最后，奉上一张来自<a href="http://scikit-learn.org的神图，如下：" target="_blank" rel="noopener">http://scikit-learn.org的神图，如下：</a></p>
-<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-082213.jpg" alt="img"></p>
+<p>因为本人特别热衷炒股，但是几年下来成绩也一般，所以对AI的学习和研究，最终会落在金融证券相关的专业领域，毕竟AI涉及的行业太多不可能都兼顾。</p>
+<p>好了，不说太多废话了，现在开始属于我的一个新时代！</p>
 
           
         
@@ -521,7 +503,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/3/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/3/">3</a><span class="page-number current">4</span><a class="page-number" href="/page/5/">5</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/5/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -571,7 +553,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -593,7 +575,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -667,7 +649,7 @@
     
       <span class="post-meta-item-text">网站总字数&#58;</span>
     
-    <span title="网站总字数">46.4k字</span>
+    <span title="网站总字数">48.9k字</span>
   
 </div>
 

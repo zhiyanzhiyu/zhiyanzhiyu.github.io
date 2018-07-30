@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2018/07/30/ai-ml-002-statisical-ml-outline/">
+    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2018/07/30/ai-ml-003-single-regression/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zyzy">
@@ -327,7 +327,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/30/ai-ml-002-statisical-ml-outline/" itemprop="url">ML002.统计学习方法概论</a></h1>
+                <a class="post-title-link" href="/2018/07/30/ai-ml-003-single-regression/" itemprop="url">ML003.单变量线性回归</a></h1>
         
 
         <div class="post-meta">
@@ -339,7 +339,7 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-30T14:15:49+08:00">
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-30T14:32:20+08:00">
                 2018-07-30
               </time>
             
@@ -379,7 +379,7 @@
 
           
           
-             <span id="/2018/07/30/ai-ml-002-statisical-ml-outline/" class="leancloud_visitors" data-flag-title="ML002.统计学习方法概论">
+             <span id="/2018/07/30/ai-ml-003-single-regression/" class="leancloud_visitors" data-flag-title="ML003.单变量线性回归">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">字数&#58;</span>
                 
                 <span title="字数">
-                  3,796 字
+                  2,550 字
                 </span>
               
 
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  13 分钟
+                  9 分钟
                 </span>
               
             </div>
@@ -443,116 +443,70 @@
       
         
           
-            <hr>
-<blockquote>
-<p>本文是机器学习相关的学习笔记，主要参考Andrew Ng、李宏毅等大牛的课程和书籍。<br>本文是003篇之<strong>统计学习方法概论</strong>，主要内容是李航《统计学习方法》第一章的内容，统计学习方法概论，介绍了一些基本概念。</p>
+            <blockquote>
+<p>Machine Learing学习笔记，主要参考Andrew Ng、李宏毅等大牛的课程和书籍。本文是0003篇之单变量线性回归的相关内容，主要参考Ng的机器学习教程。</p>
 </blockquote>
-<p>在前面的一篇笔记中，提到过机器学习和统计学的关系：<strong>统计学的目的是通过学习更多的潜在模式和关联关系，来帮助人类深入理解数据。 统计学习近似于机器学习，与机器学习高度重合，统计学的发展促进了机器学习的大发展，但是两者侧重点不同。统计学习重点关注统计模型的发展优化，偏数学，而机器学习关注实际问题的解决，偏实际。</strong></p>
-<p>机器学习和统计学习各有侧重，不过对我们初学者来说，可以把两者先当成一回事。最近也在看李航的那本《统计学习方法》，虽然是一本很薄的书，但是对我这种数学渣渣来说，真的看着有些吃力了。不过其评分之高是我们不能回避的一本书。</p>
-<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-07-28-131737.png" alt="image-20180728211735214"></p>
-<p>网上大部分视频课程都是采用的一种从简单例子开始，自下而上的方式，但是这样在学习的过程中，总是会不断的出现新的概念，时间长了就有点混乱，不够系统。而《统计学习方法》的第一章可以很好的给我们一个自顶而下的概念，让我们能够更加系统的掌握相关概念。本文算是该书第一章的读书笔记。</p>
-<h3 id="1-统计学习的定义和特点"><a href="#1-统计学习的定义和特点" class="headerlink" title="1.统计学习的定义和特点"></a>1.统计学习的定义和特点</h3><p><strong>统计学习</strong>统计机器学习（Statisical Machine Learning，是关于计算机基于数据构建概率统计模型并运用模型对数据进行预测与分析的一门学科。它有如下几个<strong>特点</strong>：</p>
+<h3 id="1-模型表述"><a href="#1-模型表述" class="headerlink" title="1 模型表述"></a>1 模型表述</h3><p>本文是斯坦福机器学习课程2-1节的笔记，主要内容是对机器学习问题，如何进行建模表述？在房价预测案例中，我们有一个数据集，包含某地住房价格。如下：</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-082534.png" alt="img"></p>
+<p>根据该数据集，我们可以在坐标图上画出相应的数据集。很自然的，我们要想预测该地区的房价，就是在该坐标图上求解一条直线或者曲线，而这条线会尽可能多的穿过历史交易数据的点。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-082604.jpg" alt="img">在上述问题表述中，有几个常见的术语需要明确一下：<br>房屋面积是数据的<strong>特征（feature）</strong>,某一条历史交易数据都是一个<strong>训练样本（training example）</strong>,所有的历史交易数据叫做<strong>训练集（training set）</strong>。</p>
+<p>通过过把训练集输入给学习算法，进而学习得到一个假设的 h，然后将要预测的房屋尺寸作为输入变量输入给 h，预测出该房屋的交易价格作为输出变量输出为结果，如下图所示：</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-082623.png" alt="img">问题需要用数学的方式表述出来，其中：</p>
 <ul>
-<li>计算机及网络平台之上，这个自然，不需多言；</li>
-<li>以数据为研究对象，数据驱动，是统计学习的对象；</li>
-<li>预测与分析，这是统计学习的目标；</li>
-<li>方法为中心，所谓的方法就是前一篇笔记的模型和算法，比如监督学习，无监督学习，半监督学习以及强化学习等等。</li>
-<li>概率论，统计学，信息论，计算理论，最优化理论及计算机科学 交叉学科。</li>
+<li>m代表训练集中样本数量；</li>
+<li>x代表特征/输入变量；</li>
+<li>y代表目标变量/输出变量；</li>
+<li>$$\langle x,y\rangle$$代表训练集中的样本实例；</li>
+<li>$$\langle x_\langle i_\rangle ,y_\langle i_\rangle \rangle$$代表第 i 个观察样本；</li>
+<li>h 代表学习算法的解决方案或函数，也称为假设(hypothesis) 。</li>
 </ul>
-<p>上述内容都比较好理解，需要重点说明的是<strong>学习方法</strong>相关的内容：统计学习方法包括模型的假设空间，模型选择的准则以及模型学习的算法，这三者被称为统计学习的三要素，简称模型，策略和算法。</p>
-<p>实现统计学习方法的步骤：</p>
-<ul>
-<li>得到一个有限的训练数据集合；</li>
-<li>确定包含所有可能的模型的假设空间，即学习模型的集合；</li>
-<li>确定模型选择的准则，即学习的策略；</li>
-<li>实现求解最优模型的算法，即学习的算法；</li>
-<li>通过学习方法选择最优模型；</li>
-<li>利用学习的最优模型对新数据进行预测分析。</li>
-</ul>
-<h3 id="2-监督学习"><a href="#2-监督学习" class="headerlink" title="2 监督学习"></a>2 监督学习</h3><p>Supervised learning，李航的《统计学习方法》主要讲的监督学习。</p>
-<h4 id="2-1-基本概念"><a href="#2-1-基本概念" class="headerlink" title="2.1 基本概念"></a>2.1 <strong>基本概念</strong></h4><p><strong>输入空间与输出空间</strong>：在监督学习中，将输入与输出所有可能的取值的集合分别称为<strong>输入空间（input space）</strong>与<strong>输出空间（output space）</strong>,输入与输出空间可以是有限元素的集合，也可以是整个欧氏空间。通常输出空间远小于输入空间。</p>
-<p><strong>特征空间：</strong> 每个具体的输入都是一个<strong>实例（instance）</strong>,通常由<strong>特征向量（feature vector）</strong>表示,所有特征向量存在的空间成为<strong>特征空间（feature space）</strong>。特征空间的每一维都对应于一个特征。有时假设输入空间与特征空间为相同的空间，有时假设输入空间与特征空间为不同的空间，需要将实例从输入空间映射到特征空间。模型实际上都是定义在特征空间上的。</p>
-<p>通常情况下，输入变量写作X，输出变量写作Y，输入实例x的特征向量记作：$x = (x^{(1)},x^{(2)},…,x^{(x)})^T$,其中$x^{(i)}$表示x的第i个特征，注意与$x_i$的区分，$x_i$表示多个输入变量中的第i个，即：$x_i = (x_i^{(1)},x_i^{(2)},…,x_i^{(n)})^T$。</p>
-<p>训练集通常表示为：$T = {(x_1,y_1),(x_2,y_2),…,(x_n,y_n) }$，输入与输出对又称为<strong>样本（Sample）</strong>或者样本点。</p>
-<p>输入变量X和输出变量Y有不同的类型，可以是连续的，也可以是离散的。通常分为如下三类：</p>
-<ul>
-<li>输入变量与输出变量均为连续变量的预测问题成为回归问题；</li>
-<li>输出变量为有限个离散变量的预测问题称为分类问题；</li>
-<li>输入变量与输出变量均为变量序列的预测问题成为标注问题；</li>
-</ul>
-<p><strong>联合概率分布</strong>监督学习假设输入与输出的随机变量X和Y遵循联合概率分布$P(X,Y)$,$P(X,Y)$表示分布函数，或者分布密度函数。需要注意的是：在学习过程中，我们假定这一联合概率分布存在，但是对学习系统来说，联合概率分布的具体定义是未知的。统计学习假设数据存在一定统计规律，X和Y具有联合概率分布的假设就是监督学习关于数据的基本假设。</p>
-<p><strong>假设空间</strong></p>
-<p>监督学习的目的在于找到一个由输入到输出的映射，即所谓的模型。学习的目的是找到一个最好的模型，模型属于输入空间到输出的空间映射的集合，这个集合就是<strong>假设空间（hypothesis space）</strong>,假设空间的确定意味着学习范围的确定。</p>
-<p>监督学习的模型一般由条件概率分布$P(X|Y)$或者决策函数(decision function) $ Y =  f(X)$ 表示，对具体输入进行相应的预测时，写作：$P(y|x)$ 或$y = f(x)$</p>
-<h4 id="2-2-问题的形式化"><a href="#2-2-问题的形式化" class="headerlink" title="2.2 问题的形式化"></a>2.2 问题的形式化</h4><p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-07-29-033504.png" alt="image-20180729113503326"></p>
-<p>在学习过程中，系统利用给定训练数据，学习（训练）得到一个模型，表示为条件概率分布【】或者决策函数，用来描述输入与输出随机变量之间的映射关系。</p>
-<p>在学习过程中，学习系统试图通过训练数据集中的样本$\langle x_i,y_i \rangle$带来的信息学习模型。具体地说，对输入$x_i$，一个具体的模型$y = f(x)$ 可以产生一个输出$f(x_i)$,而训练数据集中对应的输出是$y_i$，如果这个模型有很好的预测能力，训练样本输出$y_i$和模型输出之间的差应该足够小。学习系统通过不断的尝试，选取最好的模型，以便对训练数据集有足够好的预测，同时对未知的测试数据集的预测也有尽可能好的推广。</p>
-<h3 id="3-统计学习三要素"><a href="#3-统计学习三要素" class="headerlink" title="3 统计学习三要素"></a>3 统计学习三要素</h3><p>统计学习方法 = 模型 + 策略 + 算法</p>
-<h4 id="3-1模型"><a href="#3-1模型" class="headerlink" title="3.1模型"></a>3.1<strong>模型</strong></h4><p>条件概率分布或决策函数，模型的假设空间包含所有可能的条件概率分布或决策函数。J假设空间中的模型一般有无穷多个。</p>
-<p>假设空间可以定义为决策函数的集合：$F = {f|Y=f(x)}$,其中X和Y事定义在输入空间和输出空间上的变量，参数向量觉得的函数族：$F = {f|Y=f_\theta(X),\theta \in R^n }$,参数向量$\theta$ 取值于n维欧氏空间$R^n$,成为参数空间。</p>
-<h4 id="3-2-策略"><a href="#3-2-策略" class="headerlink" title="3.2 策略"></a>3.2 <strong>策略</strong></h4><p>有了模型空间，需要考虑按照什么样的准则学习或选择最优的模型？损失函数度量模型一次预测的好坏，风险函数度量平均意义下模型预测的好坏。</p>
-<p><strong>损失函数</strong>  Loss function  cost function ，</p>
-<p>在假设空间中选取模型f作为决策函数，对于给定的输入X，由f(X)给出响应的输出Y，这个输出的预测值f(X)和Y之间可能一致也可能不一致，用一个损失函数或者代价函数来度量预测错误的程度，记作：$L(Y,f(X))$，损失函数是f(X)和Y的非负实值函数。</p>
-<p>常用损失函数：</p>
-<ul>
-<li>0-1损失函数</li>
-<li>平方损失函数</li>
-<li>绝对损失函数</li>
-<li>对数损失函数</li>
-</ul>
-<p><strong>风险函数</strong></p>
-<p>损失函数值越小，模型就越好。</p>
-<p>风险函数，期望损失，病态问题</p>
-<p>经验风险 经验损失</p>
-<p>多岁期望风险是模型关于联合分布的期望损失，经验风险是模型关于训练样本集的平均损失。根据大数定律，当样本容量N趋于无穷大时，经验风险趋于期望风险。</p>
-<p><strong>经验风险最小化</strong></p>
-<p>在样本足够大时，经验风险最小化能保证有很好的学习效果，被广泛采用。极大似然估计就是经验风险最小化的一个例子。但是当样本容量小时，容易产生过拟合现象。</p>
-<p><strong>结构风险最小化</strong></p>
-<p>结构风险最小化（Structural risk minimization,SRM）是为了防止过拟合而提出来的策略。结构风险最小化等价于正则化（regularization）。结构风险在经验风险上加上表示模型复杂度的正则化项（regularizer）或罚项（penalty term)。在假设空间，损失函数以及训练数据集确定的情况下，结构风险的定义是：</p>
-<p>$$R_{srm}(f) = \frac{1}{N} \sum_{i=1}^n L(y_i,f(x_i)) +\lambda J(f)$$</p>
-<p>其中，$J(f)$为模型复杂度，定义在假设空间上的泛函数。模型$f$越复杂，复杂度就越大。复杂度表示了复杂模型的惩罚。$\lambda$ 大于等于0，权衡经验风险和复杂度模型。贝叶斯估计中最大后验概率估计是结构风险最小化的例子。</p>
-<p>结构风险最小化的策略认为架构风险最小的模型是最优模型，所以求最优模型就是求解最优化问题：</p>
-<p>$$min_{f} \frac{1}{N} \sum_{i=1}^n L(y_i,f(x_i)) +\lambda J(f)$$</p>
-<h4 id="3-3-算法"><a href="#3-3-算法" class="headerlink" title="3.3 算法"></a>3.3 <strong>算法</strong></h4><p>学习模型的具体计算方法，比如梯度下降算法。</p>
-<h3 id="4-模型评估与模型选择"><a href="#4-模型评估与模型选择" class="headerlink" title="4 模型评估与模型选择"></a>4 模型评估与模型选择</h3><h4 id="4-1-训练误差和测试误差"><a href="#4-1-训练误差和测试误差" class="headerlink" title="4.1 训练误差和测试误差"></a>4.1 <strong>训练误差和测试误差</strong></h4><ul>
-<li>训练误差  训练数据</li>
-<li>测试误差  测试数据</li>
-<li>泛化能力 将学习方法对未知数据的预测能力称为泛化能力（generalization ability）</li>
-</ul>
-<h4 id="4-2-过拟合与模型选择"><a href="#4-2-过拟合与模型选择" class="headerlink" title="4.2 过拟合与模型选择"></a>4.2 <strong>过拟合与模型选择</strong></h4><ul>
-<li>过拟合（over-fitting）</li>
-</ul>
-<h3 id="5-正则化与交叉验证"><a href="#5-正则化与交叉验证" class="headerlink" title="5 正则化与交叉验证"></a>5 正则化与交叉验证</h3><h4 id="5-1-正则化"><a href="#5-1-正则化" class="headerlink" title="5.1 正则化"></a>5.1 <strong>正则化</strong></h4><p>模型选择的典型方法是正则化（regularzation）,正则化是结构风险最小化策略的实现，是在经验风险上加一个正则化项或惩罚项。</p>
-<p>正则化的作用是选择经验风险与模型复杂度同时较小的模型。正则化符合奥卡姆剃刀（Occam’s razor）原理。奥卡姆剃刀原理应用于模型选择时考虑：在所有可能选择的模型中，能够很好地解释已知数据并且十分简单的才是最好的模型，也就是应该选择的模型。</p>
-<blockquote>
-<p>奥卡姆剃刀定律（Occam’s Razor, Ockham’s Razor）又称“奥康的剃刀”，它是由14世纪<a href="https://baike.baidu.com/item/%E8%8B%B1%E6%A0%BC%E5%85%B0" target="_blank" rel="noopener">英格兰</a>的逻辑学家、圣方济各会修士<a href="https://baike.baidu.com/item/%E5%A5%A5%E5%8D%A1%E5%A7%86%E7%9A%84%E5%A8%81%E5%BB%89" target="_blank" rel="noopener">奥卡姆的威廉</a>（William of Occam，约1285年至1349年）提出。这个原理称为“如无必要，勿增实体”，即“简单有效原理”。正如他在《箴言书注》2卷15题说“切勿浪费较多东西去做，用较少的东西，同样可以做好的事情。”</p>
-</blockquote>
-<h4 id="5-2-交叉验证"><a href="#5-2-交叉验证" class="headerlink" title="5.2 交叉验证"></a>5.2 <strong>交叉验证</strong></h4><p>数据集切分：</p>
-<ul>
-<li>训练集，模型训练</li>
-<li>验证集，模型选择</li>
-<li>测试集，模型评估</li>
-</ul>
-<p><strong>简单交叉验证</strong></p>
-<p><strong>S折交叉验证</strong></p>
-<p><strong>留一交叉验证</strong></p>
-<h3 id="6-泛化能力"><a href="#6-泛化能力" class="headerlink" title="6 泛化能力"></a>6 泛化能力</h3><h4 id="6-1-泛化误差"><a href="#6-1-泛化误差" class="headerlink" title="6.1 泛化误差"></a>6.1 <strong>泛化误差</strong></h4><p>generalization ability，泛化能力。</p>
-<p>预测误差即为泛化误差，事实上泛化误差就是所学习到模型的期望风险。</p>
-<h4 id="6-2-泛化误差上届"><a href="#6-2-泛化误差上届" class="headerlink" title="6.2 泛化误差上届"></a>6.2 <strong>泛化误差上届</strong></h4><p>generalization error bound，泛化误差上届</p>
-<h3 id="7-生成模型与判别模型"><a href="#7-生成模型与判别模型" class="headerlink" title="7 生成模型与判别模型"></a>7 <strong>生成模型与判别模型</strong></h3><p>监督学习方法可分为生成方法和判别方法。</p>
-<p><strong>生产方法</strong></p>
-<p>生成方法 （generative approach）和生成模型（ generative model ）。由数据学习联合分布，求出条件概率分布作为预测的模型。之所以称为生成方法，是因为模型表示了给定的输入X产生输出Y的生成关系。典型生成模型：朴素贝叶斯法和隐马尔科夫模型。</p>
-<p><strong>辨别方法</strong></p>
-<p>辨别方法 （discriminative approach）和判别模型（ dissriminative model）</p>
-<p>判别方法由数据直接学习决策函数$f(x)$或者条件概率分布作为预测的模型，判别方法关心的对给定的输入X，应该预测什么样的输出Y？典型的判别模型包括：K近邻法，感知机，决策树，逻辑斯蒂回归，最大熵模型，支持向量机等。</p>
-<h3 id="8-分类问题"><a href="#8-分类问题" class="headerlink" title="8 分类问题"></a>8 分类问题</h3><p>监督学习的核心问题。许多统计学习方法可用于分类，包括k近邻法，感知机，朴素贝叶斯，决策树，决策列表，逻辑斯蒂回归模型，支持向量机，提升方法，贝叶斯网络，神经网络等。</p>
-<p>分类在于根据其特性将数据分门别类，在许多领域都有广泛的应用。</p>
-<h3 id="9-标注问题"><a href="#9-标注问题" class="headerlink" title="9 标注问题"></a>9 标注问题</h3><p>标注（tagging），分类问题的一个推广，也是更复杂结构预测问题的简单形式。<br>标注问题在信息抽取、自然语言处理等领域被广泛应用，是这些领域的基本问题。例如自然语言处理中词性的标注（part of speech tagging）问题。</p>
-<p>常见的标注统计学习方法有隐马尔科夫模型和条件随机场。</p>
-<h3 id="10-回归问题"><a href="#10-回归问题" class="headerlink" title="10 回归问题"></a>10 回归问题</h3><p>预测输入变量和输出变量之间的关系。回归问题的学习等价于<strong>函数拟合</strong>：选择一个函数曲线使其很好地拟合已知数据且很好地预测未知数据。</p>
-<p>回归问题按照输入变量的个数，分为一元回归和多元回归；按照输入变量和输出变量关系的类型（即模型类型），分为线性回归和非线性回归。</p>
-<p>回归学习最常用的损失函数是平方损失函数，在此情况下，回归问题可以由著名的最小二乘法求解。</p>
-<p>说明：本文因为涉及到不少公式，整理起来有点麻烦，所以没有在文中列出。</p>
+<p>那么我们如何来找到这个h呢？房价预测的例子比较简单，h 表示一个函数，输入x是房屋尺寸大小，因此h根据输入的x值来得出y值，y值对应房子的价格，h是一个从x 到y的函数映射。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-082646.jpg" alt="img"></p>
+<p>因为这个函数只含有一个特征/输入变量，这样的问题叫作<strong>单变量线性回归问题。</strong>现在要做的便是为我们的模型选择合适的参数(parameters)$$\theta_0$$ 和$$\theta_1$$ 。很明显，在房价预测这个例子中，$$θ_1$$便是直线的斜率，$$θ_1$$则是在 y 轴上的截距，求解这两个参数是后续成本函数所要解决的问题。</p>
+<h3 id="2-代价函数"><a href="#2-代价函数" class="headerlink" title="2 代价函数"></a>2 代价函数</h3><p>本文是斯坦福大学机器学习课程的2-2，2-3，2-4的学习笔记，主要是内容是代价函数以及对代价函数的直观理解。</p>
+<h4 id="2-1-代价函数定义（Cost-Function-）"><a href="#2-1-代价函数定义（Cost-Function-）" class="headerlink" title="2.1 代价函数定义（Cost Function ）"></a>2.1 代价函数定义（Cost Function ）</h4><p>如下图所示，在房价预测的案例中，我们得到了预测房价的目标函数，问题也转换成了为模型选择合适的参数$$\theta_i$$，即$$θ_0$$和$$θ_1$$。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-083126.jpg" alt="img"></p>
+<p>思路是通过选取不同的（$$θ_0$$,$$θ<em>1$$）使得$$h</em>\theta\langle x \rangle $$更接近与y,就是$$h_\theta\langle x \rangle $$和训练集的真实值的误差最小，当这个误差最小的时候，就是我们要的参数值。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-083359.jpg" alt="img"></p>
+<p>通过这个思路，我们得到了一个关于$$\langleθ_0,θ_1\rangle$$的函数，当这个函数取得最小值的时候，我们就找到了我们要的参数值。</p>
+<p><strong><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-083428.png" alt="img"></strong></p>
+<p>代价函数也被称作<strong>平方误差函数</strong>，有时也被称为<strong>平方误差代价函数</strong>。对于大多数问题特别是回归问题，平方误差代价函数都是一个合理的选择。</p>
+<h4 id="2-2-代价函数的直观理解"><a href="#2-2-代价函数的直观理解" class="headerlink" title="2.2 代价函数的直观理解"></a>2.2 代价函数的直观理解</h4><p>我们要进一步解释代价函数 $$J\langle\theta_0,\theta_1 \rangle$$的工作原理 ，并尝试更直观地解释它在计算什么，以及我们使用它的目的。为了更好的进行说明理解，我们先对问题进行简化，即设置$$θ_0$$=0。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-102443.jpg" alt="img"></p>
+<p>$$h_\theta\langle x \rangle $$是一条穿过原点的直线，而代价函数则是一条曲线，当这条曲线取最小值得时候，得到最佳的$$h_\theta\langle x \rangle $$。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-102448.jpg" alt="img"></p>
+<h4 id="2-3-代价函数的直观理解2"><a href="#2-3-代价函数的直观理解2" class="headerlink" title="2.3 代价函数的直观理解2"></a>2.3 代价函数的直观理解2</h4><p>当我们不对问题进行简化，保留$$\theta_0$$的时候,问题会复杂一些，$$h_\theta\langle x \rangle $$是一条不经过原点的直线。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-102454.jpg" alt="img"></p>
+<p>对应的代价函数则是一个3D曲面图（弓形函数），$$θ_0,θ_1$$是平面上的两个坐标，而高度则是 $$J\langle\theta_0,\theta_1 \rangle$$的值。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-102501.jpg" alt="img"></p>
+<p>不过为了使得问题更容易理解，可以使用等高线图来表示代价函数，两者是等价的。可以看出等高线最低点的取值，就是 $$J\langle\theta_0,\theta_1 \rangle$$的最小值，而此时是拟合训练数据最多的一条直线。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-102507.jpg" alt="img"></p>
+<h4 id="2-4-如何自动求解-J-langle-theta-0-theta-1-rangle-最小值？"><a href="#2-4-如何自动求解-J-langle-theta-0-theta-1-rangle-最小值？" class="headerlink" title="2.4 如何自动求解 $$J\langle\theta_0,\theta_1 \rangle$$最小值？"></a>2.4 如何自动求解 $$J\langle\theta_0,\theta_1 \rangle$$最小值？</h4><p>求得$$\langle\theta_0,\theta_1 \rangle$$的最小值，也就得到了最佳的$$\langle\theta_0,\theta_1 \rangle$$值，也就得到了最佳$$h_\theta\langle x \rangle $$。不过在实际问题中，我们不可能把这些点画出来，然后用人工的方法来读出这些点的数值。我们会遇到更复杂、更高维度、更多参数的情况，而这些情况是很难画出图的，因此更无法将其可视化，因此我们真正需要的是编写程序，自动的找出这些最小化代价函数的参数值。</p>
+<p>最后，课程检测里看到一道思考题：如果存在 $$J\langle\theta_0,\theta_1 \rangle$$ = 0，意味着什么呢？ 原点？</p>
+<h3 id="3-梯度下降"><a href="#3-梯度下降" class="headerlink" title="3 梯度下降"></a>3 梯度下降</h3><p>本文是斯坦福大学机器学习第2-5，2-6，2-7，2-8几个小节的学习笔记，主要内容是梯度下降算法。</p>
+<h4 id="3-1-梯度下降算法"><a href="#3-1-梯度下降算法" class="headerlink" title="3.1 梯度下降算法"></a>3.1 梯度下降算法</h4><p>梯度下降是一个用来求函数最小值的算法，思路是先随机选择一个参数组合计算代价函数，然后寻找下一个能让代价函数值下降最多的参数组合，然后重复执行此操作，直到找到一个<strong>局部最小值(local minimum)</strong>。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-104240.jpg" alt="img">因为我们并没有尝试完所有的参数组合，所以不能确定我们得到的局部最小值是否便是全局最小值(global minimum)，选择不同的初始参数组 合，可能会找到不同的局部最小值。这里我们可以想象一下，如果自己站在一座山上的某个点，怎么来找到最短的下山路径？</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-104247.jpg" alt="img"></p>
+<p>梯度下降算法表示如下：</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-104253.jpg" alt="img"></p>
+<p>其中 α 是学习率(learning rate)，它决定了代价函数下降程度，即向下迈出的步子有多大。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-104258.jpg" alt="img"></p>
+<p>在批量梯度下降中，我们每一次都同时让所有的参数减去学习速率乘以代价函数的导数，即我们要更新$$θ_0$$ 和$$θ_1$$，同时更新是梯度下降中的一种常用方法，当我们谈到梯度下降时，默认就是同步更新。 </p>
+<h4 id="3-2-梯度下降的直观意义"><a href="#3-2-梯度下降的直观意义" class="headerlink" title="3.2 梯度下降的直观意义"></a>3.2 梯度下降的直观意义</h4><p>在批量梯度下降中，我们每一次都同时让所有的参数减去学习速率乘以代价函数的导数。对θ赋值，使得$$ J\langleθ\rangle$$ 按梯度下降最快方向进行，一直迭代下去，最终得到局部 最小值。其中 a 是学习率(learning rate)，它决定了我们沿着能让代价函数下降程度最大的方向向下迈出的步子有多大。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-104306.jpg" alt="img"></p>
+<p>如下图上半部分所示，求导就是说取这个红点的切线，这条切线的斜率正好是这个三角形的高度除以这个水平长度。现在这条线有一个正斜率，也就是说它有正导数，因此我得到的新的$$θ_1$$ ，$$θ_1$$ 更新后等于$$θ_1$$ 减去一 个正数乘以 a ，所以下一个θ值会变小。 相反，如果$$θ_1$$取在左边一点，那么求得导数就是一个负导数，下一个θ值会变大。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-104311.jpg" alt="img"></p>
+<p>如果 <strong>a 太小或 a 太大</strong>会出现什么情况呢？所以如果 a 太小的话，梯度下降会很慢，需要很多步才能到达全局最低点。如果 a 太大有可能会越过最低点，甚至可能无法收敛，甚至发散。如下图所示：</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-104324.jpg" alt="img"></p>
+<p><strong>局部最低点</strong>问题：如果我们预先把$$θ_1$$ 放在一个局部的最低点，你认为下一步梯度下降法会怎样工作?因为局部最优点的导数将等于零，这意味着新的$$θ_1$$ 等于原来的$$θ_1$$，那么梯度下降法更新其实什么都没做。这也解释了为什么即使学习速率 a 保持不变时，梯度下降可以收敛到局部最低点。 </p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-104336.jpg" alt="img"></p>
+<p>在梯度下降法中，当我们接近局部最低点时，梯度下降法会自动采取更小的幅度，因为当我们接近局部最低点时会导数逐渐趋近于零，因此没有必要再另外减小 a 。</p>
+<h4 id="3-3-线性回归的梯度下降"><a href="#3-3-线性回归的梯度下降" class="headerlink" title="3.3 线性回归的梯度下降"></a>3.3 线性回归的梯度下降</h4><p>下面将梯度下降和代价函数结合，将其应用于具体的拟合直线的线性回归算法里。 其实就是梯度下降算法里面$$ J\langleθ\rangle$$换成具体的代价函数，然后进行迭代计算，直到取得代价函数的最小值。下面几张截图说明了该过程：</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-104342.jpg" alt="img"></p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-104351.jpg" alt="img"></p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-104356.jpg" alt="img"></p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-104400.jpg" alt="img"></p>
+<p>如果不特别指明，梯度下降指的是<strong>批量梯度下降</strong>，即在梯度下降的每一步中，我们都用到了所有的训练样本。在梯度下降中，在计算微分求导项时，我们需要进行求和运算。在每一个单独的梯度下降中，都要要对所有 m 个训练 样本求和。可以想象的到，当样本很大时梯度下降的效率相当大，因此也有不是这种”批量”型的梯度下降，不考虑整个的训练集，每次只关注训练集中的一些小的子集。</p>
 
           
         
@@ -596,7 +550,7 @@
 
   
   <nav class="pagination">
-    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
+    <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/2/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -646,7 +600,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -668,7 +622,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -742,7 +696,7 @@
     
       <span class="post-meta-item-text">网站总字数&#58;</span>
     
-    <span title="网站总字数">46.4k字</span>
+    <span title="网站总字数">48.9k字</span>
   
 </div>
 

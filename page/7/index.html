@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/10/13/qrcode-notes/">
+    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/11/29/mysql-reset-pwd/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zyzy">
@@ -327,7 +327,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/10/13/qrcode-notes/" itemprop="url">二维码相关开发总结</a></h1>
+                <a class="post-title-link" href="/2017/11/29/mysql-reset-pwd/" itemprop="url">MacOS下MySQL密码重置</a></h1>
         
 
         <div class="post-meta">
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:41:19+08:00">
-                2017-10-13
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T18:03:23+08:00">
+                2017-11-29
               </time>
             
 
@@ -362,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/系统架构/" itemprop="url" rel="index">
-                    <span itemprop="name">系统架构</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -379,7 +379,7 @@
 
           
           
-             <span id="/2017/10/13/qrcode-notes/" class="leancloud_visitors" data-flag-title="二维码相关开发总结">
+             <span id="/2017/11/29/mysql-reset-pwd/" class="leancloud_visitors" data-flag-title="MacOS下MySQL密码重置">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">字数&#58;</span>
                 
                 <span title="字数">
-                  1,534 字
+                  399 字
                 </span>
               
 
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  5 分钟
+                  2 分钟
                 </span>
               
             </div>
@@ -443,25 +443,47 @@
       
         
           
-            <p>最近在项目中，接触了一些二维码相关的功能，这里总结一二，备查。</p>
-<h3 id="二维码基础"><a href="#二维码基础" class="headerlink" title="二维码基础"></a>二维码基础</h3><p>二维条码/二维码（2-dimensional bar code）是用某种特定的几何图形按一定规律在平面（二维方向上）分布的黑白相间的图形记录数据符号信息的；在代码编制上巧妙地利用构成计算机内部逻辑基础的“0”、“1”比特流的概念，使用若干个与二进制相对应的几何形体来表示文字数值信息，通过图象输入设备或光电扫描设备自动识读以实现信息自动处理：它具有条码技术的一些共性：每种码制有其特定的字符集；每个字符占有一定的宽度；具有一定的校验功能等。同时还具有对不同行的信息自动识别功能、及处理图形旋转变化等特点。  </p>
-<h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><p>在许多种类的二维条码中，常用的码制有：DataMatrix，MaxiCode，Aztec，QRCode，Vericode，PDF417，Ultracode，Code49，Code16K等，QR码是1994年由日本Denso-Wave公司发明。QR来自英文QuickResponse的缩写，即快速反应的意思，源自发明者希望QR码可让其内容快速被解码。QR码最常见于日本、韩国，并为目前日本最流行的二维空间条码。  </p>
-<h4 id="主要应用"><a href="#主要应用" class="headerlink" title="主要应用"></a>主要应用</h4><p>二维条码具有储存量大、保密性高、追踪性高、抗损性强、备援性大、成本便宜等特性，这些特性特别适用于表单、安全保密、追踪、证照、存货盘点、资料备援等方面。智能手机和平板电脑的普及应用催生了之前并不被看好的二维码应用，大家竞相投入大量资源进行技术研发。马化腾说：二维码是移动互联网入口。<br>二维码的应用，似乎一夜之间渗透到我们生活的方方面面，地铁广告、报纸、火车票、飞机票、快餐店、电影院、团购网站以及各类商品外包装上。作为物联网浪潮产业中的一个环节，二维码的应用从未这么受到关注，有专家甚至预测，将在两三年内形成上千亿的市场空间。</p>
-<p>二维码的应用的有主读和被读的概念。国外，二维码的平台式服务指的是有一个平台来供你生成二维码，并在那后面附上图片、文字、视频等各种各样的信息。本质上，二维码的内容是指向一个地址。所以二维码平台式服务属于被读的领域。</p>
-<h3 id="二维码的生成"><a href="#二维码的生成" class="headerlink" title="二维码的生成"></a>二维码的生成</h3><h4 id="可选择的API"><a href="#可选择的API" class="headerlink" title="可选择的API"></a>可选择的API</h4><p>二维码的生成，网上有很多例子，各种程序版本的都有，这里只提一下Java版本的注意事项。Java版本的有两种选择，分别是Zxing和QRcode。</p>
-<ul>
-<li>ZXing用Java实现的多种格式的1D/2D条码图像处理库，Zxing库的主要部分支持以下几个功能：核心代码的使用、适用于J2SE客户端的版本、适用于Android客户端的版本（即BarcodeScanner）、Android的集成（通过Intent支持和BarcodeScanner的集成）等。ZXing处理库可以生成和识别QRCode码。</li>
-<li>QRCode码，是由日本Denso公司于1994年9月研制的一种矩阵二维码符号。</li>
-</ul>
-<p>个人推荐如果桌面或Web应用，采用Denso公司的QRCode库，Android应用采用ZXing处理库。</p>
-<p>其中网上提供的QRCode的Jar包，开发的时候找了好几个才找对，官网下载的那个只有生成没有解析，而网上的例子大都是带着解析方法的，所以用集成了解析API的Jar包。</p>
-<h4 id="二维码的大小"><a href="#二维码的大小" class="headerlink" title="二维码的大小"></a>二维码的大小</h4><p>二维码有大小（version）,version越大存储信息越多，生成的二维码图片也越大越复杂，在实际使用过程中，虽然可以使用更大的级别，但是如果图片太大，通过微信发送图片的时候，在微信中点击图片，不能被微信作为二维码识别，使用不方便。<strong>原因如下：</strong>二维码所能包含的字符信息量是由QrcodeVersion的设置值来决定的。将QrcodeVersion设置到20的时候，就已经可以容乃到300多个字节。不过修改了QrcodeVersion的值，解决的仅仅是字符集容量的问题，这样生成的图片可能无法解码。可是把字符容量控制在128个以内的时候，就可以正常的解码。生成的二维码图片的大小是会根据所压缩的信息内容而变化的，网上提供的例子是通过new BufferedImage(139, 139, BufferedImage.TYPE_INT_RGB);来创建图像对象的，默认的情况下图片的大小是139<em>139，这个大小是比较适合QrcodeVersion为7的情况。将图片的大小设置到300</em>300就可以很好的支持QrcodeVersion为20的情况，并且可以正常的解码。</p>
-<h3 id="二维码名片相关"><a href="#二维码名片相关" class="headerlink" title="二维码名片相关"></a>二维码名片相关</h3><p>vCard 规范容许公开交换个人数据交换 (Personal Data Interchange PDI) 信息，在传统纸质商业名片可找到这些信息。规范定义电子名片（或叫vCard）的格式。 vCard 规范可作为各种应用或系统之间的交换格式。定义的格式与传送的方法无关。传送交换可能是文件系统，点对点交换的公共电话网络，以有线网络或无线传送的方式。用户能在互联网上直接利用vCard。电子邮件能转发在vCard中人信息。网页上很多用户填写的表格可自动使用vCard。</p>
-<p>在实际开发过程中，需要注意的几点：</p>
-<ul>
-<li>个人名片信息量不是很大，生成二维码名片的大小可以为12，这个大小能包含基本的信息，生成的二维码也不会太复杂，在微信中可以很好的被识别。</li>
-<li>自定义字段，虽然信息可以写入，但是微信扫码识别不出来。</li>
-</ul>
+            <p>关于Mac上MySQL的密码重置，网上有很多说明，参照着试了一下，多有错误，整理备份之，供需要者参考。</p>
+<h3 id="1-关掉MySQL"><a href="#1-关掉MySQL" class="headerlink" title="1.关掉MySQL"></a>1.关掉MySQL</h3><p>可以通过系统偏好设置进行关闭，或者使用命令行。在Mac OS X启动和停止MySQL服务的命令如下：</p>
+<pre><code>//启动MySQL服务
+sudo /usr/local/mysql/support-files/mysql.server start
+//停止MySQL服务
+sudo /usr/local/mysql/support-files/mysql.server stop
+//重启MySQL服务
+sudo /usr/local/mysql/support-files/mysql.server restart
+</code></pre><h3 id="2-Safe模式启动Mysql"><a href="#2-Safe模式启动Mysql" class="headerlink" title="2.Safe模式启动Mysql"></a>2.Safe模式启动Mysql</h3><p>在终端中，进入Mysql目录，使用安全模式启动，禁止Mysql的验证功能，命令如下：</p>
+<pre><code>cd /usr/local/mysql/bin/
+sudo su  
+./mysqld_safe --skip-grant-tables &amp;
+</code></pre><h3 id="3-更新密码"><a href="#3-更新密码" class="headerlink" title="3.更新密码"></a>3.更新密码</h3><p>   上一步是安全模式启动，可以直接登录Mysql，执行如下命令：</p>
+<pre><code>./mysql
+</code></pre><p>在MySQL命令行中执行更新密码的SQL：</p>
+<pre><code>mysql&gt;FLUSH PRIVILEGES;
+mysql&gt;UPDATE mysql.user
+SET authentication_string=PASSWORD(&apos;123456&apos;)
+WHERE user=&apos;root&apos;;
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+Rows matched: 1  Changed: 0  Warnings: 1
+</code></pre><h3 id="4-正常模式启动Mysql"><a href="#4-正常模式启动Mysql" class="headerlink" title="4.正常模式启动Mysql"></a>4.正常模式启动Mysql</h3><p>关闭Mysql后正常模式启动，可以用新设置的密码登录MySQL。</p>
+<pre><code>sh-3.2# sudo /usr/local/mysql/support-files/mysql.server stop
+Shutting down MySQL
+...
+SUCCESS!
+[1]+  Done                    ./mysqld_safe --skip-grant-tables
+sh-3.2#
+sh-3.2# mysql -uroot -p
+Enter password:
+Welcome to the MySQL monitor.  Commands end with ; or \g.
+Your MySQL connection id is 21
+.....//提示信息省略
+Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.
+</code></pre><h3 id="5-重设密码"><a href="#5-重设密码" class="headerlink" title="5.重设密码"></a>5.重设密码</h3><p>登录MySQL之后，在MySQL命令行中执行如下命令：</p>
+<pre><code>mysql&gt; use mysql
+ERROR 1820 (HY000): You must reset your password using
+ALTER USER statement before executing this statement.
+mysql&gt; SET PASSWORD = PASSWORD(&apos;123456&apos;);
+Query OK, 0 rows affected, 1 warning (0.00 sec)
+</code></pre><p>操作完成。</p>
 
           
         
@@ -505,7 +527,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -555,7 +577,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -577,7 +599,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -651,7 +673,7 @@
     
       <span class="post-meta-item-text">网站总字数&#58;</span>
     
-    <span title="网站总字数">46.4k字</span>
+    <span title="网站总字数">48.9k字</span>
   
 </div>
 

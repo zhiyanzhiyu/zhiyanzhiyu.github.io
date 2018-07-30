@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2018/01/02/ai-ml-000-introduction/">
+    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2018/01/17/ai-ml-001-alg/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zyzy">
@@ -327,7 +327,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/01/02/ai-ml-000-introduction/" itemprop="url">ML000.机器学习入门</a></h1>
+                <a class="post-title-link" href="/2018/01/17/ai-ml-001-alg/" itemprop="url">ML001.机器学习算法概览</a></h1>
         
 
         <div class="post-meta">
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T13:31:11+08:00">
-                2018-01-02
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-17T14:10:51+08:00">
+                2018-01-17
               </time>
             
 
@@ -379,7 +379,7 @@
 
           
           
-             <span id="/2018/01/02/ai-ml-000-introduction/" class="leancloud_visitors" data-flag-title="ML000.机器学习入门">
+             <span id="/2018/01/17/ai-ml-001-alg/" class="leancloud_visitors" data-flag-title="ML001.机器学习算法概览">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">字数&#58;</span>
                 
                 <span title="字数">
-                  1,634 字
+                  1,690 字
                 </span>
               
 
@@ -444,42 +444,40 @@
         
           
             <blockquote>
-<p>本文是机器学习相关的学习笔记，主要参考Andrew Ng、李宏毅等大牛的课程和书籍。<br>本文是0篇之<strong>机器学习入门</strong>，主要内容是机器学习的概念等基础知识。</p>
+<p>Machine Learing学习笔记，主要参考Andrew Ng、李宏毅等大牛的课程和书籍。本文是001篇之<strong>机器学习算法概览</strong>，主要内容是对机器学习涉及到的各种学习模型和算法的简介。</p>
 </blockquote>
-<p>AI今年实在太火，每天都能搞出大事情！从去年就计划学习相关知识，还尝试了几次，但每次看点入门知识就放弃了，因为内容确实有点难，感觉智商不太够用，/(ㄒoㄒ)/~~。不过形势所迫，不玩点有难度的早晚要沦落成diduan人口，被AI这玩意驱逐出地球。哎，为了全人类，还是破釜沉舟背水一战吧！</p>
-<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-072625.jpg" alt="作为程序员的你，感受到压力没？"></p>
-<p>最近找了很多资料，看了好几个公开课，比较流行的有大神Andrew NG在Coursera的机器学习课程，以及台湾李宏毅教授的课程，都比较适合初学者。我会参考这几个课程和其他参考书，结合自己的学习情况，整理一个大纲和笔记。</p>
-<h4 id="1-机器学习入门"><a href="#1-机器学习入门" class="headerlink" title="1 机器学习入门"></a>1 机器学习入门</h4><p><strong>1.1机器学习被用来做什么？</strong></p>
-<p>机器学习已经得到了很广泛的应用，比如谷狗，度娘的搜索技术，Facebook或Apple的图片分类程序，电子邮件垃圾邮件筛选器等等。Andrew Ng的课程中演示了一个自动飞行器，这让我们相信汽车自动驾驶时代很快就会到来。</p>
-<p><strong>1.2机器学习为什么越来越流行?</strong></p>
-<p>目前机器学习不只用于人工智能领域，它已经成为计算机一种新的能力(NewCapability），应用于很多方面，课程中提到了数据挖掘，自动化技术，理解人类思维了解人类大脑等等。下面是一个稍微详细点的分类，说明了机器学习涉及到领域：</p>
+<h3 id="1-算法概览"><a href="#1-算法概览" class="headerlink" title="1.算法概览"></a>1.算法概览</h3><p>本节不探讨算法的实现细节，只做总体的概览。机器学习的算法有很多，请看下面一张图，这张图来自台湾李宏毅教授机器学习课程PPT，很好的概括了机器学习的常见算法，可以作为一个学习路线图。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-080146.jpg" alt="机器学习算法概览"></p>
+<h3 id="2-监督学习（Supervised-Learning）"><a href="#2-监督学习（Supervised-Learning）" class="headerlink" title="2.监督学习（Supervised Learning）"></a>2.监督学习（Supervised Learning）</h3><p>首先要理解<strong>监督</strong>的到底是指什么？个人理解就是训练数据有标签，比如面积，价格，房间数等，预测也有目标性，即成交价格，这就是所谓的“监督”。</p>
+<h4 id="2-1-回归（Regression）"><a href="#2-1-回归（Regression）" class="headerlink" title="2.1 回归（Regression）"></a>2.1 回归（Regression）</h4><p>NG课程里面举了一个预测房价的例子，还是比较容易理解的。如下图所示：<img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-081356.jpg" alt="img"></p>
+<p>上图表示根据某一地区房屋历史交易数据，可以在图上标出面积和房价的点，根据这些历史数据，可以拟合出一条面积和价格之间的直线，或者曲线，进而预测房屋价格。</p>
+<p>根据已有房屋历史交易数据（即所谓的“正确答案”）来来预测房屋交易价格（即更多“正确答案”），是典型的监督学习，而且是线性回归算法。这里要理解回归（Regression）是什么含义？简单来说，<strong>回归就意味着预测结果是连续的（Continuous）</strong>。</p>
+<h4 id="2-2-分类（Classification）"><a href="#2-2-分类（Classification）" class="headerlink" title="2.2 分类（Classification）"></a>2.2 分类（Classification）</h4><p>如果预测结果是不连续的呢？这就属于分类问题，比如NG在课程中提到的癌症预测案例，如下图所示：</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-081428.jpg" alt="img"></p>
+<p>根据一个人身上肿块大小，预测肿瘤是良性的还是恶性的，即有没有得癌症？因为结果要么是得了癌症，要么是没得癌症，只有两个结果，即<strong>结果是不连续的，离散的</strong>。本实例只有两个结果，即良性和恶性，算是一个Binary Classification，当然有Multi-Class Classification,比如新闻分类，可以有很多种。</p>
+<p>上述两个案例中，都是只有一个特征，实际问题中特征肯定不止一个，比如房间预测案例中房间数目，癌症预测案例病人年龄，都是有价值的特征。有一些算法可以处理多个甚至无限多特征，比如支持向量机（SVM），里面有 一个巧妙的数学技巧，能让计算机处理无限多个特征。 </p>
+<p>另外，监督学习中还有决策树，深度学习等，也属于分类算法，后面的课程笔记中再详细说明。</p>
+<h3 id="3-无监督学习（Unsupervised-Learning）"><a href="#3-无监督学习（Unsupervised-Learning）" class="headerlink" title="3.无监督学习（Unsupervised Learning）"></a>3.无监督学习（Unsupervised Learning）</h3><p>无监督学习肯定是相对监督学习而言，无监督学习不管是训练数据还是学习目标都不明确，没有任何标签（Unlabeled data），没有“正确答案”，只有一个数据集，算法自己从数据中学习出有价值的东西出来。最常见的应该是聚类算法，聚类算法应用很广泛，比如谷歌新闻分类，DNA微观数据集，大型计算机集群，推荐系统，天文数据分析等。</p>
+<p>NG在课程中举了一个鸡尾酒宴问题（Cocktail Party Problem）的案例，即在一个嘈杂的环境中，如何根据两个麦克风输入的声音，提取出某一个人或者某个东西发出的声音，是一个无监督学习的例子。</p>
+<h3 id="4-其他"><a href="#4-其他" class="headerlink" title="4.其他"></a>4.其他</h3><p>除了无监督学习，图中还提到的几个算法，下面逐一简单说明之：</p>
 <ul>
-<li><strong>模式识别</strong> 可以认为模式识别就是机器学习，模式识别是从工业界发展起来的概念，而机器学习则强调计算机学科。</li>
-<li><strong>数据挖掘</strong> 数据挖掘=机器学习+数据库。数据挖掘仅仅是一种思考方式，不必神话之。</li>
-<li><strong>统计学习</strong>  统计学的目的是通过学习更多的潜在模式和关联关系，来帮助人类深入理解数据。 统计学习近似于机器学习，与机器学习高度重合，统计学的发展促进了机器学习的大发展，但是两者侧重点不同。统计学习重点关注统计模型的发展优化，偏数学，而机器学习关注实际问题的解决，偏实际。</li>
-<li><strong>计算机视觉</strong> 计算机视觉 = 图像处理+机器学习。</li>
-<li><strong>语音识别</strong> 语音识别 = 语音处理+机器学习，即音频处理技术与机器学习的结合。</li>
-<li><strong>自然语言处理</strong>自然语言处理 = 文本处理 + 机器学习。自然语言处理是让机器理解人类语言的学科，词法分析，语义理解，机器学习等。</li>
+<li><strong>Semi-supervised Learning，</strong>半监督学习是监督学习与无监督学习相结合的一种方法，同时使用未标记和有标记数据，来进行模式识别工作，能够提升学习效率；</li>
+<li><strong>Transfer Learning，</strong>顾名思义就是就是把已学训练好的模型和参数，迁移到新的模型来帮助新模型训练数据集。</li>
+<li><strong>Reinforcement Learning</strong> 增强学习（或强化学习）是近年来机器学习和智能控制领域的主要方法之一。相比其他学习方法，增强学习更接近生物学习的本质，因此有望获得更高的智能，这一点在棋类游戏中已经得到体现，想必大火的阿尔法狗让你记忆犹新！</li>
 </ul>
-<p>提到数据挖掘和大数据，有这样一种观点：<strong>成功的机器学习应用不是拥有最好的算法，而是拥有更多的数据。</strong>随着大数据概念的兴起，机器学习和大数据愈发耦合，可以说大数据是机器学习应用的最佳场景，二者互相依赖，共同发展。<strong>大数据的核心是利用数据的价值，机器学习则是利用数据价值的关键技术。 </strong></p>
-<h4 id="2-机器学习是什么？"><a href="#2-机器学习是什么？" class="headerlink" title="2 机器学习是什么？"></a>2 机器学习是什么？</h4><p>通俗来讲，机器学习就是教机器自己来完成任务，就这么简单。</p>
-<p>机器学习目前不存在被广泛认可的定义，但有两个可以参考：</p>
-<p><strong>2.1 Arthur Samuel(1959)：</strong>在没有明确编程情况下，使计算机能够主动学习研究的领域【原文参考：Field of study that gives computers the ability to learn without being explicitly programmed.】。值得一提的是Arthur Samuel编写了最早的阿尔法狗，不过下的国际象棋；</p>
-<p><strong>2.2 Tom Mitchell(1998)：</strong>一个程序能从经验 E 中学习，解决任务 T，达到性能度量值 P，当且仅当有了经验 E 后，经过 P 评判，程序在处理 T 时的性能有所提升，这就是机器学习【原文参考：A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.】。</p>
-<p>其中第二个定义正式一点，还押韵。具体到下棋的例子：经验E是程序自我练习的经验，而任务T就是下棋，性能度量值P就是它在与新的对手比赛时赢得比赛的概率。Ng课后测验里面有几题目测试对这个定义的理解，其中一道大意是：<strong>天气预报中，T，P，E分别是什么？</strong></p>
-<p>在本小节中，Andrew NG提到了对各种工具应该采取何种态度？值得强调，既：拥有合适的工具很重要，但更重要的是：<strong>你要学会如何恰当地使用这些工具，会用与不会用的人之间存在着鸿沟。</strong></p>
-<h4 id="3-几个容易混淆的概念"><a href="#3-几个容易混淆的概念" class="headerlink" title="3 几个容易混淆的概念"></a>3 几个容易混淆的概念</h4><p>初学者可能会被AI，ML和DL这三个概念搞糊涂，贴张让人神清气爽的图。</p>
-<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-073315.jpg" alt=""></p>
-<p>AI是最早的一个概念，发展一波三折：</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-07-27-062351.jpg" alt="img"></p>
+<h3 id="5-另一种分类"><a href="#5-另一种分类" class="headerlink" title="5.另一种分类"></a>5.另一种分类</h3><p>在网上看到过一篇机器学习的入门文章(《让我们从机器学习谈起》)，总结的也比较好，如下：</p>
 <ul>
-<li>从时间是上来讲，人工智能出现最早，机器学习和深度学习近些年才出现的。</li>
-<li>从逻辑上来讲，人工智能是目标，机器学习和深度学习是实现手段。相对机器学习而言，深度学习听起来高大上，但概并不神秘，就是传统神经网络发展到了多隐藏层的情况。</li>
+<li><strong>回归算法</strong> 入门算法，包括<strong>线性回归和逻辑回归</strong>。首先是线性回归，比如房价求解问题，寻找一条直线匹配所有数据，常用最小二乘法求解，但效率不高。数值计算用来提升计算的准确性和效率问题，例如梯度下降及牛顿法。其次是逻辑回归，与线性回归类似，但本质不同，线性回归处理的是数值问题，预测结果也为数值，逻辑回归属于分类算法，预测结果是离散分类。</li>
+<li><strong>神经网络</strong>，人工神经网络（ANN），基于大脑机理研究，在语音和视觉识别上效果好，BP算法诞生后发展进入新阶段。分解与整合是主要机理，但训练过程仍然困难，90年代后SVM算法取代了神经网络的地位。</li>
+<li><strong>SVM（支持向量机）</strong>支持向量机算法诞生于统计学界，是一种数学成分很浓的算法，是逻辑回归算法的强化，通过给与逻辑回归算法更严格的优化条件，通过高斯“核”获得比逻辑回归更好的分类界限，所谓“核”事实上就是一种特殊的函数，最典型的特征是可以将低纬空间映射到高纬空间。</li>
+<li><strong>聚类算法</strong> 没有标签，无监督算法的典型代表。计算种群中的距离，根据距离远近将数据划分为多个族群。</li>
+<li><strong>降维算法</strong> 无监督学习算法的一种，将数据从高纬降到低维，主要作用是压缩数据与提升机器学其他算法的效率。</li>
+<li><strong>推荐算法</strong> 电商网站用的最多，根据用户特征推荐可能感兴趣的东西。一个是基于物品内容的推荐，一个基于相似用户的推荐。</li>
+<li><strong>其他</strong> 高斯判别，朴素贝叶斯，决策树等</li>
 </ul>
-<h3 id="4-如何学习机器学习"><a href="#4-如何学习机器学习" class="headerlink" title="4 如何学习机器学习"></a>4 如何学习机器学习</h3><p>因为是新手，这个问题暂时回答不了，不过随着时间的推移，我相信可以给出自己的建议。</p>
-<p>首先是编程语言的选择：</p>
-<blockquote>
-<p>构想一个合适的机器学习方法，从来都不是一个瀑布式的过程，相反你需要反复分析，在各色各样的机器学习算法中尝试不同版本的输入数据，这种探索方式非常适合Python。作为一门解释性高级语言，Python似乎就是专门为尝试不同事物而设计的。【机器学习系统设计 P2】</p>
-</blockquote>
+<p>最后，奉上一张来自<a href="http://scikit-learn.org的神图，如下：" target="_blank" rel="noopener">http://scikit-learn.org的神图，如下：</a></p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-082213.jpg" alt="img"></p>
 
           
         
@@ -523,7 +521,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/4/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/4/">4</a><span class="page-number current">5</span><a class="page-number" href="/page/6/">6</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/6/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -573,7 +571,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -595,7 +593,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -669,7 +667,7 @@
     
       <span class="post-meta-item-text">网站总字数&#58;</span>
     
-    <span title="网站总字数">46.4k字</span>
+    <span title="网站总字数">48.9k字</span>
   
 </div>
 

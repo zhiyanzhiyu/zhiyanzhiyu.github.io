@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/06/14/json-web-tokens-notes/">
+    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/07/06/win-bat-about/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zyzy">
@@ -327,7 +327,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/06/14/json-web-tokens-notes/" itemprop="url">JWT介绍及Java实现JJWT使用总结</a></h1>
+                <a class="post-title-link" href="/2017/07/06/win-bat-about/" itemprop="url">Bat脚本的几点经验总结</a></h1>
         
 
         <div class="post-meta">
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-06-14T10:49:15+08:00">
-                2017-06-14
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-06T17:35:08+08:00">
+                2017-07-06
               </time>
             
 
@@ -362,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/系统架构/" itemprop="url" rel="index">
-                    <span itemprop="name">系统架构</span>
+                  <a href="/categories/运维/" itemprop="url" rel="index">
+                    <span itemprop="name">运维</span>
                   </a>
                 </span>
 
@@ -379,7 +379,7 @@
 
           
           
-             <span id="/2017/06/14/json-web-tokens-notes/" class="leancloud_visitors" data-flag-title="JWT介绍及Java实现JJWT使用总结">
+             <span id="/2017/07/06/win-bat-about/" class="leancloud_visitors" data-flag-title="Bat脚本的几点经验总结">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">字数&#58;</span>
                 
                 <span title="字数">
-                  1,677 字
+                  754 字
                 </span>
               
 
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6 分钟
+                  3 分钟
                 </span>
               
             </div>
@@ -443,46 +443,22 @@
       
         
           
-            <h2 id="JWT介绍"><a href="#JWT介绍" class="headerlink" title="JWT介绍"></a>JWT介绍</h2><p>Json web token (JWT), 是为了在网络应用环境间传递声明而执行的一种基于JSON的开放标准（(RFC7519)，该token被设计为紧凑且安全的，特别适用于分布式站点的单点登录（SSO）场景。JWT的声明一般被用来在身份提供者和服务提供者间传递被认证的用户身份信息，以便于从资源服务器获取资源，也可以增加一些额外的其它业务逻辑所必须的声明信息，该token也可直接被用于认证，也可被加密。</p>
-<h2 id="认证方案"><a href="#认证方案" class="headerlink" title="认证方案"></a>认证方案</h2><h3 id="Session认证"><a href="#Session认证" class="headerlink" title="Session认证"></a>Session认证</h3><p>在谈论JWT之前，我们先看一下传统的session认证方案：http协议本身是一种无状态的协议，这意味着用户向应用提供用户名和密码来进行用户认证，那么下一次请求时，用户还要再一次进行用户认证才行，因为根据http协议，我们并不能知道是哪个用户发出的请求，所以为了让我们的应用能识别是哪个用户发出的请求，我们只能在服务器存储一份用户登录的信息，这份登录信息会在响应时传递给浏览器，告诉其保存为cookie,以便下次请求时发送给我们的应用，这样我们的应用就能识别请求来自哪个用户了,这就是传统的基于session认证。但是这种基于session的认证使应用本身很难得到扩展，随着不同客户端用户的增加，独立的服务器已无法承载更多的用户，而这时候基于session认证应用的问题就会暴露出来。</p>
-<p>基于session认证所显露的问题:</p>
-<ul>
-<li>Session: 每个用户经过我们的应用认证之后，我们的应用都要在服务端做一次记录，以方便用户下次请求的鉴别，通常而言session都是保存在内存中，而随着认证用户的增多，服务端的开销会明显增大。</li>
-<li>扩展性: 用户认证之后，服务端做认证记录，如果认证的记录被保存在内存中的话，这意味着用户下次请求还必须要请求在这台服务器上,这样才能拿到授权的资源，这样在分布式的应用上，相应的限制了负载均衡器的能力。这也意味着限制了应用的扩展能力。</li>
-<li>CSRF: 因为是基于cookie来进行用户识别的, cookie如果被截获，用户就会很容易受到跨站请求伪造的攻击。</li>
-</ul>
-<h3 id="基于token的鉴权机制"><a href="#基于token的鉴权机制" class="headerlink" title="基于token的鉴权机制"></a>基于token的鉴权机制</h3><p>基于token的鉴权机制类似于http协议也是无状态的，它不需要在服务端去保留用户的认证信息或者会话信息。这就意味着基于token认证机制的应用不需要去考虑用户在哪一台服务器登录了，这就为应用的扩展提供了便利。流程上是这样的：</p>
-<ul>
-<li>用户使用用户名密码来请求服务器</li>
-<li>服务器进行验证用户的信息</li>
-<li>服务器通过验证发送给用户一个token</li>
-<li>客户端存储token，并在每次请求时附送上这个token值</li>
-<li>服务端验证token值，并返回数据</li>
-<li>这个token必须要在每次请求时传递给服务端，它应该保存在请求头里， 另外，服务端要支持CORS(跨来源资源共享)策略，一般我们在服务端这么做就可以了Access-Control-Allow-Origin: *。</li>
-</ul>
-<h2 id="JWT"><a href="#JWT" class="headerlink" title="JWT"></a>JWT</h2><p><a href="https://jwt.io/" target="_blank" rel="noopener">JWT</a>长什么样？JWT是由三段信息构成的，如下:</p>
+            <p>最近有个小项目需要在Window环境下部署，需要写一个bat启动脚本，但是因为对bat脚本语法不太清楚，找了个之前用的模版，算是能用了。期间碰到几个小问题，记录一下：</p>
+<h3 id="简单语法说明"><a href="#简单语法说明" class="headerlink" title="简单语法说明"></a>简单语法说明</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">if exist "%JAVA_HOME%" goto okHome</span><br><span class="line">echo The JAVA_HOME environment variable is not defined correctly</span><br><span class="line">goto end</span><br><span class="line"></span><br><span class="line">:okHome</span><br><span class="line">if exist "%JAVA_HOME%\bin\java.exe" goto run</span><br><span class="line">echo The java.exe is not available</span><br><span class="line">goto end</span><br><span class="line"></span><br><span class="line">:run</span><br><span class="line">set CLASSPATH=.</span><br><span class="line">for %%i in (.\lib\*.jar) do call cpappend.bat %%i</span><br><span class="line"><span class="meta">%</span>JAVA_HOME%\bin\java.exe -classpath %CLASSPATH% com.xxx.JxzkMain 192.xx.xx.xxx 99xx 99xx 90xx</span><br><span class="line"><span class="meta">1&gt;</span>&gt;/var/log/xxx-data.out</span><br><span class="line"><span class="meta">2&gt;</span>&gt;/var/log/xxx-data.alarms &amp;</span><br><span class="line"></span><br><span class="line">:end</span><br></pre></td></tr></table></figure>
+<p>说明：<br>FOR %%variable IN (set) DO command [command-parameters]，%%i应该是代表了”.\lib*.jar”中的每一个jar包</p>
+<p>for %%i in (“.\lib*.jar”) 应该是遍历”.\lib*.jar”中的每一个jar包,同时用%%i来存储名称<br>call setenv.bat %%i 应该是把%%i当参数调用setenv.bat<br>set cp=%cp%;%1 应该是把每一个%%i和%cp%拼接起来，再次赋值给%cp%变量</p>
+<p>set cp=for %%i in (“.\lib*.jar”) do call cpappend.bat %%i，应该是遍历lib包下的每一个jar包，同时把jar包名称用;拼接成起来赋值给cp变量</p>
+<p>java -cp %cp% com.test.DoMain 这个是执行Java main方法<br>1&gt;&gt;/var/log/xxx-data.out  输出日志信息<br>2&gt;&gt;/var/log/xxx-data.alarms &amp;  输出告警信息</p>
+<h4 id="让命令行窗口处于显示等待状态"><a href="#让命令行窗口处于显示等待状态" class="headerlink" title="让命令行窗口处于显示等待状态"></a>让命令行窗口处于显示等待状态</h4><p> pause</p>
+<h3 id="环境变量中的空格"><a href="#环境变量中的空格" class="headerlink" title="环境变量中的空格"></a>环境变量中的空格</h3><p>脚本写好之后，在自己的开发机器上运行正常，可以把应用拉起来，但是放到生产环境上，却报了一个异常：</p>
 <blockquote>
-<p>eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJKb2UifQ.ipevRNuRP6HflG8cFKnmUPtypruRC4fb1DWtoLL62SY</p>
+<p>‘C:\Program’ 不是内部或外部命令，也不是可运行的程序或批处理文件。<br>看着好像是Java的安装目录有问题，以为是环境变量配置的不对，重新配置了一遍，还是不行！因为生产Java安装在了C:\Program Files下，中间有个空格，可能会有问题，网上查了一下，果然！</p>
 </blockquote>
-<h3 id="header"><a href="#header" class="headerlink" title="header"></a>header</h3><p>jwt的头部承载两部分信息：声明类型(这里是jwt)和声明加密的算法（通常直接使用 HMAC SHA256），完整的头部就像下面这样的JSON：<br><figure class="highlight"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  'typ': 'JWT',</span><br><span class="line">  'alg': 'HS256'</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>然后将头部进行base64加密（该加密是可以对称解密的),构成了第一部分：eyJhbGciOiJIUzI1NiJ9</p>
-<h3 id="playload"><a href="#playload" class="headerlink" title="playload"></a>playload</h3><p>载荷就是存放有效信息的地方。这个名字像是特指飞机上承载的货品，这些有效信息包含三个部分:即标准中注册的声明，公共的声明，私有的声明<br><strong>标准中注册的声明</strong> (建议但不强制使用) ：</p>
+<p>如果本机环境变量的设置：java_home = C:\Program Files\Java\jdk1.8.0_131<br>*.bat中的命令格式：%java_home%\bin\java 或者 C:\Program Files\Java\jdk1.8.0_131\bin\java<br>运行这个.bat发现提示错误： “c:\Program” 不是内部或外部命令，检查了下，发现路径没有填写错误因此本人推断DOS中可能无法识别路径中有空格的情况，因此就google了一把还发现真的是这样。解决空格问题一共有两种办法：</p>
 <ul>
-<li>iss: jwt签发者</li>
-<li>sub: jwt所面向的用户</li>
-<li>aud: 接收jwt的一方</li>
-<li>exp: jwt的过期时间，这个过期时间必须要大于签发时间</li>
-<li>nbf: 定义在什么时间之前，该jwt都是不可用的.</li>
-<li>iat: jwt的签发时间</li>
-<li>jti: jwt的唯一身份标识，主要用来作为一次性token,从而回避重放攻击。<br><strong>公共的声明</strong> ：公共的声明可以添加任何的信息，一般添加用户的相关信息或其他业务需要的必要信息.但不建议添加敏感信息，因为该部分在客户端可解密.<br><strong>私有的声明</strong> ：私有声明是提供者和消费者所共同定义的声明，一般不建议存放敏感信息，因为base64是对称解密的，意味着该部分信息可以归类为明文信息。<br>如下：<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">  <span class="attr">"sub"</span>: <span class="string">"1111111"</span>,</span><br><span class="line">  <span class="attr">"name"</span>: <span class="string">"2222222222"</span>,</span><br><span class="line">  <span class="attr">"admin"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-</li>
+<li>一个是想办法在环境变量设置的时候用特殊字符给他替换掉：C:\PROGRA~1\Java\jdk1.8.0_131</li>
+<li>另外一个就是在写代码的时候用双引号给有空格的路径给它引起来， “C:\Program Files”\Java\jdk1.8.0_131\bin\java<br>需要注意的是，在环境变量中使用C:\PROGRA~1\，在bat中用%JAVA_HOME%引用是没有效果的，只有直接写在bat中才行，即：set JAVA_HOME=C:\PROGRA~1\Java\jdk1.8.0_131</li>
 </ul>
-<h3 id="signature"><a href="#signature" class="headerlink" title="signature"></a>signature</h3><p>jwt的第三部分是一个签证信息，这个签证信息由三部分组成：header (base64后的),payload (base64后的),secret。这个部分需要base64加密后的header和base64加密后的payload使用.连接组成的字符串，然后通过header中声明的加密方式进行加盐secret组合加密，然后就构成了jwt的第三部分。</p>
-<h2 id="JWT的Java实现JJWT"><a href="#JWT的Java实现JJWT" class="headerlink" title="JWT的Java实现JJWT"></a>JWT的Java实现JJWT</h2><p>JWT现在已经算得上流行了，各种语言都有了不同版本的实现，下面简单说明一下Java版本的实现之一<a href="https://github.com/jwtk/jjwt" target="_blank" rel="noopener">JJWT</a>。</p>
-<p>Maven依赖：<br><figure class="highlight xml"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">dependency</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">groupId</span>&gt;</span>io.jsonwebtoken<span class="tag">&lt;/<span class="name">groupId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">artifactId</span>&gt;</span>jjwt<span class="tag">&lt;/<span class="name">artifactId</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">version</span>&gt;</span>0.7.0<span class="tag">&lt;/<span class="name">version</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">dependency</span>&gt;</span></span><br></pre></td></tr></table></figure></p>
-<p>生成Token：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Key key = MacProvider.generateKey();</span><br><span class="line">String compactJws = Jwts.builder()</span><br><span class="line">  .setSubject(<span class="string">"Joe"</span>)</span><br><span class="line">  .signWith(SignatureAlgorithm.HS512, key)</span><br><span class="line">  .compact();</span><br></pre></td></tr></table></figure></p>
-<p>解析Token：<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">    Jwts.parser().setSigningKey(key).parseClaimsJws(compactJws);</span><br><span class="line">    <span class="comment">//OK, we can trust this JWT,正常解析则表示Token有效</span></span><br><span class="line">&#125; <span class="keyword">catch</span> (SignatureException e) &#123;</span><br><span class="line">    <span class="comment">//don't trust the JWT!，不能解析则表示Token非法，拒绝请求</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
-<p>最初了解JWT的时候，对其如何验证请求带上来的Token有些疑问，这里在对签名进行加密的时候，是一个固定的Key，保存在服务端，不能泄露，否则就失去了意义！<br><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">public</span> <span class="keyword">static</span> SecretKey <span class="title">generalKey</span><span class="params">()</span></span>&#123;</span><br><span class="line">    String stringKey =  JWT_SECRET;<span class="comment">//固定值，比如123456</span></span><br><span class="line">    <span class="keyword">byte</span>[] encodedKey = Base64.decodeBase64(stringKey);</span><br><span class="line">    SecretKey key = <span class="keyword">new</span> SecretKeySpec(encodedKey, <span class="number">0</span>, encodedKey.length, <span class="string">"AES"</span>);</span><br><span class="line">    <span class="keyword">return</span> key;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -526,7 +502,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/23/">23</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -576,7 +552,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">23</span>
+                  <span class="site-state-item-count">24</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -598,7 +574,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">53</span>
+                  <span class="site-state-item-count">54</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -672,7 +648,7 @@
     
       <span class="post-meta-item-text">网站总字数&#58;</span>
     
-    <span title="网站总字数">46.4k字</span>
+    <span title="网站总字数">48.9k字</span>
   
 </div>
 
