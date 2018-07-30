@@ -465,9 +465,9 @@
 <p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-082646.jpg" alt="img"></p>
 <p>因为这个函数只含有一个特征/输入变量，这样的问题叫作<strong>单变量线性回归问题。</strong>现在要做的便是为我们的模型选择合适的参数(parameters)$\theta_0$ 和$\theta_1$ 。很明显，在房价预测这个例子中，$θ_1$便是直线的斜率，$θ_1$则是在 y 轴上的截距，求解这两个参数是后续成本函数所要解决的问题。</p>
 <h3 id="2-代价函数"><a href="#2-代价函数" class="headerlink" title="2 代价函数"></a>2 代价函数</h3><p>本文是斯坦福大学机器学习课程的2-2，2-3，2-4的学习笔记，主要是内容是代价函数以及对代价函数的直观理解。</p>
-<h4 id="2-1-代价函数定义（Cost-Function-）"><a href="#2-1-代价函数定义（Cost-Function-）" class="headerlink" title="2.1 代价函数定义（Cost Function ）"></a>2.1 代价函数定义（Cost Function ）</h4><p>如下图所示，在房价预测的案例中，我们得到了预测房价的目标函数，问题也转换成了为模型选择合适的参数$\theta_i$$，即$$θ_0$和​$θ_1$。</p>
+<h4 id="2-1-代价函数定义（Cost-Function-）"><a href="#2-1-代价函数定义（Cost-Function-）" class="headerlink" title="2.1 代价函数定义（Cost Function ）"></a>2.1 代价函数定义（Cost Function ）</h4><p>如下图所示，在房价预测的案例中，我们得到了预测房价的目标函数，问题也转换成了为模型选择合适的参数$\theta_i$$，即$$θ_0$和$θ_1$。</p>
 <p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-083126.jpg" alt="img"></p>
-<p>思路是通过选取不同的（$θ_0$,$θ<em>1$）使得$h</em>\theta\langle x \rangle $更接近与y,就是$h_\theta\langle x \rangle $和训练集的真实值的误差最小，当这个误差最小的时候，就是我们要的参数值。</p>
+<p>思路是通过选取不同的$（θ_0,θ<em>1）$使得$h</em>\theta\langle x \rangle $更接近与y,就是$h_\theta\langle x \rangle $和训练集的真实值的误差最小，当这个误差最小的时候，就是我们要的参数值。</p>
 <p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-083359.jpg" alt="img"></p>
 <p>通过这个思路，我们得到了一个关于$\langleθ_0,θ_1\rangle$的函数，当这个函数取得最小值的时候，我们就找到了我们要的参数值。</p>
 <p><strong><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-083428.png" alt="img"></strong></p>
