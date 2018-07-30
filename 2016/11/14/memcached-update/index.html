@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="运维,memcached," />
+  <meta name="keywords" content="memcached,运维," />
 
 
 
@@ -89,7 +89,7 @@
 
 
 <meta name="description" content="缘起公司的几个小项目部署在阿里云上，最近收到封安全相关的邮件，内容如下：  尊敬的用户： 2016年10月31日,Memcached官方发布安全补丁修复多个远程代码执行漏洞，黑客可以利用这些漏洞窃取在Memcached中存放的业务数据，或导致Memcached服务崩溃从而造成拒绝服务等危害，风险等级较高，为了确保您在云上业务安全性，请您关注，具体详见安全通告信息，漏洞详情。同时建议您前往安骑士控制">
-<meta name="keywords" content="运维,memcached">
+<meta name="keywords" content="memcached,运维">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Memcached升级总结">
 <meta property="og:url" content="http://zhiyanzhiyu.net.cn/2016/11/14/memcached-update/index.html">
@@ -260,22 +260,26 @@
   
     <div class="site-search">
       
-  <div class="popup search-popup local-search-popup">
-  <div class="local-search-header clearfix">
-    <span class="search-icon">
-      <i class="fa fa-search"></i>
-    </span>
+  
+  <div class="algolia-popup popup search-popup">
+    <div class="algolia-search">
+      <div class="algolia-search-input-icon">
+        <i class="fa fa-search"></i>
+      </div>
+      <div class="algolia-search-input" id="algolia-search-input"></div>
+    </div>
+
+    <div class="algolia-results">
+      <div id="algolia-stats"></div>
+      <div id="algolia-hits"></div>
+      <div id="algolia-pagination" class="algolia-pagination"></div>
+    </div>
+
     <span class="popup-btn-close">
       <i class="fa fa-times-circle"></i>
     </span>
-    <div class="local-search-input-wrapper">
-      <input autocomplete="off"
-             placeholder="搜索..." spellcheck="false"
-             type="text" id="local-search-input">
-    </div>
   </div>
-  <div id="local-search-result"></div>
-</div>
+
 
 
 
@@ -529,9 +533,9 @@
       
         <div class="post-tags">
           
-            <a href="/tags/运维/" rel="tag"># 运维</a>
-          
             <a href="/tags/memcached/" rel="tag"># memcached</a>
+          
+            <a href="/tags/运维/" rel="tag"># 运维</a>
           
         </div>
       
@@ -1274,6 +1278,19 @@
   </script>
 
 
+
+
+  
+  
+  
+  <link rel="stylesheet" href="/lib/algolia-instant-search/instantsearch.min.css">
+
+  
+  
+  <script src="/lib/algolia-instant-search/instantsearch.min.js"></script>
+  
+
+  <script src="/js/src/algolia-search.js?v=5.1.4"></script>
 
 
 
