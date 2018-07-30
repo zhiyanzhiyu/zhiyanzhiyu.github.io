@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Mysql,数据库," />
+  <meta name="keywords" content="ML,AI,机器学习,统计学习," />
 
 
 
@@ -88,23 +88,21 @@
 
 
 
-<meta name="description" content="说明：本文为工作十年回顾总结系列之MYSQL之数据类型篇，主要内容为《High Performance MSYQL》第3版笔记，以及网上流传的最佳实践，作为个人知识库存档备份，相关配图来自anxpp的博客，其他文中引用不再一一说明。  MSYQL支持数据类型非常丰富，支持所有标准SQL数据类型，如果算上同义词有近40种之多。常用类型主要有3类：数值类型，字符串类型和时间日期类型。 1.1 数值类">
-<meta name="keywords" content="Mysql,数据库">
+<meta name="description" content="本文是机器学习相关的学习笔记，主要参考Andrew Ng、李宏毅等大牛的课程和书籍。本文是003篇之统计学习方法概论，主要内容是李航《统计学习方法》第一章的内容，统计学习方法概论，介绍了一些基本概念。  在前面的一篇笔记中，提到过机器学习和统计学的关系：统计学的目的是通过学习更多的潜在模式和关联关系，来帮助人类深入理解数据。 统计学习近似于机器学习，与机器学习高度重合，统计学的发展促进了机器学">
+<meta name="keywords" content="ML,AI,机器学习,统计学习">
 <meta property="og:type" content="article">
-<meta property="og:title" content="MSYQL总结之数据类型篇">
-<meta property="og:url" content="http://zhiyanzhiyu.net.cn/2017/04/16/mysql-data-type/index.html">
+<meta property="og:title" content="ML002.统计学习方法概论">
+<meta property="og:url" content="http://zhiyanzhiyu.net.cn/2018/07/30/ai-ml-002-statisical-ml-outline/index.html">
 <meta property="og:site_name" content="志言志语">
-<meta property="og:description" content="说明：本文为工作十年回顾总结系列之MYSQL之数据类型篇，主要内容为《High Performance MSYQL》第3版笔记，以及网上流传的最佳实践，作为个人知识库存档备份，相关配图来自anxpp的博客，其他文中引用不再一一说明。  MSYQL支持数据类型非常丰富，支持所有标准SQL数据类型，如果算上同义词有近40种之多。常用类型主要有3类：数值类型，字符串类型和时间日期类型。 1.1 数值类">
+<meta property="og:description" content="本文是机器学习相关的学习笔记，主要参考Andrew Ng、李宏毅等大牛的课程和书籍。本文是003篇之统计学习方法概论，主要内容是李航《统计学习方法》第一章的内容，统计学习方法概论，介绍了一些基本概念。  在前面的一篇笔记中，提到过机器学习和统计学的关系：统计学的目的是通过学习更多的潜在模式和关联关系，来帮助人类深入理解数据。 统计学习近似于机器学习，与机器学习高度重合，统计学的发展促进了机器学">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://od6dlhv8a.bkt.clouddn.com/2017043058152425.png">
-<meta property="og:image" content="http://od6dlhv8a.bkt.clouddn.com/2017042674015677.png">
-<meta property="og:image" content="http://od6dlhv8a.bkt.clouddn.com/2017043373514055.png">
-<meta property="og:image" content="http://od6dlhv8a.bkt.clouddn.com/201704534776567.png">
-<meta property="og:updated_time" content="2017-04-16T02:14:29.000Z">
+<meta property="og:image" content="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-07-28-131737.png">
+<meta property="og:image" content="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-07-29-033504.png">
+<meta property="og:updated_time" content="2018-07-30T06:18:52.806Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="MSYQL总结之数据类型篇">
-<meta name="twitter:description" content="说明：本文为工作十年回顾总结系列之MYSQL之数据类型篇，主要内容为《High Performance MSYQL》第3版笔记，以及网上流传的最佳实践，作为个人知识库存档备份，相关配图来自anxpp的博客，其他文中引用不再一一说明。  MSYQL支持数据类型非常丰富，支持所有标准SQL数据类型，如果算上同义词有近40种之多。常用类型主要有3类：数值类型，字符串类型和时间日期类型。 1.1 数值类">
-<meta name="twitter:image" content="http://od6dlhv8a.bkt.clouddn.com/2017043058152425.png">
+<meta name="twitter:title" content="ML002.统计学习方法概论">
+<meta name="twitter:description" content="本文是机器学习相关的学习笔记，主要参考Andrew Ng、李宏毅等大牛的课程和书籍。本文是003篇之统计学习方法概论，主要内容是李航《统计学习方法》第一章的内容，统计学习方法概论，介绍了一些基本概念。  在前面的一篇笔记中，提到过机器学习和统计学的关系：统计学的目的是通过学习更多的潜在模式和关联关系，来帮助人类深入理解数据。 统计学习近似于机器学习，与机器学习高度重合，统计学的发展促进了机器学">
+<meta name="twitter:image" content="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-07-28-131737.png">
 
 
 
@@ -134,13 +132,13 @@
 
 
 
-  <link rel="canonical" href="http://zhiyanzhiyu.net.cn/2017/04/16/mysql-data-type/"/>
+  <link rel="canonical" href="http://zhiyanzhiyu.net.cn/2018/07/30/ai-ml-002-statisical-ml-outline/"/>
 
 
 
 
 
-  <title>MSYQL总结之数据类型篇 | 志言志语</title>
+  <title>ML002.统计学习方法概论 | 志言志语</title>
   
 
 
@@ -313,7 +311,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/04/16/mysql-data-type/">
+    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2018/07/30/ai-ml-002-statisical-ml-outline/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zyzy">
@@ -330,7 +328,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">MSYQL总结之数据类型篇</h1>
+          <h1 class="post-title" itemprop="name headline">ML002.统计学习方法概论</h1>
         
 
         <div class="post-meta">
@@ -342,8 +340,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-16T09:50:16+08:00">
-                2017-04-16
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-30T14:15:49+08:00">
+                2018-07-30
               </time>
             
 
@@ -365,8 +363,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -382,7 +380,7 @@
 
           
           
-             <span id="/2017/04/16/mysql-data-type/" class="leancloud_visitors" data-flag-title="MSYQL总结之数据类型篇">
+             <span id="/2018/07/30/ai-ml-002-statisical-ml-outline/" class="leancloud_visitors" data-flag-title="ML002.统计学习方法概论">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -412,7 +410,7 @@
                   <span class="post-meta-item-text">字数&#58;</span>
                 
                 <span title="字数">
-                  1,707 字
+                  3,796 字
                 </span>
               
 
@@ -428,7 +426,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  6 分钟
+                  13 分钟
                 </span>
               
             </div>
@@ -449,59 +447,116 @@
       
 
       
-        <blockquote>
-<p>说明：本文为工作十年回顾总结系列之MYSQL之数据类型篇，主要内容为《High Performance MSYQL》第3版笔记，以及网上流传的最佳实践，作为个人知识库存档备份，相关配图来自anxpp的博客，其他文中引用不再一一说明。</p>
+        <hr>
+<blockquote>
+<p>本文是机器学习相关的学习笔记，主要参考Andrew Ng、李宏毅等大牛的课程和书籍。<br>本文是003篇之<strong>统计学习方法概论</strong>，主要内容是李航《统计学习方法》第一章的内容，统计学习方法概论，介绍了一些基本概念。</p>
 </blockquote>
-<p>MSYQL支持数据类型非常丰富，支持所有标准SQL数据类型，如果算上同义词有近40种之多。常用类型主要有3类：数值类型，字符串类型和时间日期类型。</p>
-<h3 id="1-1-数值类型"><a href="#1-1-数值类型" class="headerlink" title="1.1 数值类型"></a>1.1 数值类型</h3><p>数值类型有两种，即整数（whole number）和实数（real number），而实数又分为定点数和浮点数，下面逐进行一说明。</p>
-<h4 id="1-1-1-整数类型"><a href="#1-1-1-整数类型" class="headerlink" title="1.1.1-整数类型"></a>1.1.1-整数类型</h4><p>整数类型最简单的数据类型，很好理解，无需多言。整数存储所占空间和取值范围如下表所示：<br><img src="http://od6dlhv8a.bkt.clouddn.com/2017043058152425.png" alt="整型数据取值范围"></p>
-<p><strong>选型建议：</strong></p>
+<p>在前面的一篇笔记中，提到过机器学习和统计学的关系：<strong>统计学的目的是通过学习更多的潜在模式和关联关系，来帮助人类深入理解数据。 统计学习近似于机器学习，与机器学习高度重合，统计学的发展促进了机器学习的大发展，但是两者侧重点不同。统计学习重点关注统计模型的发展优化，偏数学，而机器学习关注实际问题的解决，偏实际。</strong></p>
+<p>机器学习和统计学习各有侧重，不过对我们初学者来说，可以把两者先当成一回事。最近也在看李航的那本《统计学习方法》，虽然是一本很薄的书，但是对我这种数学渣渣来说，真的看着有些吃力了。不过其评分之高是我们不能回避的一本书。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-07-28-131737.png" alt="image-20180728211735214"></p>
+<p>网上大部分视频课程都是采用的一种从简单例子开始，自下而上的方式，但是这样在学习的过程中，总是会不断的出现新的概念，时间长了就有点混乱，不够系统。而《统计学习方法》的第一章可以很好的给我们一个自顶而下的概念，让我们能够更加系统的掌握相关概念。本文算是该书第一章的读书笔记。</p>
+<h3 id="1-统计学习的定义和特点"><a href="#1-统计学习的定义和特点" class="headerlink" title="1.统计学习的定义和特点"></a>1.统计学习的定义和特点</h3><p><strong>统计学习</strong>统计机器学习（Statisical Machine Learning，是关于计算机基于数据构建概率统计模型并运用模型对数据进行预测与分析的一门学科。它有如下几个<strong>特点</strong>：</p>
 <ul>
-<li>整数类型支持UNSIGNED属性，表示不允许有负值，表示正数范围上限提高一倍。</li>
-<li>创建数据表的时候，可以为整数类型指定宽度，如INT（11），但这没有实际意义，只用于交互工具界面显示字符个数，对于存储和计算来说，INT（1）和INT（20）是相同的；</li>
-<li>INTEGER等同INT。<h4 id="1-1-2-实数类型"><a href="#1-1-2-实数类型" class="headerlink" title="1.1.2-实数类型"></a>1.1.2-实数类型</h4>简单来说就是带小数的数字。MYSQL即支持精确类型也支持不精确类型，其中：1）定点数，DECIMAL（同NUMERIC）用于存储精确的小数；2）浮点数，FLOAT、DOUBLE和REAL类型支持使用标准的浮点运算进行近似计算；3）选型建议：<ul>
-<li>浮点和定点都可以指定精度，但是相对于定点数来说，浮点类型在存储同样范围的值时，通常比DECIMAL使用更少的空间，所以应尽量只在对小数进行精确计算时才使用DECIMAL，比如财务数据。</li>
-<li>在数据量比较大时，可考虑用BIGINT代替DECIAML，即将需要存储的货币单位根据小数的位数以相应的倍数即可，这样可避免浮点数存储计算不精确和DECIMAL精确计算代价高的问题。<br><img src="http://od6dlhv8a.bkt.clouddn.com/2017042674015677.png" alt="实数存储空间占用"></li>
+<li>计算机及网络平台之上，这个自然，不需多言；</li>
+<li>以数据为研究对象，数据驱动，是统计学习的对象；</li>
+<li>预测与分析，这是统计学习的目标；</li>
+<li>方法为中心，所谓的方法就是前一篇笔记的模型和算法，比如监督学习，无监督学习，半监督学习以及强化学习等等。</li>
+<li>概率论，统计学，信息论，计算理论，最优化理论及计算机科学 交叉学科。</li>
 </ul>
-</li>
-</ul>
-<h3 id="1-2字符串类型"><a href="#1-2字符串类型" class="headerlink" title="1.2字符串类型"></a>1.2字符串类型</h3><p>MYSQL支持多种字符串类型，其中VARCHAR和CHAR是两种最主要的字符串类型。</p>
+<p>上述内容都比较好理解，需要重点说明的是<strong>学习方法</strong>相关的内容：统计学习方法包括模型的假设空间，模型选择的准则以及模型学习的算法，这三者被称为统计学习的三要素，简称模型，策略和算法。</p>
+<p>实现统计学习方法的步骤：</p>
 <ul>
-<li>CHAR，固定长度，长度可为从0到255的任何值，保存时右边填充空格，检索时尾部的空格被删除掉，所以存储时字符串右边不能有空格，否则检索和比较会出问题；</li>
-<li>VARCHAR为可变长字符串，长度可以指定为0到65,535之间的值，需要一个字节来记录长度(如长度超255，则用两个字节)；</li>
-<li>BINARY和VARBINARY，和CHAR和VARCHAR类似，存储的是二进制字符串，不同之处是它们存储二进制串，没有字符集，排序和比较基于列值字节的数值；</li>
-<li>BLOB和TEXT类型，为了存储很大的数据而设计的数据类型，分别采用二进制和字符方式存储。MYSQL把BLOB和TEXT当成一个独立的对象处理，存储引擎在存储时通常会做特殊处理；</li>
-<li>枚举（ENUM）类型，枚举列可以把一些不重复的字符串存储城一个预定义的集合，在存储枚举时非常紧凑，会根据列表值的数据压缩到一个或者两个字节中；</li>
-<li>位数据类型，使用紧凑的位存储数据，这些类型不管底层存储格式和处理方式如何，从技术上来说都是字符串类型。</li>
-<li>字符串类型存储占用空间，如下图所示：<br><img src="http://od6dlhv8a.bkt.clouddn.com/2017043373514055.png" alt="字符串类型"></li>
+<li>得到一个有限的训练数据集合；</li>
+<li>确定包含所有可能的模型的假设空间，即学习模型的集合；</li>
+<li>确定模型选择的准则，即学习的策略；</li>
+<li>实现求解最优模型的算法，即学习的算法；</li>
+<li>通过学习方法选择最优模型；</li>
+<li>利用学习的最优模型对新数据进行预测分析。</li>
 </ul>
-<p><strong>选型建议：</strong></p>
+<h3 id="2-监督学习"><a href="#2-监督学习" class="headerlink" title="2 监督学习"></a>2 监督学习</h3><p>Supervised learning，李航的《统计学习方法》主要讲的监督学习。</p>
+<h4 id="2-1-基本概念"><a href="#2-1-基本概念" class="headerlink" title="2.1 基本概念"></a>2.1 <strong>基本概念</strong></h4><p><strong>输入空间与输出空间</strong>：在监督学习中，将输入与输出所有可能的取值的集合分别称为<strong>输入空间（input space）</strong>与<strong>输出空间（output space）</strong>,输入与输出空间可以是有限元素的集合，也可以是整个欧氏空间。通常输出空间远小于输入空间。</p>
+<p><strong>特征空间：</strong> 每个具体的输入都是一个<strong>实例（instance）</strong>,通常由<strong>特征向量（feature vector）</strong>表示,所有特征向量存在的空间成为<strong>特征空间（feature space）</strong>。特征空间的每一维都对应于一个特征。有时假设输入空间与特征空间为相同的空间，有时假设输入空间与特征空间为不同的空间，需要将实例从输入空间映射到特征空间。模型实际上都是定义在特征空间上的。</p>
+<p>通常情况下，输入变量写作X，输出变量写作Y，输入实例x的特征向量记作：$x = (x^{(1)},x^{(2)},…,x^{(x)})^T$,其中$x^{(i)}$表示x的第i个特征，注意与$x_i$的区分，$x_i$表示多个输入变量中的第i个，即：$x_i = (x_i^{(1)},x_i^{(2)},…,x_i^{(n)})^T$。</p>
+<p>训练集通常表示为：$T = {(x_1,y_1),(x_2,y_2),…,(x_n,y_n) }$，输入与输出对又称为<strong>样本（Sample）</strong>或者样本点。</p>
+<p>输入变量X和输出变量Y有不同的类型，可以是连续的，也可以是离散的。通常分为如下三类：</p>
 <ul>
-<li>VARCHAR类型用于存储可变长字符串，比定长类型更节省空间,对性能提升很有帮助，不过因为行是变长的，所以UPDATE时需要做额外的工作。所以下面的情况最好使用VARCHAR：字符串列的最大长度比平均长度大很多，列的更新很少；</li>
-<li>CHAR是定长的，所以CHAR适合存储很短的字符串，或者所有的值都接近一个长度，比如MD5值，手机号码，IP地址；</li>
-<li>因为内部会将每个值在列表中的位置保存为整数，并且按整数进行排序，所以尽量不要用数字作为ENUM枚举常量，这种双重性很容易导致混乱。</li>
+<li>输入变量与输出变量均为连续变量的预测问题成为回归问题；</li>
+<li>输出变量为有限个离散变量的预测问题称为分类问题；</li>
+<li>输入变量与输出变量均为变量序列的预测问题成为标注问题；</li>
 </ul>
-<h3 id="1-3-日期和时间类型"><a href="#1-3-日期和时间类型" class="headerlink" title="1.3 日期和时间类型"></a>1.3 日期和时间类型</h3><p>MYSQL有很多类型来保存日期和时间，DATE，TIME，DATETIME，TIMESTAMP，YEAR，并且大部分时间类型都没有替代品，不存在什么最佳选择，根据实际需要选择即可。</p>
+<p><strong>联合概率分布</strong>监督学习假设输入与输出的随机变量X和Y遵循联合概率分布$P(X,Y)$,$P(X,Y)$表示分布函数，或者分布密度函数。需要注意的是：在学习过程中，我们假定这一联合概率分布存在，但是对学习系统来说，联合概率分布的具体定义是未知的。统计学习假设数据存在一定统计规律，X和Y具有联合概率分布的假设就是监督学习关于数据的基本假设。</p>
+<p><strong>假设空间</strong></p>
+<p>监督学习的目的在于找到一个由输入到输出的映射，即所谓的模型。学习的目的是找到一个最好的模型，模型属于输入空间到输出的空间映射的集合，这个集合就是<strong>假设空间（hypothesis space）</strong>,假设空间的确定意味着学习范围的确定。</p>
+<p>监督学习的模型一般由条件概率分布$P(X|Y)$或者决策函数(decision function) $ Y =  f(X)$ 表示，对具体输入进行相应的预测时，写作：$P(y|x)$ 或$y = f(x)$</p>
+<h4 id="2-2-问题的形式化"><a href="#2-2-问题的形式化" class="headerlink" title="2.2 问题的形式化"></a>2.2 问题的形式化</h4><p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-07-29-033504.png" alt="image-20180729113503326"></p>
+<p>在学习过程中，系统利用给定训练数据，学习（训练）得到一个模型，表示为条件概率分布【】或者决策函数，用来描述输入与输出随机变量之间的映射关系。</p>
+<p>在学习过程中，学习系统试图通过训练数据集中的样本$\langle x_i,y_i \rangle$带来的信息学习模型。具体地说，对输入$x_i$，一个具体的模型$y = f(x)$ 可以产生一个输出$f(x_i)$,而训练数据集中对应的输出是$y_i$，如果这个模型有很好的预测能力，训练样本输出$y_i$和模型输出之间的差应该足够小。学习系统通过不断的尝试，选取最好的模型，以便对训练数据集有足够好的预测，同时对未知的测试数据集的预测也有尽可能好的推广。</p>
+<h3 id="3-统计学习三要素"><a href="#3-统计学习三要素" class="headerlink" title="3 统计学习三要素"></a>3 统计学习三要素</h3><p>统计学习方法 = 模型 + 策略 + 算法</p>
+<h4 id="3-1模型"><a href="#3-1模型" class="headerlink" title="3.1模型"></a>3.1<strong>模型</strong></h4><p>条件概率分布或决策函数，模型的假设空间包含所有可能的条件概率分布或决策函数。J假设空间中的模型一般有无穷多个。</p>
+<p>假设空间可以定义为决策函数的集合：$F = {f|Y=f(x)}$,其中X和Y事定义在输入空间和输出空间上的变量，参数向量觉得的函数族：$F = {f|Y=f_\theta(X),\theta \in R^n }$,参数向量$\theta$ 取值于n维欧氏空间$R^n$,成为参数空间。</p>
+<h4 id="3-2-策略"><a href="#3-2-策略" class="headerlink" title="3.2 策略"></a>3.2 <strong>策略</strong></h4><p>有了模型空间，需要考虑按照什么样的准则学习或选择最优的模型？损失函数度量模型一次预测的好坏，风险函数度量平均意义下模型预测的好坏。</p>
+<p><strong>损失函数</strong>  Loss function  cost function ，</p>
+<p>在假设空间中选取模型f作为决策函数，对于给定的输入X，由f(X)给出响应的输出Y，这个输出的预测值f(X)和Y之间可能一致也可能不一致，用一个损失函数或者代价函数来度量预测错误的程度，记作：$L(Y,f(X))$，损失函数是f(X)和Y的非负实值函数。</p>
+<p>常用损失函数：</p>
 <ul>
-<li>DATETIME，同时包含日期和时间信息，以’YYYY-MM-DD HH:MM:SS’格式检索和显示，支持的范围为’1000-01-0100:00:00’到’9999-12-31 23:59:59’；</li>
-<li>DATE，只有日期值，使用’YYYY-MM-DD’格式检索和显示，支持的范围是’1000-01-01’到’9999-12-31’；</li>
-<li>TIMESTAMP，包含日期和时间，范围’1970-01-0100:00:01’UTC到’2038-01-1903:14:07’UTC；</li>
-<li>TIME，以’HH:MM:SS’格式检索和显示(或对于大的小时值采用’HHH:MM:SS’格式)，范围可以从’-838:59:59’到’838:59:59’；</li>
-<li>YEAR，一个单字节类型，以YYYY格式检索和显示YEAR值，范围是1901到2155。<br><img src="http://od6dlhv8a.bkt.clouddn.com/201704534776567.png" alt=""></li>
+<li>0-1损失函数</li>
+<li>平方损失函数</li>
+<li>绝对损失函数</li>
+<li>对数损失函数</li>
 </ul>
-<p><strong>选型建议</strong></p>
+<p><strong>风险函数</strong></p>
+<p>损失函数值越小，模型就越好。</p>
+<p>风险函数，期望损失，病态问题</p>
+<p>经验风险 经验损失</p>
+<p>多岁期望风险是模型关于联合分布的期望损失，经验风险是模型关于训练样本集的平均损失。根据大数定律，当样本容量N趋于无穷大时，经验风险趋于期望风险。</p>
+<p><strong>经验风险最小化</strong></p>
+<p>在样本足够大时，经验风险最小化能保证有很好的学习效果，被广泛采用。极大似然估计就是经验风险最小化的一个例子。但是当样本容量小时，容易产生过拟合现象。</p>
+<p><strong>结构风险最小化</strong></p>
+<p>结构风险最小化（Structural risk minimization,SRM）是为了防止过拟合而提出来的策略。结构风险最小化等价于正则化（regularization）。结构风险在经验风险上加上表示模型复杂度的正则化项（regularizer）或罚项（penalty term)。在假设空间，损失函数以及训练数据集确定的情况下，结构风险的定义是：</p>
+<p>$$R_{srm}(f) = \frac{1}{N} \sum_{i=1}^n L(y_i,f(x_i)) +\lambda J(f)$$</p>
+<p>其中，$J(f)$为模型复杂度，定义在假设空间上的泛函数。模型$f$越复杂，复杂度就越大。复杂度表示了复杂模型的惩罚。$\lambda$ 大于等于0，权衡经验风险和复杂度模型。贝叶斯估计中最大后验概率估计是结构风险最小化的例子。</p>
+<p>结构风险最小化的策略认为架构风险最小的模型是最优模型，所以求最优模型就是求解最优化问题：</p>
+<p>$$min_{f} \frac{1}{N} \sum_{i=1}^n L(y_i,f(x_i)) +\lambda J(f)$$</p>
+<h4 id="3-3-算法"><a href="#3-3-算法" class="headerlink" title="3.3 算法"></a>3.3 <strong>算法</strong></h4><p>学习模型的具体计算方法，比如梯度下降算法。</p>
+<h3 id="4-模型评估与模型选择"><a href="#4-模型评估与模型选择" class="headerlink" title="4 模型评估与模型选择"></a>4 模型评估与模型选择</h3><h4 id="4-1-训练误差和测试误差"><a href="#4-1-训练误差和测试误差" class="headerlink" title="4.1 训练误差和测试误差"></a>4.1 <strong>训练误差和测试误差</strong></h4><ul>
+<li>训练误差  训练数据</li>
+<li>测试误差  测试数据</li>
+<li>泛化能力 将学习方法对未知数据的预测能力称为泛化能力（generalization ability）</li>
+</ul>
+<h4 id="4-2-过拟合与模型选择"><a href="#4-2-过拟合与模型选择" class="headerlink" title="4.2 过拟合与模型选择"></a>4.2 <strong>过拟合与模型选择</strong></h4><ul>
+<li>过拟合（over-fitting）</li>
+</ul>
+<h3 id="5-正则化与交叉验证"><a href="#5-正则化与交叉验证" class="headerlink" title="5 正则化与交叉验证"></a>5 正则化与交叉验证</h3><h4 id="5-1-正则化"><a href="#5-1-正则化" class="headerlink" title="5.1 正则化"></a>5.1 <strong>正则化</strong></h4><p>模型选择的典型方法是正则化（regularzation）,正则化是结构风险最小化策略的实现，是在经验风险上加一个正则化项或惩罚项。</p>
+<p>正则化的作用是选择经验风险与模型复杂度同时较小的模型。正则化符合奥卡姆剃刀（Occam’s razor）原理。奥卡姆剃刀原理应用于模型选择时考虑：在所有可能选择的模型中，能够很好地解释已知数据并且十分简单的才是最好的模型，也就是应该选择的模型。</p>
+<blockquote>
+<p>奥卡姆剃刀定律（Occam’s Razor, Ockham’s Razor）又称“奥康的剃刀”，它是由14世纪<a href="https://baike.baidu.com/item/%E8%8B%B1%E6%A0%BC%E5%85%B0" target="_blank" rel="noopener">英格兰</a>的逻辑学家、圣方济各会修士<a href="https://baike.baidu.com/item/%E5%A5%A5%E5%8D%A1%E5%A7%86%E7%9A%84%E5%A8%81%E5%BB%89" target="_blank" rel="noopener">奥卡姆的威廉</a>（William of Occam，约1285年至1349年）提出。这个原理称为“如无必要，勿增实体”，即“简单有效原理”。正如他在《箴言书注》2卷15题说“切勿浪费较多东西去做，用较少的东西，同样可以做好的事情。”</p>
+</blockquote>
+<h4 id="5-2-交叉验证"><a href="#5-2-交叉验证" class="headerlink" title="5.2 交叉验证"></a>5.2 <strong>交叉验证</strong></h4><p>数据集切分：</p>
 <ul>
-<li>除特殊行为之后，通常应该使用TIMESTAMP，因为它比DATETIME空间效率更高；</li>
-<li>用整数保存时间戳的格式通常不方便处理，不推荐这样做；</li>
-<li>存储比秒更小粒度的日期和时间怎么办？可以用BIGINT存储微妙级别的时间戳，或者使用DOUBLE存储秒之后的小数部分。</li>
+<li>训练集，模型训练</li>
+<li>验证集，模型选择</li>
+<li>测试集，模型评估</li>
 </ul>
-<h3 id="几个通用的选型原则"><a href="#几个通用的选型原则" class="headerlink" title="几个通用的选型原则"></a>几个通用的选型原则</h3><p>除了上面各个类型中的“选型建议”，还有几条通用的原则：</p>
-<ul>
-<li>更小的通常更好，尽量使用可以正确存储数据的最小数据类型，例如如果只存0-200，则tinyint unsigned更好，因为它们占用更少的磁盘，内存和CPU处理时间。不过要预见性，确保存储值的范围不超过；</li>
-<li>简单就好，简单数据类型操作需要更少的CPU时间，比如整型比字符串类型操作代价更低，存储时间用内置数据类型比字符串更好；</li>
-<li>尽量避免Null，尽量指定NotNull，因为Null值使得索引，索引统计和值的比较都更加复杂；</li>
-<li>只分配真正需要的空间，可归入第一条，因为更长的列会消耗更多的内存，尤其是使用内存临时表进行排序或操作时会提别糟糕，最好的策略是只分配真正的需要空间。</li>
-</ul>
+<p><strong>简单交叉验证</strong></p>
+<p><strong>S折交叉验证</strong></p>
+<p><strong>留一交叉验证</strong></p>
+<h3 id="6-泛化能力"><a href="#6-泛化能力" class="headerlink" title="6 泛化能力"></a>6 泛化能力</h3><h4 id="6-1-泛化误差"><a href="#6-1-泛化误差" class="headerlink" title="6.1 泛化误差"></a>6.1 <strong>泛化误差</strong></h4><p>generalization ability，泛化能力。</p>
+<p>预测误差即为泛化误差，事实上泛化误差就是所学习到模型的期望风险。</p>
+<h4 id="6-2-泛化误差上届"><a href="#6-2-泛化误差上届" class="headerlink" title="6.2 泛化误差上届"></a>6.2 <strong>泛化误差上届</strong></h4><p>generalization error bound，泛化误差上届</p>
+<h3 id="7-生成模型与判别模型"><a href="#7-生成模型与判别模型" class="headerlink" title="7 生成模型与判别模型"></a>7 <strong>生成模型与判别模型</strong></h3><p>监督学习方法可分为生成方法和判别方法。</p>
+<p><strong>生产方法</strong></p>
+<p>生成方法 （generative approach）和生成模型（ generative model ）。由数据学习联合分布，求出条件概率分布作为预测的模型。之所以称为生成方法，是因为模型表示了给定的输入X产生输出Y的生成关系。典型生成模型：朴素贝叶斯法和隐马尔科夫模型。</p>
+<p><strong>辨别方法</strong></p>
+<p>辨别方法 （discriminative approach）和判别模型（ dissriminative model）</p>
+<p>判别方法由数据直接学习决策函数$f(x)$或者条件概率分布作为预测的模型，判别方法关心的对给定的输入X，应该预测什么样的输出Y？典型的判别模型包括：K近邻法，感知机，决策树，逻辑斯蒂回归，最大熵模型，支持向量机等。</p>
+<h3 id="8-分类问题"><a href="#8-分类问题" class="headerlink" title="8 分类问题"></a>8 分类问题</h3><p>监督学习的核心问题。许多统计学习方法可用于分类，包括k近邻法，感知机，朴素贝叶斯，决策树，决策列表，逻辑斯蒂回归模型，支持向量机，提升方法，贝叶斯网络，神经网络等。</p>
+<p>分类在于根据其特性将数据分门别类，在许多领域都有广泛的应用。</p>
+<h3 id="9-标注问题"><a href="#9-标注问题" class="headerlink" title="9 标注问题"></a>9 标注问题</h3><p>标注（tagging），分类问题的一个推广，也是更复杂结构预测问题的简单形式。<br>标注问题在信息抽取、自然语言处理等领域被广泛应用，是这些领域的基本问题。例如自然语言处理中词性的标注（part of speech tagging）问题。</p>
+<p>常见的标注统计学习方法有隐马尔科夫模型和条件随机场。</p>
+<h3 id="10-回归问题"><a href="#10-回归问题" class="headerlink" title="10 回归问题"></a>10 回归问题</h3><p>预测输入变量和输出变量之间的关系。回归问题的学习等价于<strong>函数拟合</strong>：选择一个函数曲线使其很好地拟合已知数据且很好地预测未知数据。</p>
+<p>回归问题按照输入变量的个数，分为一元回归和多元回归；按照输入变量和输出变量关系的类型（即模型类型），分为线性回归和非线性回归。</p>
+<p>回归学习最常用的损失函数是平方损失函数，在此情况下，回归问题可以由著名的最小二乘法求解。</p>
+<p>说明：本文因为涉及到不少公式，整理起来有点麻烦，所以没有在文中列出。</p>
 
       
     </div>
@@ -562,7 +617,7 @@
   </li>
   <li class="post-copyright-link">
     <strong>本文链接：</strong>
-    <a href="http://zhiyanzhiyu.net.cn/2017/04/16/mysql-data-type/" title="MSYQL总结之数据类型篇">http://zhiyanzhiyu.net.cn/2017/04/16/mysql-data-type/</a>
+    <a href="http://zhiyanzhiyu.net.cn/2018/07/30/ai-ml-002-statisical-ml-outline/" title="ML002.统计学习方法概论">http://zhiyanzhiyu.net.cn/2018/07/30/ai-ml-002-statisical-ml-outline/</a>
   </li>
   <li class="post-copyright-license">
     <strong>版权声明： </strong>
@@ -577,9 +632,13 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Mysql/" rel="tag"># Mysql</a>
+            <a href="/tags/ML/" rel="tag"># ML</a>
           
-            <a href="/tags/数据库/" rel="tag"># 数据库</a>
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/统计学习/" rel="tag"># 统计学习</a>
           
         </div>
       
@@ -592,8 +651,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/04/15/nosql-base/" rel="next" title="NoSQL理论基础">
-                <i class="fa fa-chevron-left"></i> NoSQL理论基础
+              <a href="/2018/07/28/swagger-notes/" rel="next" title="Swagger常见问题汇总">
+                <i class="fa fa-chevron-left"></i> Swagger常见问题汇总
               </a>
             
           </div>
@@ -601,10 +660,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/04/18/linux-project-deployment-record/" rel="prev" title="Linux项目部署总结">
-                Linux项目部署总结 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -766,7 +821,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-1-数值类型"><span class="nav-number">1.</span> <span class="nav-text">1.1 数值类型</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-1-整数类型"><span class="nav-number">1.1.</span> <span class="nav-text">1.1.1-整数类型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#1-1-2-实数类型"><span class="nav-number">1.2.</span> <span class="nav-text">1.1.2-实数类型</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-2字符串类型"><span class="nav-number">2.</span> <span class="nav-text">1.2字符串类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#1-3-日期和时间类型"><span class="nav-number">3.</span> <span class="nav-text">1.3 日期和时间类型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#几个通用的选型原则"><span class="nav-number">4.</span> <span class="nav-text">几个通用的选型原则</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-统计学习的定义和特点"><span class="nav-number">1.</span> <span class="nav-text">1.统计学习的定义和特点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-监督学习"><span class="nav-number">2.</span> <span class="nav-text">2 监督学习</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#2-1-基本概念"><span class="nav-number">2.1.</span> <span class="nav-text">2.1 基本概念</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#2-2-问题的形式化"><span class="nav-number">2.2.</span> <span class="nav-text">2.2 问题的形式化</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-统计学习三要素"><span class="nav-number">3.</span> <span class="nav-text">3 统计学习三要素</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#3-1模型"><span class="nav-number">3.1.</span> <span class="nav-text">3.1模型</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-2-策略"><span class="nav-number">3.2.</span> <span class="nav-text">3.2 策略</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#3-3-算法"><span class="nav-number">3.3.</span> <span class="nav-text">3.3 算法</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-模型评估与模型选择"><span class="nav-number">4.</span> <span class="nav-text">4 模型评估与模型选择</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-训练误差和测试误差"><span class="nav-number">4.1.</span> <span class="nav-text">4.1 训练误差和测试误差</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-过拟合与模型选择"><span class="nav-number">4.2.</span> <span class="nav-text">4.2 过拟合与模型选择</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-正则化与交叉验证"><span class="nav-number">5.</span> <span class="nav-text">5 正则化与交叉验证</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-正则化"><span class="nav-number">5.1.</span> <span class="nav-text">5.1 正则化</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-交叉验证"><span class="nav-number">5.2.</span> <span class="nav-text">5.2 交叉验证</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-泛化能力"><span class="nav-number">6.</span> <span class="nav-text">6 泛化能力</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#6-1-泛化误差"><span class="nav-number">6.1.</span> <span class="nav-text">6.1 泛化误差</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#6-2-泛化误差上届"><span class="nav-number">6.2.</span> <span class="nav-text">6.2 泛化误差上届</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#7-生成模型与判别模型"><span class="nav-number">7.</span> <span class="nav-text">7 生成模型与判别模型</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#8-分类问题"><span class="nav-number">8.</span> <span class="nav-text">8 分类问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#9-标注问题"><span class="nav-number">9.</span> <span class="nav-text">9 标注问题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#10-回归问题"><span class="nav-number">10.</span> <span class="nav-text">10 回归问题</span></a></li></ol></div>
             
 
           </div>
