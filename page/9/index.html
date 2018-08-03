@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/07/06/win-bat-about/">
+    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/10/13/qrcode-notes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zyzy">
@@ -327,7 +327,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/07/06/win-bat-about/" itemprop="url">Bat脚本的几点经验总结</a></h1>
+                <a class="post-title-link" href="/2017/10/13/qrcode-notes/" itemprop="url">二维码相关开发总结</a></h1>
         
 
         <div class="post-meta">
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-07-06T17:35:08+08:00">
-                2017-07-06
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-13T21:41:19+08:00">
+                2017-10-13
               </time>
             
 
@@ -362,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/运维/" itemprop="url" rel="index">
-                    <span itemprop="name">运维</span>
+                  <a href="/categories/系统架构/" itemprop="url" rel="index">
+                    <span itemprop="name">系统架构</span>
                   </a>
                 </span>
 
@@ -379,7 +379,7 @@
 
           
           
-             <span id="/2017/07/06/win-bat-about/" class="leancloud_visitors" data-flag-title="Bat脚本的几点经验总结">
+             <span id="/2017/10/13/qrcode-notes/" class="leancloud_visitors" data-flag-title="二维码相关开发总结">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">字数&#58;</span>
                 
                 <span title="字数">
-                  754 字
+                  1,534 字
                 </span>
               
 
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  3 分钟
+                  5 分钟
                 </span>
               
             </div>
@@ -443,21 +443,24 @@
       
         
           
-            <p>最近有个小项目需要在Window环境下部署，需要写一个bat启动脚本，但是因为对bat脚本语法不太清楚，找了个之前用的模版，算是能用了。期间碰到几个小问题，记录一下：</p>
-<h3 id="简单语法说明"><a href="#简单语法说明" class="headerlink" title="简单语法说明"></a>简单语法说明</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line">if exist "%JAVA_HOME%" goto okHome</span><br><span class="line">echo The JAVA_HOME environment variable is not defined correctly</span><br><span class="line">goto end</span><br><span class="line"></span><br><span class="line">:okHome</span><br><span class="line">if exist "%JAVA_HOME%\bin\java.exe" goto run</span><br><span class="line">echo The java.exe is not available</span><br><span class="line">goto end</span><br><span class="line"></span><br><span class="line">:run</span><br><span class="line">set CLASSPATH=.</span><br><span class="line">for %%i in (.\lib\*.jar) do call cpappend.bat %%i</span><br><span class="line"><span class="meta">%</span>JAVA_HOME%\bin\java.exe -classpath %CLASSPATH% com.xxx.JxzkMain 192.xx.xx.xxx 99xx 99xx 90xx</span><br><span class="line"><span class="meta">1&gt;</span>&gt;/var/log/xxx-data.out</span><br><span class="line"><span class="meta">2&gt;</span>&gt;/var/log/xxx-data.alarms &amp;</span><br><span class="line"></span><br><span class="line">:end</span><br></pre></td></tr></table></figure>
-<p>说明：<br>FOR %%variable IN (set) DO command [command-parameters]，%%i应该是代表了”.\lib*.jar”中的每一个jar包</p>
-<p>for %%i in (“.\lib*.jar”) 应该是遍历”.\lib*.jar”中的每一个jar包,同时用%%i来存储名称<br>call setenv.bat %%i 应该是把%%i当参数调用setenv.bat<br>set cp=%cp%;%1 应该是把每一个%%i和%cp%拼接起来，再次赋值给%cp%变量</p>
-<p>set cp=for %%i in (“.\lib*.jar”) do call cpappend.bat %%i，应该是遍历lib包下的每一个jar包，同时把jar包名称用;拼接成起来赋值给cp变量</p>
-<p>java -cp %cp% com.test.DoMain 这个是执行Java main方法<br>1&gt;&gt;/var/log/xxx-data.out  输出日志信息<br>2&gt;&gt;/var/log/xxx-data.alarms &amp;  输出告警信息</p>
-<h4 id="让命令行窗口处于显示等待状态"><a href="#让命令行窗口处于显示等待状态" class="headerlink" title="让命令行窗口处于显示等待状态"></a>让命令行窗口处于显示等待状态</h4><p> pause</p>
-<h3 id="环境变量中的空格"><a href="#环境变量中的空格" class="headerlink" title="环境变量中的空格"></a>环境变量中的空格</h3><p>脚本写好之后，在自己的开发机器上运行正常，可以把应用拉起来，但是放到生产环境上，却报了一个异常：</p>
-<blockquote>
-<p>‘C:\Program’ 不是内部或外部命令，也不是可运行的程序或批处理文件。<br>看着好像是Java的安装目录有问题，以为是环境变量配置的不对，重新配置了一遍，还是不行！因为生产Java安装在了C:\Program Files下，中间有个空格，可能会有问题，网上查了一下，果然！</p>
-</blockquote>
-<p>如果本机环境变量的设置：java_home = C:\Program Files\Java\jdk1.8.0_131<br>*.bat中的命令格式：%java_home%\bin\java 或者 C:\Program Files\Java\jdk1.8.0_131\bin\java<br>运行这个.bat发现提示错误： “c:\Program” 不是内部或外部命令，检查了下，发现路径没有填写错误因此本人推断DOS中可能无法识别路径中有空格的情况，因此就google了一把还发现真的是这样。解决空格问题一共有两种办法：</p>
+            <p>最近在项目中，接触了一些二维码相关的功能，这里总结一二，备查。</p>
+<h3 id="二维码基础"><a href="#二维码基础" class="headerlink" title="二维码基础"></a>二维码基础</h3><p>二维条码/二维码（2-dimensional bar code）是用某种特定的几何图形按一定规律在平面（二维方向上）分布的黑白相间的图形记录数据符号信息的；在代码编制上巧妙地利用构成计算机内部逻辑基础的“0”、“1”比特流的概念，使用若干个与二进制相对应的几何形体来表示文字数值信息，通过图象输入设备或光电扫描设备自动识读以实现信息自动处理：它具有条码技术的一些共性：每种码制有其特定的字符集；每个字符占有一定的宽度；具有一定的校验功能等。同时还具有对不同行的信息自动识别功能、及处理图形旋转变化等特点。  </p>
+<h4 id="分类"><a href="#分类" class="headerlink" title="分类"></a>分类</h4><p>在许多种类的二维条码中，常用的码制有：DataMatrix，MaxiCode，Aztec，QRCode，Vericode，PDF417，Ultracode，Code49，Code16K等，QR码是1994年由日本Denso-Wave公司发明。QR来自英文QuickResponse的缩写，即快速反应的意思，源自发明者希望QR码可让其内容快速被解码。QR码最常见于日本、韩国，并为目前日本最流行的二维空间条码。  </p>
+<h4 id="主要应用"><a href="#主要应用" class="headerlink" title="主要应用"></a>主要应用</h4><p>二维条码具有储存量大、保密性高、追踪性高、抗损性强、备援性大、成本便宜等特性，这些特性特别适用于表单、安全保密、追踪、证照、存货盘点、资料备援等方面。智能手机和平板电脑的普及应用催生了之前并不被看好的二维码应用，大家竞相投入大量资源进行技术研发。马化腾说：二维码是移动互联网入口。<br>二维码的应用，似乎一夜之间渗透到我们生活的方方面面，地铁广告、报纸、火车票、飞机票、快餐店、电影院、团购网站以及各类商品外包装上。作为物联网浪潮产业中的一个环节，二维码的应用从未这么受到关注，有专家甚至预测，将在两三年内形成上千亿的市场空间。</p>
+<p>二维码的应用的有主读和被读的概念。国外，二维码的平台式服务指的是有一个平台来供你生成二维码，并在那后面附上图片、文字、视频等各种各样的信息。本质上，二维码的内容是指向一个地址。所以二维码平台式服务属于被读的领域。</p>
+<h3 id="二维码的生成"><a href="#二维码的生成" class="headerlink" title="二维码的生成"></a>二维码的生成</h3><h4 id="可选择的API"><a href="#可选择的API" class="headerlink" title="可选择的API"></a>可选择的API</h4><p>二维码的生成，网上有很多例子，各种程序版本的都有，这里只提一下Java版本的注意事项。Java版本的有两种选择，分别是Zxing和QRcode。</p>
 <ul>
-<li>一个是想办法在环境变量设置的时候用特殊字符给他替换掉：C:\PROGRA~1\Java\jdk1.8.0_131</li>
-<li>另外一个就是在写代码的时候用双引号给有空格的路径给它引起来， “C:\Program Files”\Java\jdk1.8.0_131\bin\java<br>需要注意的是，在环境变量中使用C:\PROGRA~1\，在bat中用%JAVA_HOME%引用是没有效果的，只有直接写在bat中才行，即：set JAVA_HOME=C:\PROGRA~1\Java\jdk1.8.0_131</li>
+<li>ZXing用Java实现的多种格式的1D/2D条码图像处理库，Zxing库的主要部分支持以下几个功能：核心代码的使用、适用于J2SE客户端的版本、适用于Android客户端的版本（即BarcodeScanner）、Android的集成（通过Intent支持和BarcodeScanner的集成）等。ZXing处理库可以生成和识别QRCode码。</li>
+<li>QRCode码，是由日本Denso公司于1994年9月研制的一种矩阵二维码符号。</li>
+</ul>
+<p>个人推荐如果桌面或Web应用，采用Denso公司的QRCode库，Android应用采用ZXing处理库。</p>
+<p>其中网上提供的QRCode的Jar包，开发的时候找了好几个才找对，官网下载的那个只有生成没有解析，而网上的例子大都是带着解析方法的，所以用集成了解析API的Jar包。</p>
+<h4 id="二维码的大小"><a href="#二维码的大小" class="headerlink" title="二维码的大小"></a>二维码的大小</h4><p>二维码有大小（version）,version越大存储信息越多，生成的二维码图片也越大越复杂，在实际使用过程中，虽然可以使用更大的级别，但是如果图片太大，通过微信发送图片的时候，在微信中点击图片，不能被微信作为二维码识别，使用不方便。<strong>原因如下：</strong>二维码所能包含的字符信息量是由QrcodeVersion的设置值来决定的。将QrcodeVersion设置到20的时候，就已经可以容乃到300多个字节。不过修改了QrcodeVersion的值，解决的仅仅是字符集容量的问题，这样生成的图片可能无法解码。可是把字符容量控制在128个以内的时候，就可以正常的解码。生成的二维码图片的大小是会根据所压缩的信息内容而变化的，网上提供的例子是通过new BufferedImage(139, 139, BufferedImage.TYPE_INT_RGB);来创建图像对象的，默认的情况下图片的大小是139<em>139，这个大小是比较适合QrcodeVersion为7的情况。将图片的大小设置到300</em>300就可以很好的支持QrcodeVersion为20的情况，并且可以正常的解码。</p>
+<h3 id="二维码名片相关"><a href="#二维码名片相关" class="headerlink" title="二维码名片相关"></a>二维码名片相关</h3><p>vCard 规范容许公开交换个人数据交换 (Personal Data Interchange PDI) 信息，在传统纸质商业名片可找到这些信息。规范定义电子名片（或叫vCard）的格式。 vCard 规范可作为各种应用或系统之间的交换格式。定义的格式与传送的方法无关。传送交换可能是文件系统，点对点交换的公共电话网络，以有线网络或无线传送的方式。用户能在互联网上直接利用vCard。电子邮件能转发在vCard中人信息。网页上很多用户填写的表格可自动使用vCard。</p>
+<p>在实际开发过程中，需要注意的几点：</p>
+<ul>
+<li>个人名片信息量不是很大，生成二维码名片的大小可以为12，这个大小能包含基本的信息，生成的二维码也不会太复杂，在微信中可以很好的被识别。</li>
+<li>自定义字段，虽然信息可以写入，但是微信扫码识别不出来。</li>
 </ul>
 
           
@@ -502,7 +505,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/8/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/8/">8</a><span class="page-number current">9</span><a class="page-number" href="/page/10/">10</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/10/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -552,7 +555,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -648,7 +651,7 @@
     
       <span class="post-meta-item-text">网站总字数&#58;</span>
     
-    <span title="网站总字数">49.0k字</span>
+    <span title="网站总字数">51.2k字</span>
   
 </div>
 

@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2018/07/28/swagger-notes/">
+    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2018/07/30/ai-ml-002-statisical-ml-outline/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zyzy">
@@ -327,7 +327,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2018/07/28/swagger-notes/" itemprop="url">Swagger常见问题汇总</a></h1>
+                <a class="post-title-link" href="/2018/07/30/ai-ml-002-statisical-ml-outline/" itemprop="url">ML002.统计学习方法概论</a></h1>
         
 
         <div class="post-meta">
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-28T22:16:05+08:00">
-                2018-07-28
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-07-30T14:15:49+08:00">
+                2018-07-30
               </time>
             
 
@@ -362,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/系统架构/" itemprop="url" rel="index">
-                    <span itemprop="name">系统架构</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -379,7 +379,7 @@
 
           
           
-             <span id="/2018/07/28/swagger-notes/" class="leancloud_visitors" data-flag-title="Swagger常见问题汇总">
+             <span id="/2018/07/30/ai-ml-002-statisical-ml-outline/" class="leancloud_visitors" data-flag-title="ML002.统计学习方法概论">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">字数&#58;</span>
                 
                 <span title="字数">
-                  462 字
+                  3,788 字
                 </span>
               
 
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  13 分钟
                 </span>
               
             </div>
@@ -443,13 +443,116 @@
       
         
           
-            <p>Swagger 是一个规范和完整的框架，用于生成、描述、调用和可视化 RESTful 风格的 Web 服务。总体目标是使客户端和文件系统作为服务器以同样的速度来更新。文件的方法，参数和模型紧密集成到服务器端的代码，允许API来始终保持同步。Swagger让部署管理和使用功能强大的API变得更加简单。关于Swagger的入门教程，网上有很多，我这里就不再多言。本文总结几个在使用过程中遇到的几个问题。</p>
-<h3 id="两个界面显示问题"><a href="#两个界面显示问题" class="headerlink" title="两个界面显示问题"></a>两个界面显示问题</h3><p>看下图中被红框圈起来地方，有一些问题，其中：1）关于版本的选择，必须设置groupName，否则会有问题；2）需要把Lisense填上，否则右下角会有一个红色的“ERROR”。</p>
-<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-06-27-033525.png" alt="image-20180627113524041"></p>
-<p>代码如下：</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Bean</span></span><br><span class="line"><span class="function"><span class="keyword">public</span> Docket <span class="title">createRestApi</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> Docket(DocumentationType.SWAGGER_2)</span><br><span class="line">            .apiInfo(apiInfo())</span><br><span class="line">            .groupName(<span class="string">"V2"</span>)</span><br><span class="line">            .select()</span><br><span class="line">        .apis(RequestHandlerSelectors.basePackage(<span class="string">"com.simt.dajiale.web.controller.agent.v2"</span>))</span><br><span class="line">            .paths(PathSelectors.any())</span><br><span class="line">            .build();</span><br><span class="line">&#125;</span><br><span class="line"><span class="function"><span class="keyword">private</span> ApiInfo <span class="title">apiInfo</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">new</span> ApiInfoBuilder()</span><br><span class="line">            .title(<span class="string">"大家乐代理商接入API"</span>)</span><br><span class="line">            .contact(<span class="string">"SHIMU TECH"</span>)</span><br><span class="line">            .description(<span class="string">"V2版是当前正在使用的接口，如无特殊说明请按V2版接口进行开发测试！"</span>)</span><br><span class="line">            .termsOfServiceUrl(<span class="string">""</span>)</span><br><span class="line">            .version(<span class="string">"2.0"</span>)</span><br><span class="line">            .build();</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h3 id="生产环境不生效设置"><a href="#生产环境不生效设置" class="headerlink" title="生产环境不生效设置"></a>生产环境不生效设置</h3><p>Spring boot中有个注解@ConditionalOnProperty，这个注解能够控制某个configuration是否生效。具体通过其两个属性name以及havingValue来实现，其中name用来从application.properties中读取某个属性值，如果该值为空，则返回false，如果值不为空，则将该值与havingValue指定的值进行比较，如果一样则返回true，否则返回false。如果返回值为false，则该configuration不生效，为true则生效。</p>
-<figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">@Configuration</span></span><br><span class="line"><span class="meta">@ConditionalOnProperty</span>(prefix = <span class="string">"swagger2"</span>,value = &#123;<span class="string">"enable"</span>&#125;,havingValue = <span class="string">"true"</span>)</span><br><span class="line"><span class="meta">@EnableSwagger</span>2</span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">SwaggerConfiguration</span> </span>&#123;&#125;</span><br></pre></td></tr></table></figure>
+            <hr>
+<blockquote>
+<p>Machine Learing学习笔记，主要参考Andrew Ng、李宏毅等大牛的课程和书籍。本文是003篇之<strong>统计学习方法概论</strong>，主要内容是李航《统计学习方法》第一章的内容，统计学习方法概论，介绍了一些基本概念。</p>
+</blockquote>
+<p>在前面的一篇笔记中，提到过机器学习和统计学的关系：<strong>统计学的目的是通过学习更多的潜在模式和关联关系，来帮助人类深入理解数据。 统计学习近似于机器学习，与机器学习高度重合，统计学的发展促进了机器学习的大发展，但是两者侧重点不同。统计学习重点关注统计模型的发展优化，偏数学，而机器学习关注实际问题的解决，偏实际。</strong></p>
+<p>机器学习和统计学习各有侧重，不过对我们初学者来说，可以把两者先当成一回事。最近也在看李航的那本《统计学习方法》，虽然是一本很薄的书，但是对我这种数学渣渣来说，真的看着有些吃力了。不过其评分之高是我们不能回避的一本书。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-07-28-131737.png" alt="image-20180728211735214"></p>
+<p>网上大部分视频课程都是采用的一种从简单例子开始，自下而上的方式，但是这样在学习的过程中，总是会不断的出现新的概念，时间长了就有点混乱，不够系统。而《统计学习方法》的第一章可以很好的给我们一个自顶而下的概念，让我们能够更加系统的掌握相关概念。本文算是该书第一章的读书笔记。</p>
+<h3 id="1-统计学习的定义和特点"><a href="#1-统计学习的定义和特点" class="headerlink" title="1.统计学习的定义和特点"></a>1.统计学习的定义和特点</h3><p><strong>统计学习</strong>统计机器学习（Statisical Machine Learning，是关于计算机基于数据构建概率统计模型并运用模型对数据进行预测与分析的一门学科。它有如下几个<strong>特点</strong>：</p>
+<ul>
+<li>计算机及网络平台之上，这个自然，不需多言；</li>
+<li>以数据为研究对象，数据驱动，是统计学习的对象；</li>
+<li>预测与分析，这是统计学习的目标；</li>
+<li>方法为中心，所谓的方法就是前一篇笔记的模型和算法，比如监督学习，无监督学习，半监督学习以及强化学习等等。</li>
+<li>概率论，统计学，信息论，计算理论，最优化理论及计算机科学 交叉学科。</li>
+</ul>
+<p>上述内容都比较好理解，需要重点说明的是<strong>学习方法</strong>相关的内容：统计学习方法包括模型的假设空间，模型选择的准则以及模型学习的算法，这三者被称为统计学习的三要素，简称模型，策略和算法。</p>
+<p>实现统计学习方法的步骤：</p>
+<ul>
+<li>得到一个有限的训练数据集合；</li>
+<li>确定包含所有可能的模型的假设空间，即学习模型的集合；</li>
+<li>确定模型选择的准则，即学习的策略；</li>
+<li>实现求解最优模型的算法，即学习的算法；</li>
+<li>通过学习方法选择最优模型；</li>
+<li>利用学习的最优模型对新数据进行预测分析。</li>
+</ul>
+<h3 id="2-监督学习"><a href="#2-监督学习" class="headerlink" title="2 监督学习"></a>2 监督学习</h3><p>Supervised learning，李航的《统计学习方法》主要讲的监督学习。</p>
+<h4 id="2-1-基本概念"><a href="#2-1-基本概念" class="headerlink" title="2.1 基本概念"></a>2.1 <strong>基本概念</strong></h4><p><strong>输入空间与输出空间</strong>：在监督学习中，将输入与输出所有可能的取值的集合分别称为<strong>输入空间（input space）</strong>与<strong>输出空间（output space）</strong>,输入与输出空间可以是有限元素的集合，也可以是整个欧氏空间。通常输出空间远小于输入空间。</p>
+<p><strong>特征空间：</strong> 每个具体的输入都是一个<strong>实例（instance）</strong>,通常由<strong>特征向量（feature vector）</strong>表示,所有特征向量存在的空间成为<strong>特征空间（feature space）</strong>。特征空间的每一维都对应于一个特征。有时假设输入空间与特征空间为相同的空间，有时假设输入空间与特征空间为不同的空间，需要将实例从输入空间映射到特征空间。模型实际上都是定义在特征空间上的。</p>
+<p>通常情况下，输入变量写作X，输出变量写作Y，输入实例x的特征向量记作：$x = (x^{(1)},x^{(2)},…,x^{(x)})^T$,其中$x^{(i)}$表示x的第i个特征，注意与$x_i$的区分，$x_i$表示多个输入变量中的第i个，即：$x_i = (x_i^{(1)},x_i^{(2)},…,x_i^{(n)})^T$。</p>
+<p>训练集通常表示为：$T = {(x_1,y_1),(x_2,y_2),…,(x_n,y_n) }$，输入与输出对又称为<strong>样本（Sample）</strong>或者样本点。</p>
+<p>输入变量X和输出变量Y有不同的类型，可以是连续的，也可以是离散的。通常分为如下三类：</p>
+<ul>
+<li>输入变量与输出变量均为连续变量的预测问题成为回归问题；</li>
+<li>输出变量为有限个离散变量的预测问题称为分类问题；</li>
+<li>输入变量与输出变量均为变量序列的预测问题成为标注问题；</li>
+</ul>
+<p><strong>联合概率分布</strong>监督学习假设输入与输出的随机变量X和Y遵循联合概率分布$P(X,Y)$,$P(X,Y)$表示分布函数，或者分布密度函数。需要注意的是：在学习过程中，我们假定这一联合概率分布存在，但是对学习系统来说，联合概率分布的具体定义是未知的。统计学习假设数据存在一定统计规律，X和Y具有联合概率分布的假设就是监督学习关于数据的基本假设。</p>
+<p><strong>假设空间</strong></p>
+<p>监督学习的目的在于找到一个由输入到输出的映射，即所谓的模型。学习的目的是找到一个最好的模型，模型属于输入空间到输出的空间映射的集合，这个集合就是<strong>假设空间（hypothesis space）</strong>,假设空间的确定意味着学习范围的确定。</p>
+<p>监督学习的模型一般由条件概率分布$P(X|Y)$或者决策函数(decision function) $ Y =  f(X)$ 表示，对具体输入进行相应的预测时，写作：$P(y|x)$ 或$y = f(x)$</p>
+<h4 id="2-2-问题的形式化"><a href="#2-2-问题的形式化" class="headerlink" title="2.2 问题的形式化"></a>2.2 问题的形式化</h4><p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-07-29-033504.png" alt="image-20180729113503326"></p>
+<p>在学习过程中，系统利用给定训练数据，学习（训练）得到一个模型，表示为条件概率分布【】或者决策函数，用来描述输入与输出随机变量之间的映射关系。</p>
+<p>在学习过程中，学习系统试图通过训练数据集中的样本$\langle x_i,y_i \rangle$带来的信息学习模型。具体地说，对输入$x_i$，一个具体的模型$y = f(x)$ 可以产生一个输出$f(x_i)$,而训练数据集中对应的输出是$y_i$，如果这个模型有很好的预测能力，训练样本输出$y_i$和模型输出之间的差应该足够小。学习系统通过不断的尝试，选取最好的模型，以便对训练数据集有足够好的预测，同时对未知的测试数据集的预测也有尽可能好的推广。</p>
+<h3 id="3-统计学习三要素"><a href="#3-统计学习三要素" class="headerlink" title="3 统计学习三要素"></a>3 统计学习三要素</h3><p>统计学习方法 = 模型 + 策略 + 算法</p>
+<h4 id="3-1模型"><a href="#3-1模型" class="headerlink" title="3.1模型"></a>3.1<strong>模型</strong></h4><p>条件概率分布或决策函数，模型的假设空间包含所有可能的条件概率分布或决策函数。J假设空间中的模型一般有无穷多个。</p>
+<p>假设空间可以定义为决策函数的集合：$F = {f|Y=f(x)}$,其中X和Y事定义在输入空间和输出空间上的变量，参数向量觉得的函数族：$F = {f|Y=f_\theta(X),\theta \in R^n }$,参数向量$\theta$ 取值于n维欧氏空间$R^n$,成为参数空间。</p>
+<h4 id="3-2-策略"><a href="#3-2-策略" class="headerlink" title="3.2 策略"></a>3.2 <strong>策略</strong></h4><p>有了模型空间，需要考虑按照什么样的准则学习或选择最优的模型？损失函数度量模型一次预测的好坏，风险函数度量平均意义下模型预测的好坏。</p>
+<p><strong>损失函数</strong>  Loss function  cost function ，</p>
+<p>在假设空间中选取模型f作为决策函数，对于给定的输入X，由f(X)给出响应的输出Y，这个输出的预测值f(X)和Y之间可能一致也可能不一致，用一个损失函数或者代价函数来度量预测错误的程度，记作：$L(Y,f(X))$，损失函数是f(X)和Y的非负实值函数。</p>
+<p>常用损失函数：</p>
+<ul>
+<li>0-1损失函数</li>
+<li>平方损失函数</li>
+<li>绝对损失函数</li>
+<li>对数损失函数</li>
+</ul>
+<p><strong>风险函数</strong></p>
+<p>损失函数值越小，模型就越好。</p>
+<p>风险函数，期望损失，病态问题</p>
+<p>经验风险 经验损失</p>
+<p>多岁期望风险是模型关于联合分布的期望损失，经验风险是模型关于训练样本集的平均损失。根据大数定律，当样本容量N趋于无穷大时，经验风险趋于期望风险。</p>
+<p><strong>经验风险最小化</strong></p>
+<p>在样本足够大时，经验风险最小化能保证有很好的学习效果，被广泛采用。极大似然估计就是经验风险最小化的一个例子。但是当样本容量小时，容易产生过拟合现象。</p>
+<p><strong>结构风险最小化</strong></p>
+<p>结构风险最小化（Structural risk minimization,SRM）是为了防止过拟合而提出来的策略。结构风险最小化等价于正则化（regularization）。结构风险在经验风险上加上表示模型复杂度的正则化项（regularizer）或罚项（penalty term)。在假设空间，损失函数以及训练数据集确定的情况下，结构风险的定义是：</p>
+<p>$$R_{srm}(f) = \frac{1}{N} \sum_{i=1}^n L(y_i,f(x_i)) +\lambda J(f)$$</p>
+<p>其中，$J(f)$为模型复杂度，定义在假设空间上的泛函数。模型$f$越复杂，复杂度就越大。复杂度表示了复杂模型的惩罚。$\lambda$ 大于等于0，权衡经验风险和复杂度模型。贝叶斯估计中最大后验概率估计是结构风险最小化的例子。</p>
+<p>结构风险最小化的策略认为架构风险最小的模型是最优模型，所以求最优模型就是求解最优化问题：</p>
+<p>$$min_{f} \frac{1}{N} \sum_{i=1}^n L(y_i,f(x_i)) +\lambda J(f)$$</p>
+<h4 id="3-3-算法"><a href="#3-3-算法" class="headerlink" title="3.3 算法"></a>3.3 <strong>算法</strong></h4><p>学习模型的具体计算方法，比如梯度下降算法。</p>
+<h3 id="4-模型评估与模型选择"><a href="#4-模型评估与模型选择" class="headerlink" title="4 模型评估与模型选择"></a>4 模型评估与模型选择</h3><h4 id="4-1-训练误差和测试误差"><a href="#4-1-训练误差和测试误差" class="headerlink" title="4.1 训练误差和测试误差"></a>4.1 <strong>训练误差和测试误差</strong></h4><ul>
+<li>训练误差  训练数据</li>
+<li>测试误差  测试数据</li>
+<li>泛化能力 将学习方法对未知数据的预测能力称为泛化能力（generalization ability）</li>
+</ul>
+<h4 id="4-2-过拟合与模型选择"><a href="#4-2-过拟合与模型选择" class="headerlink" title="4.2 过拟合与模型选择"></a>4.2 <strong>过拟合与模型选择</strong></h4><ul>
+<li>过拟合（over-fitting）</li>
+</ul>
+<h3 id="5-正则化与交叉验证"><a href="#5-正则化与交叉验证" class="headerlink" title="5 正则化与交叉验证"></a>5 正则化与交叉验证</h3><h4 id="5-1-正则化"><a href="#5-1-正则化" class="headerlink" title="5.1 正则化"></a>5.1 <strong>正则化</strong></h4><p>模型选择的典型方法是正则化（regularzation）,正则化是结构风险最小化策略的实现，是在经验风险上加一个正则化项或惩罚项。</p>
+<p>正则化的作用是选择经验风险与模型复杂度同时较小的模型。正则化符合奥卡姆剃刀（Occam’s razor）原理。奥卡姆剃刀原理应用于模型选择时考虑：在所有可能选择的模型中，能够很好地解释已知数据并且十分简单的才是最好的模型，也就是应该选择的模型。</p>
+<blockquote>
+<p>奥卡姆剃刀定律（Occam’s Razor, Ockham’s Razor）又称“奥康的剃刀”，它是由14世纪<a href="https://baike.baidu.com/item/%E8%8B%B1%E6%A0%BC%E5%85%B0" target="_blank" rel="noopener">英格兰</a>的逻辑学家、圣方济各会修士<a href="https://baike.baidu.com/item/%E5%A5%A5%E5%8D%A1%E5%A7%86%E7%9A%84%E5%A8%81%E5%BB%89" target="_blank" rel="noopener">奥卡姆的威廉</a>（William of Occam，约1285年至1349年）提出。这个原理称为“如无必要，勿增实体”，即“简单有效原理”。正如他在《箴言书注》2卷15题说“切勿浪费较多东西去做，用较少的东西，同样可以做好的事情。”</p>
+</blockquote>
+<h4 id="5-2-交叉验证"><a href="#5-2-交叉验证" class="headerlink" title="5.2 交叉验证"></a>5.2 <strong>交叉验证</strong></h4><p>数据集切分：</p>
+<ul>
+<li>训练集，模型训练</li>
+<li>验证集，模型选择</li>
+<li>测试集，模型评估</li>
+</ul>
+<p><strong>简单交叉验证</strong></p>
+<p><strong>S折交叉验证</strong></p>
+<p><strong>留一交叉验证</strong></p>
+<h3 id="6-泛化能力"><a href="#6-泛化能力" class="headerlink" title="6 泛化能力"></a>6 泛化能力</h3><h4 id="6-1-泛化误差"><a href="#6-1-泛化误差" class="headerlink" title="6.1 泛化误差"></a>6.1 <strong>泛化误差</strong></h4><p>generalization ability，泛化能力。</p>
+<p>预测误差即为泛化误差，事实上泛化误差就是所学习到模型的期望风险。</p>
+<h4 id="6-2-泛化误差上届"><a href="#6-2-泛化误差上届" class="headerlink" title="6.2 泛化误差上届"></a>6.2 <strong>泛化误差上届</strong></h4><p>generalization error bound，泛化误差上届</p>
+<h3 id="7-生成模型与判别模型"><a href="#7-生成模型与判别模型" class="headerlink" title="7 生成模型与判别模型"></a>7 <strong>生成模型与判别模型</strong></h3><p>监督学习方法可分为生成方法和判别方法。</p>
+<p><strong>生产方法</strong></p>
+<p>生成方法 （generative approach）和生成模型（ generative model ）。由数据学习联合分布，求出条件概率分布作为预测的模型。之所以称为生成方法，是因为模型表示了给定的输入X产生输出Y的生成关系。典型生成模型：朴素贝叶斯法和隐马尔科夫模型。</p>
+<p><strong>辨别方法</strong></p>
+<p>辨别方法 （discriminative approach）和判别模型（ dissriminative model）</p>
+<p>判别方法由数据直接学习决策函数$f(x)$或者条件概率分布作为预测的模型，判别方法关心的对给定的输入X，应该预测什么样的输出Y？典型的判别模型包括：K近邻法，感知机，决策树，逻辑斯蒂回归，最大熵模型，支持向量机等。</p>
+<h3 id="8-分类问题"><a href="#8-分类问题" class="headerlink" title="8 分类问题"></a>8 分类问题</h3><p>监督学习的核心问题。许多统计学习方法可用于分类，包括k近邻法，感知机，朴素贝叶斯，决策树，决策列表，逻辑斯蒂回归模型，支持向量机，提升方法，贝叶斯网络，神经网络等。</p>
+<p>分类在于根据其特性将数据分门别类，在许多领域都有广泛的应用。</p>
+<h3 id="9-标注问题"><a href="#9-标注问题" class="headerlink" title="9 标注问题"></a>9 标注问题</h3><p>标注（tagging），分类问题的一个推广，也是更复杂结构预测问题的简单形式。<br>标注问题在信息抽取、自然语言处理等领域被广泛应用，是这些领域的基本问题。例如自然语言处理中词性的标注（part of speech tagging）问题。</p>
+<p>常见的标注统计学习方法有隐马尔科夫模型和条件随机场。</p>
+<h3 id="10-回归问题"><a href="#10-回归问题" class="headerlink" title="10 回归问题"></a>10 回归问题</h3><p>预测输入变量和输出变量之间的关系。回归问题的学习等价于<strong>函数拟合</strong>：选择一个函数曲线使其很好地拟合已知数据且很好地预测未知数据。</p>
+<p>回归问题按照输入变量的个数，分为一元回归和多元回归；按照输入变量和输出变量关系的类型（即模型类型），分为线性回归和非线性回归。</p>
+<p>回归学习最常用的损失函数是平方损失函数，在此情况下，回归问题可以由著名的最小二乘法求解。</p>
+<p>说明：本文因为涉及到不少公式，整理起来有点麻烦，所以没有在文中列出。</p>
 
           
         
@@ -493,7 +596,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/2/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/4/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -543,7 +646,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -639,7 +742,7 @@
     
       <span class="post-meta-item-text">网站总字数&#58;</span>
     
-    <span title="网站总字数">49.0k字</span>
+    <span title="网站总字数">51.2k字</span>
   
 </div>
 

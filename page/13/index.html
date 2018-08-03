@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/05/08/js-json-notes/">
+    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/05/09/mysql-om-notes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zyzy">
@@ -327,7 +327,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/05/08/js-json-notes/" itemprop="url">JSON相关总结</a></h1>
+                <a class="post-title-link" href="/2017/05/09/mysql-om-notes/" itemprop="url">MySQL常用运维命令汇总</a></h1>
         
 
         <div class="post-meta">
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-08T10:04:42+08:00">
-                2017-05-08
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-09T11:58:58+08:00">
+                2017-05-09
               </time>
             
 
@@ -362,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/编程语言/" itemprop="url" rel="index">
-                    <span itemprop="name">编程语言</span>
+                  <a href="/categories/数据库/" itemprop="url" rel="index">
+                    <span itemprop="name">数据库</span>
                   </a>
                 </span>
 
@@ -379,7 +379,7 @@
 
           
           
-             <span id="/2017/05/08/js-json-notes/" class="leancloud_visitors" data-flag-title="JSON相关总结">
+             <span id="/2017/05/09/mysql-om-notes/" class="leancloud_visitors" data-flag-title="MySQL常用运维命令汇总">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">字数&#58;</span>
                 
                 <span title="字数">
-                  1,358 字
+                  1,261 字
                 </span>
               
 
@@ -443,26 +443,15 @@
       
         
           
-            <h2 id="基础知识"><a href="#基础知识" class="headerlink" title="基础知识"></a>基础知识</h2><p>JSON的全称是”JavaScript Object Notation”，意思是JavaScript对象表示法，它是一种基于文本，独立于语言的轻量级数据交换格式。和XML相比JSON有什么优点呢？因为XML虽然可以作为跨平台的数据交换格式，但是在JS(JavaScript的简写)中处理XML非常不方便，同时XML标记比数据多，增加了交换产生的流量，而JSON没有附加的任何标记，在JS中可作为对象处理，所以我们更倾向于选择JSON来交换数据。</p>
-<h2 id="JS中处理JSON数据"><a href="#JS中处理JSON数据" class="headerlink" title="JS中处理JSON数据"></a>JS中处理JSON数据</h2><p>JSON有两种表示结构，对象和数组。对象结构以”{”大括号开始，以”}”大括号结束。中间部分由0或多个以”，”分隔的”key(关键字)/value(值)”对构成，关键字和值之间以”：”分隔，数组或对象的值可以是简单值也可以是复合值。简单值包括字符串、数值（必须是十进制标识）、布尔值和Null，其中（NaN,Infinity,-Infinity和undefined都会被转换为null)。复合值包括符合json格式的数组或对象需要注意的是，数组或对象的最后一个成员后面不能加逗号，数组或对象之中的字符串必须使用双引号，不能使用单引号，对象的成员名称必须使用双引号。空数组或者空对象都是合格的json值，Null也是一个合格的json值。常见操作如下：</p>
-<ul>
-<li>定义JSON对象</li>
-<li>从JSON对象中读数据</li>
-<li>向JSON对象中写数据（增加）</li>
-<li>修改JSON对象中的数据</li>
-<li>删除JSON对象中的数据</li>
-<li>遍历JSON对象中的数据</li>
-<li>判断是否有某属性<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">obj[<span class="string">"key"</span>] != <span class="literal">undefined</span>   <span class="comment">//这种有缺陷，如果这个key定义了，并且就是很2的赋值为undefined，那么这句就会出问题了。</span></span><br><span class="line">!(<span class="string">"key"</span> <span class="keyword">in</span> obj)</span><br><span class="line">obj.hasOwnProperty(<span class="string">"key"</span>)</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-<p>ES5中添加了json对象，其包含两个方法：JSON.stringify()和JSON.parse()，其中stringify将一个值转换为json格式的字符串，该字符串可以被JSON.parse()解析。parse()用来将json格式的字符串转换为对象。如果该json字符串不符合json格式，则会报错。</p>
-<h2 id="Java服务端处理JSON数据"><a href="#Java服务端处理JSON数据" class="headerlink" title="Java服务端处理JSON数据"></a>Java服务端处理JSON数据</h2><h3 id="json-lib"><a href="#json-lib" class="headerlink" title="json-lib"></a>json-lib</h3><p>json-lib最开始的也是应用最广泛的json解析工具，json-lib 不好的地方确实是依赖于很多第三方包，包括commons-beanutils.jar，commons-collections-3.2.jar，commons-lang-2.6.jar，commons-logging-1.1.1.jar，ezmorph-1.0.6.jar，对于复杂类型的转换，json-lib对于json转换成bean还有缺陷，比如一个类里面会出现另一个类的list或者map集合，json-lib从json到bean的转换就会出现问题。json-lib在功能和性能上面都不能满足现在互联网化的需求。</p>
-<h3 id="开源的Jackson"><a href="#开源的Jackson" class="headerlink" title="开源的Jackson"></a>开源的Jackson</h3><p>相比json-lib框架，Jackson所依赖的jar包较少，简单易用并且性能也要相对高些。而且Jackson社区相对比较活跃，更新速度也比较快。Jackson对于复杂类型的json转换bean会出现问题，一些集合Map，List的转换出现问题。Jackson对于复杂类型的bean转换Json，转换的json格式不是标准的Json格式</p>
-<h3 id="Google的Gson"><a href="#Google的Gson" class="headerlink" title="Google的Gson"></a>Google的Gson</h3><p>Gson是目前功能最全的Json解析神器，Gson当初是为因应Google公司内部需求而由Google自行研发而来，但自从在2008年五月公开发布第一版后已被许多公司或用户应用。Gson的应用主要为toJson与fromJson两个转换函数，无依赖，不需要例外额外的jar，能够直接跑在JDK上。而在使用这种对象转换之前需先创建好对象的类型以及其成员才能成功的将JSON字符串成功转换成相对应的对象。<br>类里面只要有get和set方法，Gson完全可以将复杂类型的json到bean或bean到json的转换，是JSON解析的神器。Gson在功能上面无可挑剔，但是性能上面比FastJson有所差距。</p>
-<h3 id="阿里巴巴的FastJson"><a href="#阿里巴巴的FastJson" class="headerlink" title="阿里巴巴的FastJson"></a>阿里巴巴的FastJson</h3><p>Fastjson是一个Java语言编写的高性能的JSON处理器,由阿里巴巴公司开发。无依赖，不需要例外额外的jar，能够直接跑在JDK上。FastJson在复杂类型的Bean转换Json上会出现一些问题，可能会出现引用的类型，导致Json转换出错，需要制定引用。FastJson采用独创的算法，将parse的速度提升到极致，超过所有json库。</p>
-<h3 id="综合点评"><a href="#综合点评" class="headerlink" title="综合点评"></a>综合点评</h3><p>综上4种Json技术的比较，在项目选型的时候可以使用Google的Gson和阿里巴巴的FastJson两种并行使用，如果只是功能要求，没有性能要求，可以使用google的Gson，如果有性能上面的要求可以使用Gson将bean转换json确保数据的正确，使用FastJson将Json转换Bean</p>
-<h2 id="问题总结"><a href="#问题总结" class="headerlink" title="问题总结"></a>问题总结</h2><h3 id="命名不规则的JavaBean转换"><a href="#命名不规则的JavaBean转换" class="headerlink" title="命名不规则的JavaBean转换"></a>命名不规则的JavaBean转换</h3><p>之前遇到过一个旧工程改造的项目，接口返回内容不变，因为老接口中JSON数据库属性名称千奇百怪，有的全大些，有的是驼峰，有的是首字母大写等等，用GSON可以解决这一问题。</p>
-<h3 id="GSON自动可以过滤空的属性"><a href="#GSON自动可以过滤空的属性" class="headerlink" title="GSON自动可以过滤空的属性"></a>GSON自动可以过滤空的属性</h3><p>GSON可以自动过滤掉空的属性，但是有时前端需要的接口信息不需要这样做，可以采用如下方案。<br><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Gson gson = <span class="keyword">new</span> GsonBuilder().serializeNulls().create();</span><br></pre></td></tr></table></figure></p>
+            <h2 id="常用命令"><a href="#常用命令" class="headerlink" title="常用命令"></a>常用命令</h2><h3 id="查询当前版本"><a href="#查询当前版本" class="headerlink" title="查询当前版本"></a>查询当前版本</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//在终端下：mysql -V</span><br><span class="line">[root@simu10 ~]# mysql -V</span><br><span class="line">mysql  Ver 14.14 Distrib 5.1.71, for redhat-linux-gnu (x86_64) using readline 5.1</span><br><span class="line">//在help里面查找</span><br><span class="line">[root@simu10 ~]# mysql --help | grep Distrib</span><br><span class="line">mysql  Ver 14.14 Distrib 5.1.71, for redhat-linux-gnu (x86_64) using readline 5.1</span><br><span class="line">//使用mysql的函数:</span><br><span class="line">select version();</span><br></pre></td></tr></table></figure>
+<h3 id="查看my-cnf位置"><a href="#查看my-cnf位置" class="headerlink" title="查看my.cnf位置"></a>查看my.cnf位置</h3><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">[root@db42 etc]# which mysqld</span><br><span class="line">/usr/sbin/mysqld</span><br><span class="line">[root@db42 etc]# /usr/sbin/mysqld --verbose --help |grep -A 1 'Default options';</span><br><span class="line">Default options are read from the following files in the given order:</span><br><span class="line">/etc/my.cnf /etc/mysql/my.cnf /usr/etc/my.cnf ~/.my.cnf</span><br></pre></td></tr></table></figure>
+<h3 id="状态检查（SHOW查看状态）"><a href="#状态检查（SHOW查看状态）" class="headerlink" title="状态检查（SHOW查看状态）"></a>状态检查（SHOW查看状态）</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br></pre></td><td class="code"><pre><span class="line">//显示状态信息</span><br><span class="line">mysql&gt; SHOW [SESSION|GLOBAL] STATUS LIKE '%Status_name%';</span><br><span class="line">//session（默认）：取出当前窗口的执行</span><br><span class="line">//global：从mysql启动到现在</span><br><span class="line">//（a）查看查询次数（插入次数com_insert、修改次数com_insert、删除次数com_delete）</span><br><span class="line">mysql&gt; SHOW STATUS LIKE 'com_select';</span><br><span class="line">//（b）查看连接数(登录次数)</span><br><span class="line">mysql&gt; SHOW STATUS LIKE 'connections';</span><br><span class="line">//（c）数据库运行时间</span><br><span class="line">mysql&gt; SHOW STATUS LIKE 'uptime';</span><br><span class="line">//（d）查看慢查询次数</span><br><span class="line">mysql&gt; SHOW STATUS LIKE 'slow_queries';</span><br><span class="line">//（e）查看索引使用的情况：</span><br><span class="line">mysql&gt; SHOW STATUS LIKE 'handler_read%';</span><br><span class="line">//handler_read_key：这个值越高越好，越高表示使用索引查询到的次数。</span><br><span class="line">//handler_read_rnd_next：这个值越高，说明查询低效。</span><br><span class="line">//查询系统参数设置</span><br><span class="line">mysql&gt; SHOW VARIABLES LIKE '%Variables_name%';</span><br><span class="line">//显示InnoDB存储引擎的状态</span><br><span class="line">mysql&gt; SHOW ENGINE INNODB STATUS;</span><br><span class="line">//<span class="keyword">EXPLAIN</span>分析查询</span><br><span class="line">mysql&gt; <span class="keyword">EXPLAIN</span> <span class="keyword">SELECT</span> column_name <span class="keyword">FROM</span> table_name;</span><br><span class="line">//开启profile。查看当前SQL执行时间</span><br><span class="line">mysql&gt; SET PROFILING=ON;</span><br><span class="line">mysql&gt; SHOW profiles;</span><br><span class="line">//查看所有用户的当前连接。包括执行状态、是否锁表等</span><br><span class="line">mysql&gt; SHOW processlist;</span><br><span class="line">//PROCEDURE ANALYSE()取得建议</span><br><span class="line">//通过分析<span class="keyword">select</span>查询结果对现有的表的每一列给出优化的建议</span><br><span class="line">mysql&gt; <span class="keyword">SELECT</span> column_name <span class="keyword">FROM</span> table_name <span class="keyword">PROCEDURE</span> ANALYSE();</span><br><span class="line">//<span class="keyword">OPTIMIZE</span> <span class="keyword">TABLE</span>回收闲置的数据库空间</span><br><span class="line">mysql&gt; <span class="keyword">OPTIMIZE</span> <span class="keyword">TABLE</span> table_name;</span><br><span class="line">//对于MyISAM表，当表上的数据行被删除时，所占据的磁盘空间并没有立即被回收，使用命令后这些空间将被回收，并且对磁盘上的数据行进行重排（注意：是磁盘上，而非数据库）。</span><br><span class="line">//对于InnoDB表，<span class="keyword">OPTIMIZE</span> <span class="keyword">TABLE</span>被映射到<span class="keyword">ALTER</span> <span class="keyword">TABLE</span>上，这会重建表。重建操作能更新索引统计数据并释放成簇索引中的未使用的空间。</span><br><span class="line">//只需在批量删除数据行之后，或定期（每周一次或每月一次）进行一次数据表优化操作即可，只对那些特定的表运行。</span><br><span class="line">//<span class="keyword">REPAIR</span> <span class="keyword">TABLE</span>修复被破坏的表</span><br><span class="line">mysql&gt; <span class="keyword">REPAIR</span> <span class="keyword">TABLE</span> table_name;</span><br><span class="line">//<span class="keyword">CHECK</span> <span class="keyword">TABLE</span>检查表是否有错误</span><br><span class="line">mysql&gt; <span class="keyword">CHECK</span> <span class="keyword">TABLE</span> table_name;</span><br></pre></td></tr></table></figure>
+<h3 id="MYSQL-慢查询设置"><a href="#MYSQL-慢查询设置" class="headerlink" title="MYSQL 慢查询设置"></a>MYSQL 慢查询设置</h3><figure class="highlight sql"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">//查看慢查询参数，默认关闭（OFF）</span><br><span class="line">mysql&gt; show variables like '%slow_query_log%';</span><br><span class="line">//设置慢查询开关（ON）</span><br><span class="line">mysql&gt; set global slow_query_log=1;</span><br><span class="line">//查询慢查询参数（慢的标准，默认10s）</span><br><span class="line">mysql&gt; show variables like 'long_query_time%';</span><br><span class="line">//设置慢查询参数（设置之后，需要重连才能在命令行看到更改后的值）</span><br><span class="line">mysql&gt; set global long_query_time=5;</span><br><span class="line">//查看慢查询日志输出方式（FILE  OR  TABLE）</span><br><span class="line">mysql&gt; show variables like '%log_output%';</span><br><span class="line">//查询出现过errors或warnings的表（5.7以上版本可用）：</span><br><span class="line"><span class="keyword">SELECT</span> <span class="keyword">query</span>,db,exec_count,<span class="keyword">errors</span>,<span class="keyword">warnings</span>,last_seen <span class="keyword">FROM</span> sys.statements_with_errors_or_warnings <span class="keyword">ORDER</span> <span class="keyword">BY</span> <span class="keyword">errors</span> <span class="keyword">DESC</span> <span class="keyword">LIMIT</span> <span class="number">20</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="explain查询sql执行计划，各列含义："><a href="#explain查询sql执行计划，各列含义：" class="headerlink" title="explain查询sql执行计划，各列含义："></a>explain查询sql执行计划，各列含义：</h3><blockquote>
+<p>table：表名；<br>type：连接的类型<br>    -const：主键、索引；<br>    -eq_reg：主键、索引的范围查找；<br>    -ref：连接的查找（join）<br>    -range：索引的范围查找；<br>    -index：索引的扫描；<br>    -all：全表扫描；<br>possible_keys：可能用到的索引；<br>key：实际使用的索引；<br>key_len：索引的长度，越短越好；<br>ref：索引的哪一列被使用了，常数较好；<br>rows：mysql认为必须检查的用来返回请求数据的行数；<br>extra：using filesort、using temporary（常出现在使用order by时）时需要优化。<br>    -Using filesort  额外排序。看到这个的时候，查询就需要优化了<br>    -Using temporary 使用了临时表。看到这个的时候，也需要优化</p>
+</blockquote>
+<h3 id="大小写相关"><a href="#大小写相关" class="headerlink" title="大小写相关"></a>大小写相关</h3><p>MySQL在Linux下数据库名、表名、列名、别名大小写规则是这样的：<br>1）数据库名与表名是严格区分大小写的；<br>2）表的别名是严格区分大小写的；<br>3）列名与列的别名在所有的情况下均是忽略大小写的；<br>4）变量名也是严格区分大小写的；<br>5）MySQL在Windows下都不区分大小写，但是在Linux下默认是区分大小写的。<br>6）如果想在查询时区分字段值的大小写，则字段值需要设置BINARY属性，设置的方法有多种。<br>所以在不同操作系统中为了能使程序和数据库都能正常运行，最好的办法是在设计表的时候都转为小写！</p>
+<p>修改mysql为不区分大小写设置：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@test-huanqiu ~]# mysqladmin -uroot -p shutdown //以安全模式关闭数据库</span><br><span class="line">[root@test-huanqiu ~]# cat /etc/my.cnf //添加下面一行设置</span><br><span class="line">.....</span><br><span class="line">[mysqld]</span><br><span class="line">lower_case_table_names=1</span><br><span class="line">.....</span><br><span class="line">[root@test-huanqiu ~]# /etc/init.d/mysql start //启动mysql</span><br></pre></td></tr></table></figure></p>
 
           
         
@@ -506,7 +495,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/12/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/12/">12</a><span class="page-number current">13</span><a class="page-number" href="/page/14/">14</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/14/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -556,7 +545,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -652,7 +641,7 @@
     
       <span class="post-meta-item-text">网站总字数&#58;</span>
     
-    <span title="网站总字数">49.0k字</span>
+    <span title="网站总字数">51.2k字</span>
   
 </div>
 

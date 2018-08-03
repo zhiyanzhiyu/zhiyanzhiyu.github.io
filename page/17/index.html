@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/04/15/nosql-base/">
+    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/04/16/mysql-data-type/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zyzy">
@@ -327,7 +327,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/04/15/nosql-base/" itemprop="url">NoSQL理论基础</a></h1>
+                <a class="post-title-link" href="/2017/04/16/mysql-data-type/" itemprop="url">MSYQL总结之数据类型篇</a></h1>
         
 
         <div class="post-meta">
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-15T12:20:48+08:00">
-                2017-04-15
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-16T09:50:16+08:00">
+                2017-04-16
               </time>
             
 
@@ -379,7 +379,7 @@
 
           
           
-             <span id="/2017/04/15/nosql-base/" class="leancloud_visitors" data-flag-title="NoSQL理论基础">
+             <span id="/2017/04/16/mysql-data-type/" class="leancloud_visitors" data-flag-title="MSYQL总结之数据类型篇">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">字数&#58;</span>
                 
                 <span title="字数">
-                  8,067 字
+                  1,707 字
                 </span>
               
 
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  28 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -444,96 +444,58 @@
         
           
             <blockquote>
-<p>最近整理资料，看到几年前的硕士论文，题目是《基于NoSQL的BRS系统的设计与实现》，内容虽然不是多高深，但是当时也花了很多精力才完成的。不过现在很多内容都遗忘了，有点可惜，今天从其中摘录NoSQL理论基础相关的部分，重新复习一下！对了，论文主要是讲述如何利用NoSQL技术来构建UILSMP平台中的BRS模块，即一套彩票销售平台的用户路由模块。</p>
+<p>说明：本文为工作十年回顾总结系列之MYSQL之数据类型篇，主要内容为《High Performance MSYQL》第3版笔记，以及网上流传的最佳实践，作为个人知识库存档备份，相关配图来自anxpp的博客，其他文中引用不再一一说明。</p>
 </blockquote>
-<h3 id="NoSQL兴起的背景"><a href="#NoSQL兴起的背景" class="headerlink" title="NoSQL兴起的背景"></a>NoSQL兴起的背景</h3><p>NoSQL不是一个新概念，“NoSQL”这个词最早见于到1998年，但是直到2009年，NoSQL被Eric Evans用于描述非关系型数据库的特性，才是我们目前对NoSQL的普通认识。NoSQL这一技术理念的风靡和互联网的发展息息相关。在互联网发展的早期，传统的关系数据库很好的完成了它应该承担的角色，它们使用简单，功能强大，性能也不错，而且稳定性高，积累了大量的成功案例，尤其是为互联网的发展做出了卓越的贡献的MySQL，曾经是最主流的选择。</p>
-<p>最近10多年，随着互联网的快速发展，WEB2.0热潮一浪高过一浪。用户量的爆发使得热门网站的访问量的急剧上升，大部分使用MySQL架构的网站开始出现性能问题，这时大家开始使用大量的缓存技术来缓解数据库的压力，Memcached作为一个独立的分布式的缓存服务器很快流行起来，但是由于数据库的写入压力增加，Memcached只能缓解数据库的读取压力，读写集中在一个数据库上让数据库不堪重负。这时大部分网站开始使用主从复制技术来达到读写分离，以提高读写性能和读库的可扩展性，MySQL的Master-Slave模式又成为最为流行的数据库架构。然后随着Web2.0的继续高速发展，MySQL主库的写压力开始出现瓶颈，这时分表分库又成了一个热门技术。</p>
-<p>大数据量高并发环境下的MySQL应用开发越来越复杂，也越来越具有技术挑战性。虽然有一些技术实力强大的公司开发了透明的中间件层来屏蔽开发者的复杂性，但是依然避免不了整个系统架构的复杂性，并且分库分表的子库到了一定阶段又面临扩展问题。总之，传统的关系型数据库在应对WEB2.0网站尤其是超大规模和高并发的社交类型的WEB2.0动态网站时存在如下几个难以克服的问题：</p>
+<p>MSYQL支持数据类型非常丰富，支持所有标准SQL数据类型，如果算上同义词有近40种之多。常用类型主要有3类：数值类型，字符串类型和时间日期类型。</p>
+<h3 id="1-1-数值类型"><a href="#1-1-数值类型" class="headerlink" title="1.1 数值类型"></a>1.1 数值类型</h3><p>数值类型有两种，即整数（whole number）和实数（real number），而实数又分为定点数和浮点数，下面逐进行一说明。</p>
+<h4 id="1-1-1-整数类型"><a href="#1-1-1-整数类型" class="headerlink" title="1.1.1-整数类型"></a>1.1.1-整数类型</h4><p>整数类型最简单的数据类型，很好理解，无需多言。整数存储所占空间和取值范围如下表所示：<br><img src="http://od6dlhv8a.bkt.clouddn.com/2017043058152425.png" alt="整型数据取值范围"></p>
+<p><strong>选型建议：</strong></p>
 <ul>
-<li><strong>高并发读写 </strong>：社交类型的 WEB2.0网站通常要根据用户操作来实时生成动态页面，数据库并发负载要求非常高，需要要达到每秒上万次读写请求。而关系数据库在上万次SQL查询应用场景中尚可，面对上万次SQL写请求就无能为力了。</li>
-<li><strong>海量数据的存储和访问</strong>：对大型的社交类网站而言，每天都会产生海量的用户动态信息。对于关系数据库来说，在一张有几亿条数据记录的表中进行SQL查询操作，效率是非常低下甚至是不可忍受的- 高可扩展性和高可用性：在以往经典的WEB架构中，数据库往往是很难进行横向扩展的，对于需要提供24小时不间断服务的网站来说，对数据库进行升级和扩展是非常困难的事情，需要停机进行数据迁移。</li>
+<li>整数类型支持UNSIGNED属性，表示不允许有负值，表示正数范围上限提高一倍。</li>
+<li>创建数据表的时候，可以为整数类型指定宽度，如INT（11），但这没有实际意义，只用于交互工具界面显示字符个数，对于存储和计算来说，INT（1）和INT（20）是相同的；</li>
+<li>INTEGER等同INT。<h4 id="1-1-2-实数类型"><a href="#1-1-2-实数类型" class="headerlink" title="1.1.2-实数类型"></a>1.1.2-实数类型</h4>简单来说就是带小数的数字。MYSQL即支持精确类型也支持不精确类型，其中：1）定点数，DECIMAL（同NUMERIC）用于存储精确的小数；2）浮点数，FLOAT、DOUBLE和REAL类型支持使用标准的浮点运算进行近似计算；3）选型建议：<ul>
+<li>浮点和定点都可以指定精度，但是相对于定点数来说，浮点类型在存储同样范围的值时，通常比DECIMAL使用更少的空间，所以应尽量只在对小数进行精确计算时才使用DECIMAL，比如财务数据。</li>
+<li>在数据量比较大时，可考虑用BIGINT代替DECIAML，即将需要存储的货币单位根据小数的位数以相应的倍数即可，这样可避免浮点数存储计算不精确和DECIMAL精确计算代价高的问题。<br><img src="http://od6dlhv8a.bkt.clouddn.com/2017042674015677.png" alt="实数存储空间占用"></li>
 </ul>
-<p>在面对上述问题的同时，关系数据库的很多特性对于WEB2.0网站来说并不需要，例如：</p>
+</li>
+</ul>
+<h3 id="1-2字符串类型"><a href="#1-2字符串类型" class="headerlink" title="1.2字符串类型"></a>1.2字符串类型</h3><p>MYSQL支持多种字符串类型，其中VARCHAR和CHAR是两种最主要的字符串类型。</p>
 <ul>
-<li><strong>事务一致性需求</strong>：很多WEB系统并不要求严格的事务，对读一致性的需求很低，甚至某些场景对写一致性要求也不高，所以数据库事务管理反而成了数据库高负载下一个很大的负担；</li>
-<li><strong>写实时性和读实时性需求</strong>：对关系数据库而言，插入一条数据之后立刻查询是肯定可以读出来这条数据的，但是对于很多WEB应用来说并不要求这么高的实时性；</li>
-<li>复杂SQL尤其是多表关联查询需求：大数据量的WEB系统，都会回避多个大表的关联查询以及数据分析类型的复杂SQL报表查询，在实际开发过程中大多都是单表查询或者单表的简单条件分页查询，SQL的功能被刻意的回避和弱化。</li>
+<li>CHAR，固定长度，长度可为从0到255的任何值，保存时右边填充空格，检索时尾部的空格被删除掉，所以存储时字符串右边不能有空格，否则检索和比较会出问题；</li>
+<li>VARCHAR为可变长字符串，长度可以指定为0到65,535之间的值，需要一个字节来记录长度(如长度超255，则用两个字节)；</li>
+<li>BINARY和VARBINARY，和CHAR和VARCHAR类似，存储的是二进制字符串，不同之处是它们存储二进制串，没有字符集，排序和比较基于列值字节的数值；</li>
+<li>BLOB和TEXT类型，为了存储很大的数据而设计的数据类型，分别采用二进制和字符方式存储。MYSQL把BLOB和TEXT当成一个独立的对象处理，存储引擎在存储时通常会做特殊处理；</li>
+<li>枚举（ENUM）类型，枚举列可以把一些不重复的字符串存储城一个预定义的集合，在存储枚举时非常紧凑，会根据列表值的数据压缩到一个或者两个字节中；</li>
+<li>位数据类型，使用紧凑的位存储数据，这些类型不管底层存储格式和处理方式如何，从技术上来说都是字符串类型。</li>
+<li>字符串类型存储占用空间，如下图所示：<br><img src="http://od6dlhv8a.bkt.clouddn.com/2017043373514055.png" alt="字符串类型"></li>
 </ul>
-<p>总之，关系数据库在越来越多的应用场景下不再是最优的解决方案，为了解决这类问题，非关系数据库即NoSQL数据库顺应时代的需求而诞生了。</p>
-<h3 id="NoSQL数据库理论基础"><a href="#NoSQL数据库理论基础" class="headerlink" title="NoSQL数据库理论基础"></a>NoSQL数据库理论基础</h3><h4 id="CAP理论"><a href="#CAP理论" class="headerlink" title="CAP理论"></a>CAP理论</h4><p>2000年，Eric Brewer基于他在UC Berkley的理论工作以及在主持Inktomi期间积累的经验提出了CAP理论，后来Seth Gilbert 和 Nancy lynch两人证明了该理论的正确性。Brewer认为在分布式环境下设计和部署系统时，有三个核心的系统需求，分别是: Consistency（一致性），Availability（ 可用性，指快速获取数据）， Tolerance of network Partition（分区容忍性），并且这三个系统需求，最多只能同时满足两个。</p>
+<p><strong>选型建议：</strong></p>
 <ul>
-<li><strong>Consistency（一致性）</strong>，指一个服务是一致的完整操作或完全不操作[3]。具体来讲就是系统中对一个数据的读和写虽然包含多个子步骤并且会持续一段时间才能执行完，但是在调用者看来，读操作和写操作都必须是单个的即时完成的操作，不存在重叠。</li>
-<li><strong>Availability(可用性)</strong>，意味着服务是可用的（可以完成如上的操作或不完成）。Gilbert 和Lynch在其CAP定理的证明中很好地指出了，可用性通常在你最需要的时刻背弃你。网站通常在业务最繁忙的时刻挂掉，因为网站压力最大，而一个他人无法访问的服务对任何人都没有价值。</li>
-<li><strong>Partition Tolerance(分区容忍性)</strong>，如果应用和数据库运行在一个机器上，忽略规模的问题并假定代码都没问题，那么可以服务器是作为一种原子处理单元（atomic processor），这个原子处理单元要么工作要么不工作,如果down机就不可用，但不会造成数据不一致问题。而一旦开始将数据和逻辑分布在不同的系统节点上，就有形成partition的风险。假定网线被切断，partition就形成了，节点之间不能进行通讯了。</li>
+<li>VARCHAR类型用于存储可变长字符串，比定长类型更节省空间,对性能提升很有帮助，不过因为行是变长的，所以UPDATE时需要做额外的工作。所以下面的情况最好使用VARCHAR：字符串列的最大长度比平均长度大很多，列的更新很少；</li>
+<li>CHAR是定长的，所以CHAR适合存储很短的字符串，或者所有的值都接近一个长度，比如MD5值，手机号码，IP地址；</li>
+<li>因为内部会将每个值在列表中的位置保存为整数，并且按整数进行排序，所以尽量不要用数字作为ENUM枚举常量，这种双重性很容易导致混乱。</li>
 </ul>
-<p><strong>CAP 理论说在一个系统中对某个数据不存在一个算法同时满足 Consistency, Availability, Partition-tolerance三个特性</strong>，这里边最重要却又最容易被人忽略的是“对某个数据不存在一个算法”的限定词，这就是说在一个系统中可以对某些数据做到CP, 对另一些数据做到AP，就算是对同一个数据调用者也可以指定不同的算法，其中某些算法可以做到 CP，而另外一些算法可以做到 AP。 要做到 CP系统可以把这个数据只放在一个节点上，其他节点收到请求后向这个节点读或写数据并返回结果,串行化是可以满足这种要求的，但是如果报文可以任意丢失的话，接受请求的节点就可能永远不返回结果,要做到CA，一个现实的例子就是使用单点的数据库,要做到AP系统只要每次对写都返回成功，对读返回固定的某个值就可以了。如果系统关心的是C，则需要处理写操作失败的情形，而如果系统关注的A，那么读操作可能不能准确的读到写操作写入的最新值。因此系统的关注点不同，采用的相应策略也是不同的，只有真正的理解了系统的实际需求才能更好的利用CAP理论。对大型分布式系统尤其是WEB系统，A与P优先级要高于C，在系统设计过程中一般都会朝着 AP 的方向进行设计，然后利用其它技术手段来保证对于C的需求。</p>
-<h4 id="最终一致性理论"><a href="#最终一致性理论" class="headerlink" title="最终一致性理论"></a>最终一致性理论</h4><p>在介绍CPA理论的时候,我们明确了一个不容忍网络分割的系统可以实现数据的一致性和可用性，即可以做到CA，这通常是用事务来实现的，即客户端和存储系统必须在同一个环境中，他们在特定的情况下作为一个整体失败，只有这样客户端才看不到网络分割。但是一个重要的事实是，在大型的分布式系统中，网络分割是难免的，因此这时数据的一致性和可用性就无法同时满足，这意味着我们必须做出选择，即放松一致性的要求，在网络分割的情况下允许系统保持可用性，或者要求严格的一致性，并接受某些时候系统不可用的结果。<br>目前，大部分基于云的应用程序都倾向于可用性和分区容错性，通常不保证一致性，至少是即时的一致性，只要系统所有节点能够做到最终一致性就可以。<strong>最终一致性在牺牲了即时一致性的同时，使得系统能够得到恒定且扩展性极高的数据访问，事务处理会保证按既定的顺序执行，但是并不保证会立即反映到所有节点上。在一致性方面，所获得的惟一保证是所有节点上的数据最终会被同步。</strong></p>
-<h4 id="BASE理论"><a href="#BASE理论" class="headerlink" title="BASE理论"></a>BASE理论</h4><p><strong>BASE是指Basically Available（基本可用）、Soft-State（软状态/柔性事务）和Eventually Consistent（最终一致性），是对CAP中的AP的延伸。</strong>在分布式环境中CAP只能取两者，因为网络分区的存在对可用性有着重要影响并且不可避免，所以互联网中的分布式系统大多会在一致性方面做一些平衡。虽然不能达到强一致性，但可以根据实际应用的需求特点采用适当的手段来达到满足业务需求的一致性效果，即我们这里所说的最终一致性。在具体实现上，可以结合同步和异步多种策略、SQL+NOSQL多种存储方案来满足应用需求。在单机环境中ACID是数据的属性，而在分布式环境中BASE就是数据的属性。单机环境对数据有着比较高的要求，而在分布式环境中因为网络分区性以及各种复杂特性，对数据也只能做基本的要求了。<br>从关系型数据库的ACID理论到NoSQL的CAP、最终一致性和BASE理论，从单机系统到大的分布式系统，从SQL到NOSQL，互联网应用的大规模发展促使我们不断创造可替代旧方案的新技术。对于NoSQL数据库与关系型数据库的差别，可以做如下简单总结：</p>
+<h3 id="1-3-日期和时间类型"><a href="#1-3-日期和时间类型" class="headerlink" title="1.3 日期和时间类型"></a>1.3 日期和时间类型</h3><p>MYSQL有很多类型来保存日期和时间，DATE，TIME，DATETIME，TIMESTAMP，YEAR，并且大部分时间类型都没有替代品，不存在什么最佳选择，根据实际需要选择即可。</p>
 <ul>
-<li>NoSQL数据库的数据模型通常与实际需求更贴近。通常使用关系型数据库时，需要关心的问题是“数据库能提供哪些功能”，而NoSQL模型关心得更多的是“可以解决哪些问题”。</li>
-<li>使用NoSQL数据模型，需要对存储的内部结构和实现算法有一定的了解,需要自己处理数据结构解析和数据的冗余复制问题。</li>
+<li>DATETIME，同时包含日期和时间信息，以’YYYY-MM-DD HH:MM:SS’格式检索和显示，支持的范围为’1000-01-0100:00:00’到’9999-12-31 23:59:59’；</li>
+<li>DATE，只有日期值，使用’YYYY-MM-DD’格式检索和显示，支持的范围是’1000-01-01’到’9999-12-31’；</li>
+<li>TIMESTAMP，包含日期和时间，范围’1970-01-0100:00:01’UTC到’2038-01-1903:14:07’UTC；</li>
+<li>TIME，以’HH:MM:SS’格式检索和显示(或对于大的小时值采用’HHH:MM:SS’格式)，范围可以从’-838:59:59’到’838:59:59’；</li>
+<li>YEAR，一个单字节类型，以YYYY格式检索和显示YEAR值，范围是1901到2155。<br><img src="http://od6dlhv8a.bkt.clouddn.com/201704534776567.png" alt=""></li>
 </ul>
-<h3 id="NoSQL数据模型"><a href="#NoSQL数据模型" class="headerlink" title="NoSQL数据模型"></a>NoSQL数据模型</h3><p>在前面的章节里面,重点关注的是NoSQL这一技术理念兴起的一些理论基础中，而本节内容系统地对NoSQL数据模型进行一些探讨。NoSQL数据模型大体上可以划分为下面几类：Key-Value存储、类BigTable数据库、文档数据库，全文索引引擎以及图数据库,下面对几种类型进行简述：</p>
+<p><strong>选型建议</strong></p>
 <ul>
-<li><strong>Key-Value模型</strong>，是最简单也是最方便使用的数据模型，它支持简单的key对value的键值存储和提取。</li>
-<li><strong>有序Key-Value模型</strong>，一个大问题是它通常是由HashTable实现，所以无法进行范围查询，所以有序Key-Value模型就出现了，有序Key-Value可以支持范围查询。</li>
-<li><strong>类BigTable模型</strong>，虽然有序Key-Value模型能够解决范围查询和问题，但是其Value依然是无结构的二进制码或纯字符串，通常我们只能在应用层去解析相应的结构。而类BigTable的数据模型，能够支持结构化的数据，包括列，列簇，时间戳和版本控制等元数据的存储。</li>
-<li><strong>文档型存储</strong>，相对类BigTable存储又有两个大的提升，一是其Value值支持复杂的结构定义，二是支持数据库索引的定义。</li>
-<li><strong>全文索引模型</strong>，与文档型存储的主要区别在于文档型存储的索引主要是按照字段名来组织的，而全文索引模型是按字段的具体值来组织的。</li>
-<li><strong>图数据库模型</strong>也可以看作是从Key-Value模型发展出来的一个分支，不同的是它的数据之间有着广泛的关联，并且这种模型支持图的算法。</li>
+<li>除特殊行为之后，通常应该使用TIMESTAMP，因为它比DATETIME空间效率更高；</li>
+<li>用整数保存时间戳的格式通常不方便处理，不推荐这样做；</li>
+<li>存储比秒更小粒度的日期和时间怎么办？可以用BIGINT存储微妙级别的时间戳，或者使用DOUBLE存储秒之后的小数部分。</li>
 </ul>
-<h3 id="NoSQL主流产品"><a href="#NoSQL主流产品" class="headerlink" title="NoSQL主流产品"></a>NoSQL主流产品</h3><p>Google为解决大数据的存储与计算而提出的GFS + Bigtable + Map Reduce应该是最早的NoSQL产品了，后来Hadoop、 Hypertable、Memcached，Tokyo cabinet，Redis,Dynamo，MongoDB,Cassandra等等NoSQL产品纷纷被推出，使得NoSQL技术理念广泛应用于互联网行业的各个关键领域,本节将对主流的NoSQL产品进行简述。</p>
-<h4 id="Redis"><a href="#Redis" class="headerlink" title="Redis"></a>Redis</h4><p>Redis（Remote Dictionary Server）是一个由Salvatore Sanfilippo开发的key-value存储系统，和Memcached有些类似，但是它支持存储的value类型更多，包括string(字符串)、list(链表)、set(集合)和zset(有序集合)。这些数据类型都支持push/pop、add/remove及取交集并集和差集等更丰富的操作，而且这些操作都是原子性的,并且在此基础上还支持各种不同方式的排序操作。</p>
-<h4 id="HBase"><a href="#HBase" class="headerlink" title="HBase"></a>HBase</h4><p>HBase–Hadoop 是一个高可靠性、高性能、面向列、可伸缩的分布式存储系统，利用HBase技术可在廉价PC服务器上搭建大规模结构化存储集群系统。HBase是Google Bigtable的开源实现，在具体使用过程中，可以利用Hadoop HDFS作为其文件存储系统，利用Hadoop MapReduce来处理HBase中的海量数据；利用Zookeeper作为协同服务。</p>
-<h4 id="Apache-Lucene"><a href="#Apache-Lucene" class="headerlink" title="Apache Lucene"></a>Apache Lucene</h4><p>Lucene 是Apache软件基金会一个全文检索引擎工具包，由Doug Cutting开发并捐献给Apache，Lucene的设计初衷是为软件开发人员提供一个简单易用的工具包，以方便的在系统中实现全文检索的功能，或者是以此为基础建立起完整的全文检索引擎，为各种中小型企业应用提供全文检索功能。</p>
-<h4 id="Neo4j"><a href="#Neo4j" class="headerlink" title="Neo4j"></a>Neo4j</h4><p>Neo是一个面向网络的数据库产品,也就是说它是一个嵌入式的、基于磁盘的、具备完全的事务特性的Java持久化引擎。Neo将结构化数据存储在网络上而不是表中，网络是一个十分灵活的数据结构，可以适应更加敏捷和快速的开发模式。</p>
-<h4 id="MongoDB"><a href="#MongoDB" class="headerlink" title="MongoDB"></a>MongoDB</h4><p>MongoDB一款介于关系数据库和非关系数据库之间的NoSQL产品，是非关系数据库当中最像关系数据库产品的，本文后续章节会详细介绍这一NoSQL产品。</p>
-<h3 id="NoSQL产品选择"><a href="#NoSQL产品选择" class="headerlink" title="NoSQL产品选择"></a>NoSQL产品选择</h3><p>虽然NoSQL这一技术理念发展已经比较成熟，也有了一批很成熟产品可供选择，但是在系统中如果选用NoSQL产品，考虑到目前大多数NoSQL产品的健壮性,稳定性欠佳，在使用过程中的学习成本，维护成本都不容忽视，存在着一定的风险。对于是否采用NoSQL这一技术理念以及采用哪一款产品都需要系统架构师进行谨慎的思考，下面提供一些选择思路：</p>
+<h3 id="几个通用的选型原则"><a href="#几个通用的选型原则" class="headerlink" title="几个通用的选型原则"></a>几个通用的选型原则</h3><p>除了上面各个类型中的“选型建议”，还有几条通用的原则：</p>
 <ul>
-<li>关注系统的应用场景，而对应用场景的考虑要回到数据本身，考虑数据是否方便查询、管理和维护。由于NoSQL的产品设计思路和实现方式和传统的关系型数据库不同，不同的NoSQL产品有其自身侧重的方向，比如HandlerSocket、TTserver和Redis侧重Key-Value的高效读写效率，MongoDB侧重文档型的数据存储结构，HBase则是需要存储海量数据的BigTable实现。所以只有更深刻了解系统的应用场景，在此基础上尽量选择合适的并且是自身比较熟悉的NoSQL产品。在这技术发展日新月异的时代，新的产品和技术不断涌现，我们需要不断的权衡取舍，以能解决我们工作中的实际问题为出发点来做出选型，而不是盲目跟风，为了尝试新技术而采用新技术的做法是不可取的。只有我们有能力驾驭了新技术，新技术才能真正的为我所有，从而为产品创造价值。如果某一应用场景的数据本身是存在关系的,比如是基于系统用户的数据,关系数据库可能仍然是最佳的选择,完全可以满足系统的商业需求，没有必要刻意使用NoSQL产品。</li>
-<li>如果确定要使用NoSQL产品，可以考虑采用跟随策略，向大的互联网公司看齐，通过调查业内比较著名的互联网公司的成功案例，并且尽可能的借鉴他们的设计方案，可以很好的规避一部分风险。比如新浪微博大规模使用Redis就是一个很好的案例,而Yahooh,Baidu大规模使用Hadoop也是一个很不错的可借鉴对象。</li>
-<li>考察产品是否有稳定的团队维护以及开源社区是否活跃。目前很多的NoSQL产品都沦为了个人产品，版本很少更新，不断爆发的出来的问题得不到及时的解决，所以一旦在架构中选择了这种产品，对系统的建设将是一个非常被动的局面。</li>
-<li>NoSQL技术相关产品的出现很大程度上是为了伸缩性(可扩展性)出现的，是为了海量应用出现的(海量按目前的市场,至少得20亿+) ,而不是一种通用的key-value应用。所以实现NoSQL产品(模型)有很多,但是尽量选用对可扩展性和海量数据支持比较好的产品。</li>
-<li>NoSQL产品的安全也是一个非常重要的因素。很多时候我们认为系统内网是可靠的，但是一旦内网被攻破而使得系统暴露于外网，则系统会面临很大的风险。事实上，因为系统选择的防火墙的稳定性和防攻击能力都可能欠佳,如果选用了在安全方面做得不好NoSQL产品,意味着系统数据的极大风险，所以在安全性在NoSQL的技术选型上是非常重要的一个方面。<br>基于上述选择标准和各个NoSQL产品的功能特性对比,在UILSMP平台的架构中我们决定选用MongoDB这一NoSQL产品，之所以选择MongoDB是因为它本身具有的一些功能特性和UILSMP平台的BRS模块应用场景非常契合，在后面章节的系统设计中，会进行具体说明。</li>
+<li>更小的通常更好，尽量使用可以正确存储数据的最小数据类型，例如如果只存0-200，则tinyint unsigned更好，因为它们占用更少的磁盘，内存和CPU处理时间。不过要预见性，确保存储值的范围不超过；</li>
+<li>简单就好，简单数据类型操作需要更少的CPU时间，比如整型比字符串类型操作代价更低，存储时间用内置数据类型比字符串更好；</li>
+<li>尽量避免Null，尽量指定NotNull，因为Null值使得索引，索引统计和值的比较都更加复杂；</li>
+<li>只分配真正需要的空间，可归入第一条，因为更长的列会消耗更多的内存，尤其是使用内存临时表进行排序或操作时会提别糟糕，最好的策略是只分配真正的需要空间。</li>
 </ul>
-<h3 id="NoSQL产品的主流设计模式"><a href="#NoSQL产品的主流设计模式" class="headerlink" title="NoSQL产品的主流设计模式"></a>NoSQL产品的主流设计模式</h3><p>在众多采用NoSQL技术的互联网应用中，有三种比较主流的模式：</p>
-<ul>
-<li><strong>以NoSQL为辅</strong>，这种模式不改变原有的以MySQL或Oracle作为存储的架构，使用NoSQL作为辅助镜像存储，用NoSQL的优势辅助提升性能。</li>
-<li><strong>以NoSQL为主</strong>，就是系统中完全采用NoSQL作为数据源来存储数据，在这种以NoSQL为数据源的架构中，最核心的就是NoSQL数据库的复制功能的实现。而当前的几乎所有的NoSQL都没有提供比较易于使用的复制接口来完成这种架构，对NoSQL进行复制协议的二次开发，需要更高的技术水平，所以这种架构看起来很好，但是却不是非常容易实现的。</li>
-<li><strong>以NoSQL作为缓存</strong>，大部分互联网应用的特点都是数据访问有热点，只有一部分数据是被频繁访问的。所以我们可以利用NoSQL来做数据的缓存。其实NoSQL数据库内部也是通过内存缓存来提高性能的，通过一些比较好的算法，把热点数据进行内存cache，而非热点数据则存储到磁盘以节省内存占用。由于其数据库结构的简单，从磁盘获取一次数 据也比从数据库一次耗时的查询划算很多。用NoSQL数据库做缓存服务器不但具有不错的性能。而且还能够Cache比内存大的数据。</li>
-</ul>
-<p>从UILSMP系统层面来开，我们采用了第（1）种以NoSQL为辅的模式，系统用户数据和交易数据仍然存储在Oracle这一关系型数据库中，只是在系统某一模块的设计上采用了NoSQL技术，可以算作是一个辅助手段。从BRS单独一个模块来块来看，我们采用了第（2）种以NoSQL为主的模式，将用户和业务中心的路由信息完全存放在MongoDB这一NoSQL数据库中，完全没有其他关系型数据库的参与。</p>
-<h3 id="为什么选择MongoDB？"><a href="#为什么选择MongoDB？" class="headerlink" title="为什么选择MongoDB？"></a>为什么选择MongoDB？</h3><p>从前文对MongoDB的简述中可以知道，MongoDB是一个处于关系数据库和非关系数据库之间的数据库产品，是NoSQL数据库中最类似关系数据库的。具体来讲，MongoDB具有如下特点：</p>
-<ul>
-<li><strong>数据类型丰富</strong>：MongoDB是面向文档数据库，所谓的“文档”可以跟关系数据库中的原来“行”概念进行类比。一条记录就可以表示非常复杂的层次关系，因为面向文档的方式可以将文档或者数组进行内嵌。MongoDB没有模式的概念，文档的键不会事先定义也不会固定不变。由于没有模式需要更改，应用层可以处理新增或者丢失的键，这样开发者可以非常容易地变更数据模型。因为这种模式自由的理念，我们不需要知道存储在MongoDB数据库中文件的任何结构定义。根据实际需要我们可以把不同结构的文件存储在同一个数据库里。</li>
-<li><strong>功能丰富强大</strong>：MongoDB除了拥有其他数据库产品所拥有的功能特性之外，还拥有一些独特的功能特性。比如MongoDB支持通用辅助索引，能进行多种快速查询，也提供唯一的、复合的地理空间索引能力，MongoDB可以自己直接在服务端存取JavaScript的函数和值。当然有些关系型数据库的常见功能MongoDB并不具备，比如联接（join）和复杂的多行事务，这种考虑是为了提高扩展性，因为这两个功能很难在一个分布式系统上实现。</li>
-<li><strong>性能非常卓越</strong>：MongoDB尽可能地将服务器所处理的逻辑交给客户端，这样精简的设计使得MongoDB获得了非常好的性能。性能是MongoDB的主要设计目标，围绕这个目标MongoDB在设计上还有很多独特的考虑，比如MongoDB使用了MongoDB传输协议作为与服务器交互的主要方式，极大减少了系统开销。</li>
-<li><strong>分布式支持良好</strong>：自动分片以支持云级别的伸缩性，支持服务器之间的数据复制，支持主-从模式及服务器之间的相互复制，复制的主要目标是提供冗余及自动故障转移。</li>
-<li><strong>可扩展性良好</strong>：开发者可以专注编写应用，不用考虑如何扩展。因为扩展问题是MongoDB设计之初就考虑到的，MongoDB可以自动在多台服务器之间分割数据，还可以平衡集群的数据和负载并且自动重排文档。如果系统需要更大的容量，只需要在集群中添加新服务器节点，然后让MongoDB数据库来自动处理剩下的事情。</li>
-<li><strong>管理十分方便</strong>：MongoDB的数据模型对开发者来说非常友好，配置选项对于管理员来说也很轻松，并有驱动程序和数据库shell提供的自然语言式的API，会让使用者关注编程本身而不是为存储数据烦恼。MongoDB尽量让服务器自治来简化数据库的管理，除了启动数据库服务器之外，几乎没有什么必要的管理操作。如果主服务器挂掉了，MongoDB会自动切换到备份服务器上，并且将备份服务器提升为活跃服务器。在分布式的环境下，集群只需要知道有新增加的节点，就会自动集成和配置新节点。MongoDB的管理理念就是尽可能地让服务器自动配置，让用户能在需要的时候整体设置。</li>
-</ul>
-<p>在键/值存储方式（提供了高性能和高度伸缩性）以及传统的RDBMS系统（丰富的功能）架起一座桥梁是MongoDB的主要设计目标，根据官方网站的描述，MongoDB适合用于以下场景：</p>
-<ul>
-<li><strong>网站数据</strong>：MongoDB非常适合实时的插入、更新与查询，并具备网站实时数据存储所需的复制及高度伸缩性。</li>
-<li><strong>缓存</strong>：由于其高性能，MongoDB非常适合作为数据获取的缓存层。</li>
-<li><strong>大尺寸低价值数据</strong>：使用传统的关系型数据库存储此类数据会比较昂贵，可以考虑使用MongoDB来存储此类数据。</li>
-<li><strong>高伸缩性场景</strong>：MongoDB非常适合由数十或数百台服务器组成的数据库，MongoDB的路线图中已经包含对MapReduce引擎的内置支持。</li>
-<li><strong>用于对象及JSON数据的存储</strong>：MongoDB的BSON数据格式非常适合文档化格式的存储及查询。</li>
-</ul>
-<p>当然，MongoDB在某些场景的使用上也会有一些限制，例如下面的几个场景就不适合使用MongoDB：</p>
-<ul>
-<li><strong>高度事务性的系统</strong>：例如银行或会计系统。传统的关系型数据库目前还是更适用于需要大量原子性事务的应用程序。</li>
-<li><strong>传统的商业智能应用</strong>：针对特定问题的BI数据库会对产生高度优化的查询方式。对于此类应用，数据仓库可能是更合适的选择。</li>
-<li><strong>需要SQL的场景</strong>，即说存储的数据之间关系性比较强，这种场景更适合使用关系型数据库。</li>
-</ul>
-<h3 id="MongoDB数据结构设计"><a href="#MongoDB数据结构设计" class="headerlink" title="MongoDB数据结构设计"></a>MongoDB数据结构设计</h3><p>在设计MongoDB数据库里面存储的数据之前，首先需要明确MongoDB的几个基本概念：</p>
-<ul>
-<li><strong>文档</strong>，文档是MongoDB中数据的基本单元，多个键极其关联的值有序地放置在一起便是文档，这非常类似于关系数据库中的行，但是比行要复杂的多。MongoDB文档有几个特点：文档中的键/值是有序的；文档中的值不仅可以是在双引号里面的字符串，还可以是其他几种数据类型，甚至是整个嵌入的问的文档；还要注意的是MongoDB不但区分类型，还区分大小写。</li>
-<li><strong>集合就是一组文档</strong>。档类似于关系数据库中的行，集合类似关系数据库中的表。集合是无模式的，一个集合里面的文档可以是各式各样的。</li>
-<li>MongoDB中多个集合可以组成数据库。一个MongoDB实例可以有多个数据库，相互之间可以是完全独立的，每个数据库都有独立的权限控制，不同数据库放置在磁盘的不同文件中。</li>
-</ul>
-<p>在本系统中，需要在MongoDB中存储数据是用户和业务中心的路由信息，则文档结构可以设计如下：{“username”:”zhangsan”,”icard”:”310105197800384325”,”route”:”biz1”}<br>在MongoDB中存储的文档中必须有一个”_id”键，这个键可以是任何类型，默认为ObjectId对象。在一个集合里面，每个文档都有唯一的“_id”值，来确保集合里面每个文档都能被唯一标识。如果有两个集合的话,两个集合可以都有一个值为123的“_id”的键，但是每个集合里面只能有一个“_id”是123的文档。ObjectId是“_id”的默认类型，它设计成轻量型的，不同的机器都能用全局唯一的同种方法方便生成它，MongoDB之所以采用ObjectId作为主键而不是其他比较常规的做法，因为在多个服务器上同步自动增加主键既费力还费时。MongoDB从一开始就设计用来作为分布式数据库,处理多个节点是一个核心要求。</p>
-<p>如果插入文档的时候没有”_id”键，系统会自动创建一个，可以由MongoDB服务器来做这件事情，但是通常会在客户端程序完成，原因如下：虽然ObjectId被设计成轻量型的，非常易于生成，但是毕竟还是会产生系统开销，而在客户端生成则提现了MongoDB的设计理念，能从服务器端转移到驱动程序来做的事情就尽量让客户端来做。这种理念的背后有着这样一个基本事实，即便是像MongoDB这样的可扩展数据库，扩展应用层也要比扩展数据库层容易的多，将事务交给客户端来处理，就减轻了数据库扩展的负担。另外,ObjectId使用12字节的存储空间，每个字节两位十六进制数字，是一个24位的字符串,是“_id”是为了保持文档的唯一性而存在的。在UILSMP-BRS的所要存储的数据中，彩民用户名和彩民省份证都是唯一存在的，所以在UILSMP-BRS的MongoDB存储的数据中,不必使用ObjectId作为“_id”默认值，而是直接使用用户名作为“_id”的值，另外键“icard”和“route”也可以用更为简短的“id”和“rt”,这样可以更加节省存储空间，则文档设计可以优化成为：{“_id”:”zhangsan”,”id”:”310105197800384325”,”rt”:”biz1”}。</p>
 
           
         
@@ -577,7 +539,7 @@
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/18/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/16/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/16/">16</a><span class="page-number current">17</span><a class="page-number" href="/page/18/">18</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/18/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -627,7 +589,7 @@
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -723,7 +685,7 @@
     
       <span class="post-meta-item-text">网站总字数&#58;</span>
     
-    <span title="网站总字数">49.0k字</span>
+    <span title="网站总字数">51.2k字</span>
   
 </div>
 

@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/11/29/mysql-reset-pwd/">
+    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2018/01/02/ai-ml-000-introduction/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zyzy">
@@ -327,7 +327,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/11/29/mysql-reset-pwd/" itemprop="url">MacOS下MySQL密码重置</a></h1>
+                <a class="post-title-link" href="/2018/01/02/ai-ml-000-introduction/" itemprop="url">ML000.机器学习入门</a></h1>
         
 
         <div class="post-meta">
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-11-29T18:03:23+08:00">
-                2017-11-29
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-02T13:31:11+08:00">
+                2018-01-02
               </time>
             
 
@@ -362,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/数据库/" itemprop="url" rel="index">
-                    <span itemprop="name">数据库</span>
+                  <a href="/categories/机器学习/" itemprop="url" rel="index">
+                    <span itemprop="name">机器学习</span>
                   </a>
                 </span>
 
@@ -379,7 +379,7 @@
 
           
           
-             <span id="/2017/11/29/mysql-reset-pwd/" class="leancloud_visitors" data-flag-title="MacOS下MySQL密码重置">
+             <span id="/2018/01/02/ai-ml-000-introduction/" class="leancloud_visitors" data-flag-title="ML000.机器学习入门">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">字数&#58;</span>
                 
                 <span title="字数">
-                  399 字
+                  1,626 字
                 </span>
               
 
@@ -420,7 +420,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  2 分钟
+                  6 分钟
                 </span>
               
             </div>
@@ -443,47 +443,43 @@
       
         
           
-            <p>关于Mac上MySQL的密码重置，网上有很多说明，参照着试了一下，多有错误，整理备份之，供需要者参考。</p>
-<h3 id="1-关掉MySQL"><a href="#1-关掉MySQL" class="headerlink" title="1.关掉MySQL"></a>1.关掉MySQL</h3><p>可以通过系统偏好设置进行关闭，或者使用命令行。在Mac OS X启动和停止MySQL服务的命令如下：</p>
-<pre><code>//启动MySQL服务
-sudo /usr/local/mysql/support-files/mysql.server start
-//停止MySQL服务
-sudo /usr/local/mysql/support-files/mysql.server stop
-//重启MySQL服务
-sudo /usr/local/mysql/support-files/mysql.server restart
-</code></pre><h3 id="2-Safe模式启动Mysql"><a href="#2-Safe模式启动Mysql" class="headerlink" title="2.Safe模式启动Mysql"></a>2.Safe模式启动Mysql</h3><p>在终端中，进入Mysql目录，使用安全模式启动，禁止Mysql的验证功能，命令如下：</p>
-<pre><code>cd /usr/local/mysql/bin/
-sudo su  
-./mysqld_safe --skip-grant-tables &amp;
-</code></pre><h3 id="3-更新密码"><a href="#3-更新密码" class="headerlink" title="3.更新密码"></a>3.更新密码</h3><p>   上一步是安全模式启动，可以直接登录Mysql，执行如下命令：</p>
-<pre><code>./mysql
-</code></pre><p>在MySQL命令行中执行更新密码的SQL：</p>
-<pre><code>mysql&gt;FLUSH PRIVILEGES;
-mysql&gt;UPDATE mysql.user
-SET authentication_string=PASSWORD(&apos;123456&apos;)
-WHERE user=&apos;root&apos;;
-Query OK, 0 rows affected, 1 warning (0.00 sec)
-Rows matched: 1  Changed: 0  Warnings: 1
-</code></pre><h3 id="4-正常模式启动Mysql"><a href="#4-正常模式启动Mysql" class="headerlink" title="4.正常模式启动Mysql"></a>4.正常模式启动Mysql</h3><p>关闭Mysql后正常模式启动，可以用新设置的密码登录MySQL。</p>
-<pre><code>sh-3.2# sudo /usr/local/mysql/support-files/mysql.server stop
-Shutting down MySQL
-...
-SUCCESS!
-[1]+  Done                    ./mysqld_safe --skip-grant-tables
-sh-3.2#
-sh-3.2# mysql -uroot -p
-Enter password:
-Welcome to the MySQL monitor.  Commands end with ; or \g.
-Your MySQL connection id is 21
-.....//提示信息省略
-Type &apos;help;&apos; or &apos;\h&apos; for help. Type &apos;\c&apos; to clear the current input statement.
-</code></pre><h3 id="5-重设密码"><a href="#5-重设密码" class="headerlink" title="5.重设密码"></a>5.重设密码</h3><p>登录MySQL之后，在MySQL命令行中执行如下命令：</p>
-<pre><code>mysql&gt; use mysql
-ERROR 1820 (HY000): You must reset your password using
-ALTER USER statement before executing this statement.
-mysql&gt; SET PASSWORD = PASSWORD(&apos;123456&apos;);
-Query OK, 0 rows affected, 1 warning (0.00 sec)
-</code></pre><p>操作完成。</p>
+            <blockquote>
+<p>Machine Learing学习笔记，主要参考Andrew Ng、李宏毅等大牛的课程和书籍。本文是000篇之<strong>机器学习入门</strong>，主要内容是机器学习的概念等基础知识。</p>
+</blockquote>
+<p>AI今年实在太火，每天都能搞出大事情！从去年就计划学习相关知识，还尝试了几次，但每次看点入门知识就放弃了，因为内容确实有点难，感觉智商不太够用，/(ㄒoㄒ)/~~。不过形势所迫，不玩点有难度的早晚要沦落成diduan人口，被AI这玩意驱逐出地球。哎，为了全人类，还是破釜沉舟背水一战吧！</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-072625.jpg" alt="作为程序员的你，感受到压力没？"></p>
+<p>最近找了很多资料，看了好几个公开课，比较流行的有大神Andrew NG在Coursera的机器学习课程，以及台湾李宏毅教授的课程，都比较适合初学者。我会参考这几个课程和其他参考书，结合自己的学习情况，整理一个大纲和笔记。</p>
+<h4 id="1-机器学习入门"><a href="#1-机器学习入门" class="headerlink" title="1 机器学习入门"></a>1 机器学习入门</h4><p><strong>1.1机器学习被用来做什么？</strong></p>
+<p>机器学习已经得到了很广泛的应用，比如谷狗，度娘的搜索技术，Facebook或Apple的图片分类程序，电子邮件垃圾邮件筛选器等等。Andrew Ng的课程中演示了一个自动飞行器，这让我们相信汽车自动驾驶时代很快就会到来。</p>
+<p><strong>1.2机器学习为什么越来越流行?</strong></p>
+<p>目前机器学习不只用于人工智能领域，它已经成为计算机一种新的能力(NewCapability），应用于很多方面，课程中提到了数据挖掘，自动化技术，理解人类思维了解人类大脑等等。下面是一个稍微详细点的分类，说明了机器学习涉及到领域：</p>
+<ul>
+<li><strong>模式识别</strong> 可以认为模式识别就是机器学习，模式识别是从工业界发展起来的概念，而机器学习则强调计算机学科。</li>
+<li><strong>数据挖掘</strong> 数据挖掘=机器学习+数据库。数据挖掘仅仅是一种思考方式，不必神话之。</li>
+<li><strong>统计学习</strong>  统计学的目的是通过学习更多的潜在模式和关联关系，来帮助人类深入理解数据。 统计学习近似于机器学习，与机器学习高度重合，统计学的发展促进了机器学习的大发展，但是两者侧重点不同。统计学习重点关注统计模型的发展优化，偏数学，而机器学习关注实际问题的解决，偏实际。</li>
+<li><strong>计算机视觉</strong> 计算机视觉 = 图像处理+机器学习。</li>
+<li><strong>语音识别</strong> 语音识别 = 语音处理+机器学习，即音频处理技术与机器学习的结合。</li>
+<li><strong>自然语言处理</strong>自然语言处理 = 文本处理 + 机器学习。自然语言处理是让机器理解人类语言的学科，词法分析，语义理解，机器学习等。</li>
+</ul>
+<p>提到数据挖掘和大数据，有这样一种观点：<strong>成功的机器学习应用不是拥有最好的算法，而是拥有更多的数据。</strong>随着大数据概念的兴起，机器学习和大数据愈发耦合，可以说大数据是机器学习应用的最佳场景，二者互相依赖，共同发展。<strong>大数据的核心是利用数据的价值，机器学习则是利用数据价值的关键技术。 </strong></p>
+<h4 id="2-机器学习是什么？"><a href="#2-机器学习是什么？" class="headerlink" title="2 机器学习是什么？"></a>2 机器学习是什么？</h4><p>通俗来讲，机器学习就是教机器自己来完成任务，就这么简单。</p>
+<p>机器学习目前不存在被广泛认可的定义，但有两个可以参考：</p>
+<p><strong>2.1 Arthur Samuel(1959)：</strong>在没有明确编程情况下，使计算机能够主动学习研究的领域【原文参考：Field of study that gives computers the ability to learn without being explicitly programmed.】。值得一提的是Arthur Samuel编写了最早的阿尔法狗，不过下的国际象棋；</p>
+<p><strong>2.2 Tom Mitchell(1998)：</strong>一个程序能从经验 E 中学习，解决任务 T，达到性能度量值 P，当且仅当有了经验 E 后，经过 P 评判，程序在处理 T 时的性能有所提升，这就是机器学习【原文参考：A computer program is said to learn from experience E with respect to some task T and some performance measure P, if its performance on T, as measured by P, improves with experience E.】。</p>
+<p>其中第二个定义正式一点，还押韵。具体到下棋的例子：经验E是程序自我练习的经验，而任务T就是下棋，性能度量值P就是它在与新的对手比赛时赢得比赛的概率。Ng课后测验里面有几题目测试对这个定义的理解，其中一道大意是：<strong>天气预报中，T，P，E分别是什么？</strong></p>
+<p>在本小节中，Andrew NG提到了对各种工具应该采取何种态度？值得强调，既：拥有合适的工具很重要，但更重要的是：<strong>你要学会如何恰当地使用这些工具，会用与不会用的人之间存在着鸿沟。</strong></p>
+<h4 id="3-几个容易混淆的概念"><a href="#3-几个容易混淆的概念" class="headerlink" title="3 几个容易混淆的概念"></a>3 几个容易混淆的概念</h4><p>初学者可能会被AI，ML和DL这三个概念搞糊涂，贴张让人神清气爽的图。</p>
+<p><img src="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-05-31-073315.jpg" alt=""></p>
+<p>AI是最早的一个概念，发展一波三折：</p>
+<ul>
+<li>从时间是上来讲，人工智能出现最早，机器学习和深度学习近些年才出现的。</li>
+<li>从逻辑上来讲，人工智能是目标，机器学习和深度学习是实现手段。相对机器学习而言，深度学习听起来高大上，但概并不神秘，就是传统神经网络发展到了多隐藏层的情况。</li>
+</ul>
+<h3 id="4-如何学习机器学习"><a href="#4-如何学习机器学习" class="headerlink" title="4 如何学习机器学习"></a>4 如何学习机器学习</h3><p>因为是新手，这个问题暂时回答不了，不过随着时间的推移，我相信可以给出自己的建议。</p>
+<p>首先是编程语言的选择：</p>
+<blockquote>
+<p>构想一个合适的机器学习方法，从来都不是一个瀑布式的过程，相反你需要反复分析，在各色各样的机器学习算法中尝试不同版本的输入数据，这种探索方式非常适合Python。作为一门解释性高级语言，Python似乎就是专门为尝试不同事物而设计的。【机器学习系统设计 P2】</p>
+</blockquote>
 
           
         
@@ -527,7 +523,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/6/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/6/">6</a><span class="page-number current">7</span><a class="page-number" href="/page/8/">8</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/8/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -577,7 +573,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -673,7 +669,7 @@ Query OK, 0 rows affected, 1 warning (0.00 sec)
     
       <span class="post-meta-item-text">网站总字数&#58;</span>
     
-    <span title="网站总字数">49.0k字</span>
+    <span title="网站总字数">51.2k字</span>
   
 </div>
 

@@ -75,7 +75,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="ML,AI,机器学习,统计学习,线性回归," />
 
 
 
@@ -88,17 +88,25 @@
 
 
 
-<meta name="description" content="AI已降临，你准备好了吗?">
-<meta name="keywords" content="程序员 AI 深度学习 ML 志哥 志言志语">
-<meta property="og:type" content="website">
-<meta property="og:title" content="智言智语">
-<meta property="og:url" content="http://zhiyanzhiyu.net.cn/page/2/index.html">
+<meta name="description" content="Python机器学习入门 本文是《机器学习系统设计》第01章读书笔记，主要是几个入门概念，重点介绍了一个实例。  机器学习就是教机器自己来完成任务，就这么简单。复杂性源于细节。 1 机器学习与Python1.举例：每日处理邮件的工作； 2.机器学习和统计学的关系，非常密切； 3.Python是机器学习最佳拍档。构建机器学习方法不是瀑布式过程，需要反复分析，尝试各种算法，这种探索式的编程方式非常适合">
+<meta name="keywords" content="ML,AI,机器学习,统计学习,线性回归">
+<meta property="og:type" content="article">
+<meta property="og:title" content="机器学习系统设计第一章读书笔记">
+<meta property="og:url" content="http://zhiyanzhiyu.net.cn/2018/07/30/bmlsp-note-ch01/index.html">
 <meta property="og:site_name" content="智言智语">
-<meta property="og:description" content="AI已降临，你准备好了吗?">
+<meta property="og:description" content="Python机器学习入门 本文是《机器学习系统设计》第01章读书笔记，主要是几个入门概念，重点介绍了一个实例。  机器学习就是教机器自己来完成任务，就这么简单。复杂性源于细节。 1 机器学习与Python1.举例：每日处理邮件的工作； 2.机器学习和统计学的关系，非常密切； 3.Python是机器学习最佳拍档。构建机器学习方法不是瀑布式过程，需要反复分析，尝试各种算法，这种探索式的编程方式非常适合">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-08-03-042443.png">
+<meta property="og:image" content="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-08-03-050754.png">
+<meta property="og:image" content="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-08-03-051926.png">
+<meta property="og:image" content="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-08-03-052453.png">
+<meta property="og:image" content="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-08-03-064352.png">
+<meta property="og:image" content="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-08-03-065406.png">
+<meta property="og:updated_time" content="2018-08-03T07:15:58.147Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="智言智语">
-<meta name="twitter:description" content="AI已降临，你准备好了吗?">
+<meta name="twitter:title" content="机器学习系统设计第一章读书笔记">
+<meta name="twitter:description" content="Python机器学习入门 本文是《机器学习系统设计》第01章读书笔记，主要是几个入门概念，重点介绍了一个实例。  机器学习就是教机器自己来完成任务，就这么简单。复杂性源于细节。 1 机器学习与Python1.举例：每日处理邮件的工作； 2.机器学习和统计学的关系，非常密切； 3.Python是机器学习最佳拍档。构建机器学习方法不是瀑布式过程，需要反复分析，尝试各种算法，这种探索式的编程方式非常适合">
+<meta name="twitter:image" content="http://p245ozkyf.bkt.clouddn.com/zyzydoc/2018-08-03-042443.png">
 
 
 
@@ -128,13 +136,13 @@
 
 
 
-  <link rel="canonical" href="http://zhiyanzhiyu.net.cn/page/2/"/>
+  <link rel="canonical" href="http://zhiyanzhiyu.net.cn/2018/07/30/bmlsp-note-ch01/"/>
 
 
 
 
 
-  <title>智言智语</title>
+  <title>机器学习系统设计第一章读书笔记 | 智言智语</title>
   
 
 
@@ -153,8 +161,7 @@
     
   
 
-  <div class="container sidebar-position-left 
-  page-home">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <a href="https://github.com/zhiyanzhiyu"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_green_007200.png" alt="Fork me on GitHub"></a>
@@ -293,9 +300,9 @@
         <div class="content-wrap">
           <div id="content" class="content">
             
-  <section id="posts" class="posts-expand">
+
+  <div id="posts" class="posts-expand">
     
-      
 
   
 
@@ -325,9 +332,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">
-                
-                <a class="post-title-link" href="/2018/07/30/bmlsp-note-ch01/" itemprop="url">机器学习系统设计第一章读书笔记</a></h1>
+          <h1 class="post-title" itemprop="name headline">机器学习系统设计第一章读书笔记</h1>
         
 
         <div class="post-meta">
@@ -392,6 +397,11 @@
           
 
           
+            <span class="post-meta-divider">|</span>
+            <span class="page-pv"><i class="fa fa-file-o"></i>
+            <span class="busuanzi-value" id="busuanzi_value_page_pv" ></span>
+            </span>
+          
 
           
             <div class="post-wordcount">
@@ -441,9 +451,7 @@
       
 
       
-        
-          
-            <h2 id="Python机器学习入门"><a href="#Python机器学习入门" class="headerlink" title="Python机器学习入门"></a>Python机器学习入门</h2><blockquote>
+        <h2 id="Python机器学习入门"><a href="#Python机器学习入门" class="headerlink" title="Python机器学习入门"></a>Python机器学习入门</h2><blockquote>
 <p>本文是《机器学习系统设计》第01章读书笔记，主要是几个入门概念，重点介绍了一个实例。</p>
 </blockquote>
 <p>机器学习就是教机器自己来完成任务，就这么简单。复杂性源于细节。</p>
@@ -501,8 +509,6 @@
 <li>正确设置实验的重要性，不要把训练数据和测试数据混在一起。</li>
 </ul>
 
-          
-        
       
     </div>
     
@@ -511,24 +517,112 @@
 
     <div>
     
+    
+<div>
+    
+        <div style="text-align:center;color: #ccc;font-size:14px;">-------------本文结束<i class="fa fa-paw"></i>感谢您的阅读!-------------</div>
+    
+</div>
+    
     </div>
 
     
 
     
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>为了好看，(∩_∩)O哈哈~！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
 
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wxpay.png" alt="Zyzy 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+      <div id="alipay" style="display: inline-block">
+        <img id="alipay_qr" src="/images/alipay.png" alt="Zyzy 支付宝"/>
+        <p>支付宝</p>
+      </div>
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+      <div>
+        <ul class="post-copyright">
+  <li class="post-copyright-author">
+    <strong>本文作者：</strong>
+    Zyzy
+  </li>
+  <li class="post-copyright-link">
+    <strong>本文链接：</strong>
+    <a href="http://zhiyanzhiyu.net.cn/2018/07/30/bmlsp-note-ch01/" title="机器学习系统设计第一章读书笔记">http://zhiyanzhiyu.net.cn/2018/07/30/bmlsp-note-ch01/</a>
+  </li>
+  <li class="post-copyright-license">
+    <strong>版权声明： </strong>
+    本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/3.0/" rel="external nofollow" target="_blank">CC BY-NC-SA 3.0</a> 许可协议。转载请注明出处！
+  </li>
+</ul>
+
+      </div>
     
 
     <footer class="post-footer">
       
-
+        <div class="post-tags">
+          
+            <a href="/tags/ML/" rel="tag"># ML</a>
+          
+            <a href="/tags/AI/" rel="tag"># AI</a>
+          
+            <a href="/tags/机器学习/" rel="tag"># 机器学习</a>
+          
+            <a href="/tags/统计学习/" rel="tag"># 统计学习</a>
+          
+            <a href="/tags/线性回归/" rel="tag"># 线性回归</a>
+          
+        </div>
       
 
       
+      
+      
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/07/30/ai-ml-002-statisical-ml-outline/" rel="next" title="ML002.统计学习方法概论">
+                <i class="fa fa-chevron-left"></i> ML002.统计学习方法概论
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/07/30/ai-ml-003-single-regression/" rel="prev" title="ML003.单变量线性回归">
+                ML003.单变量线性回归 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
       
-        <div class="post-eof"></div>
+
+      
       
     </footer>
   </div>
@@ -538,14 +632,11 @@
   </article>
 
 
-    
-  </section>
 
-  
-  <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/3/"><i class="fa fa-angle-right"></i></a>
-  </nav>
-
+    <div class="post-spread">
+      
+    </div>
+  </div>
 
 
           </div>
@@ -553,6 +644,13 @@
 
 
           
+
+  
+    <div id="gitalk-container"></div>
+
+  
+
+
 
         </div>
         
@@ -573,8 +671,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -661,6 +768,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#Python机器学习入门"><span class="nav-number">1.</span> <span class="nav-text">Python机器学习入门</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#1-机器学习与Python"><span class="nav-number">1.1.</span> <span class="nav-text">1 机器学习与Python</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#2-本书教什么"><span class="nav-number">1.2.</span> <span class="nav-text">2.本书教什么?</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#3-遇到困难怎么办？"><span class="nav-number">1.3.</span> <span class="nav-text">3.遇到困难怎么办？</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#4-开始"><span class="nav-number">1.4.</span> <span class="nav-text">4. 开始</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#4-1-NumPy-SciPy和Matplotlib简介"><span class="nav-number">1.4.1.</span> <span class="nav-text">4.1 NumPy,SciPy和Matplotlib简介</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-2-安装Python"><span class="nav-number">1.4.2.</span> <span class="nav-text">4.2 安装Python</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-3使用NumPy和SciPy智能地高效处理数据"><span class="nav-number">1.4.3.</span> <span class="nav-text">4.3使用NumPy和SciPy智能地高效处理数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#4-4-学习NumPy"><span class="nav-number">1.4.4.</span> <span class="nav-text">4.4 学习NumPy</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#5-我们第一个机器学习应用"><span class="nav-number">1.5.</span> <span class="nav-text">5.我们第一个机器学习应用</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#5-1-读取数据"><span class="nav-number">1.5.1.</span> <span class="nav-text">5.1 读取数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-2-预处理和清洗数据"><span class="nav-number">1.5.2.</span> <span class="nav-text">5.2 预处理和清洗数据</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#5-3-选择正确的模型和学习算法"><span class="nav-number">1.5.3.</span> <span class="nav-text">5.3 选择正确的模型和学习算法</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#5-3-1-误差"><span class="nav-number">1.5.3.1.</span> <span class="nav-text">5.3.1 误差</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-3-2-从一条简单直线开始"><span class="nav-number">1.5.3.2.</span> <span class="nav-text">5.3.2 从一条简单直线开始</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-3-3-一些高级话题"><span class="nav-number">1.5.3.3.</span> <span class="nav-text">5.3.3 一些高级话题</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-3-4-以进为退-另眼看数据"><span class="nav-number">1.5.3.4.</span> <span class="nav-text">5.3.4 以进为退-另眼看数据</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-3-5-训练与测试"><span class="nav-number">1.5.3.5.</span> <span class="nav-text">5.3.5 训练与测试</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#5-3-6-回答最初的问题"><span class="nav-number">1.5.3.6.</span> <span class="nav-text">5.3.6 回答最初的问题</span></a></li></ol></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#6-小结"><span class="nav-number">1.6.</span> <span class="nav-text">6.小结</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -830,6 +953,10 @@
 
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
 
   
 
@@ -870,6 +997,21 @@
 
 
 
+
+  <link rel="stylesheet" href="https://unpkg.com/gitalk/dist/gitalk.css">
+  <script src="https://unpkg.com/gitalk/dist/gitalk.min.js"></script>
+   <script type="text/javascript">
+        var gitalk = new Gitalk({
+          clientID: 'db8367ec7edcff995bab',
+          clientSecret: '12f2274d1cb32e7468deb0f180d669314b844b81',
+          repo: 'zhiyanzhiyu.github.io',
+          owner: 'zhiyanzhiyu',
+          admin: ['zhiyanzhiyu'],
+          id: location.pathname,
+          distractionFreeMode: 'true'
+        })
+        gitalk.render('gitalk-container')           
+       </script>
 
 
   

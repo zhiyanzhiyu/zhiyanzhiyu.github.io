@@ -308,7 +308,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/04/18/linux-project-deployment-record/">
+    <link itemprop="mainEntityOfPage" href="http://zhiyanzhiyu.net.cn/2017/05/06/java-enum-notes/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Zyzy">
@@ -327,7 +327,7 @@
         
           <h1 class="post-title" itemprop="name headline">
                 
-                <a class="post-title-link" href="/2017/04/18/linux-project-deployment-record/" itemprop="url">Linux项目部署总结</a></h1>
+                <a class="post-title-link" href="/2017/05/06/java-enum-notes/" itemprop="url">Java枚举使用总结</a></h1>
         
 
         <div class="post-meta">
@@ -339,8 +339,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-04-18T15:43:07+08:00">
-                2017-04-18
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-05-06T16:28:36+08:00">
+                2017-05-06
               </time>
             
 
@@ -362,8 +362,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/运维/" itemprop="url" rel="index">
-                    <span itemprop="name">运维</span>
+                  <a href="/categories/编程语言/" itemprop="url" rel="index">
+                    <span itemprop="name">编程语言</span>
                   </a>
                 </span>
 
@@ -379,7 +379,7 @@
 
           
           
-             <span id="/2017/04/18/linux-project-deployment-record/" class="leancloud_visitors" data-flag-title="Linux项目部署总结">
+             <span id="/2017/05/06/java-enum-notes/" class="leancloud_visitors" data-flag-title="Java枚举使用总结">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -404,7 +404,7 @@
                   <span class="post-meta-item-text">字数&#58;</span>
                 
                 <span title="字数">
-                  1,248 字
+                  1,734 字
                 </span>
               
 
@@ -443,22 +443,46 @@
       
         
           
-            <h3 id="Mysql相关"><a href="#Mysql相关" class="headerlink" title="Mysql相关"></a>Mysql相关</h3><p>Mysql采用RPM的方式安装，安装过程碰到了几个问题。</p>
-<h4 id="启动用户的问题"><a href="#启动用户的问题" class="headerlink" title="启动用户的问题"></a>启动用户的问题</h4><p>第一个问题是执行mysqld -initialize的时候，报如下错误：[ERROR] Fatal error: Please read “Security” section of the manual to find out how to run mysqld as root!<br>这是因为在测试的时候，使用root来启动的。而从安全角度来讲，不建议用root用户启动。在my.cnf中指定用户：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">[mysqld]</span><br><span class="line">user=mysql</span><br></pre></td></tr></table></figure></p>
-<h4 id="SELinux导致启动失败"><a href="#SELinux导致启动失败" class="headerlink" title="SELinux导致启动失败"></a>SELinux导致启动失败</h4><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Initializing MySQL database:  mysqld: Can not create directory /data/mysql/ (Errcode: 17 - File exists)</span><br><span class="line">2016-09-20T01:51:47.062108Z 0 [Warning] TIMESTAMP with implicit DEFAULT value is deprecated.</span><br><span class="line">Please use --explicit_defaults_for_timestamp server option (see documentation for more details).</span><br><span class="line">2016-09-20T01:51:47.064457Z 0 [ERROR] Aborting</span><br><span class="line">[FAILED]</span><br></pre></td></tr></table></figure>
-<p>确认datadir 目录属主 属组均为mysql 用户，应该不是用户权限的问题，这时想起SELinux 默认是开启状态，会不会是SELinux 的问题，为了确认问题，临时关闭SELINUX<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">#</span>setenforce 0</span><br></pre></td></tr></table></figure></p>
-<p>一段时间之后，机器被重启，MYSQL启动的时候又起不了了，报如下错误：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">2017-05-18T07:25:02.333924Z 0 [ERROR] InnoDB: Operating system error number 13 in a file operation.</span><br><span class="line">2017-05-18T07:25:02.333944Z 0 [ERROR] InnoDB: The error means mysqld does not have the access rights to the directory.</span><br><span class="line">2017-05-18T07:25:02.333952Z 0 [ERROR] InnoDB: os_file_get_status() failed on ./ibdata1. Cant determine file permissions</span><br><span class="line">2017-05-18T07:25:02.333961Z 0 [ERROR] InnoDB: Plugin initialization aborted with error Generic error</span><br><span class="line">2017-05-18T07:25:02.974436Z 0 [ERROR] Plugin 'InnoDB' init function returned error.</span><br><span class="line">2017-05-18T07:25:02.974455Z 0 [ERROR] Plugin 'InnoDB' registration as a STORAGE ENGINE failed.</span><br><span class="line">2017-05-18T07:25:02.974463Z 0 [ERROR] Failed to initialize plugins.</span><br><span class="line">2017-05-18T07:25:02.974469Z 0 [ERROR] Aborting</span><br></pre></td></tr></table></figure></p>
-<p>问题同样是因为SELinux没有关闭导致的。</p>
-<h4 id="字符集配置的问题"><a href="#字符集配置的问题" class="headerlink" title="字符集配置的问题"></a>字符集配置的问题</h4><p>启动失败，LOG中报错。原来在5.1版本时，为了解决中文乱码问题设置默认字符集为utf8时，在my.cnf内的 [mysql] 和 [mysqld] 项中都是写：default-character-set=utf8 ，到了5.5版本以后的版本， [mysql] 项内可以这么写， [mysqld] 项内不能再这么写了，而是必须写：character-set-server=utf8，否则报错。  </p>
-<h4 id="root账号默认密码的问题"><a href="#root账号默认密码的问题" class="headerlink" title="root账号默认密码的问题"></a>root账号默认密码的问题</h4><p>在低于Mysql 5.7.6的版本上，Mysql是使用mysql_install_db命令初始化数据库的，该命令会在安装Mysql的用户根目录下创建一个.mysql_secret文件，该文件记录了初始化生成的随机密码，用户可使用改密码登录Mysql并重新修改密码。对于Mysql 5.7.6以后的5.7系列版本，Mysql使用mysqld –initialize或mysqld –initialize-insecure命令来初始化数据库，后者可以不生成随机密码。但是安装Mysql时默认使用的是前一个命令，这个命令也会生成一个随机密码。改密码保存在了Mysql的日志文件中。在Centos 7系统上使用rpm命令安装Mysql后，mysql的配置文件是/etc/my.cnf，打开该文件，可以看到mysql的datadir和log文件等的配置信息，如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">datadir=/var/lib/mysql</span><br><span class="line">log-error=/var/log/mysqld.log</span><br></pre></td></tr></table></figure></p>
-<p>打开/var/log/mysqld.log文件，搜索字符串A temporary password is generated for root@localhost:，可以找到这个随机密码，通常这一行日志在log文件的最初几行，比较容易看到。<br>使用找到的随机密码登录mysql，首次登录后，mysql要比必须修改默认密码，否则不能执行任何其他数据库操作，这样体现了不断增强的Mysql安全性。<br>用临时密码登录之后，使用下面的语句修改默认密码： SET PASSWORD = PASSWORD(‘new password’);</p>
-<h3 id="软件编译安装问题"><a href="#软件编译安装问题" class="headerlink" title="软件编译安装问题"></a>软件编译安装问题</h3><p>configure: error: no acceptable C compiler found in $PATH See <code>c
-configure: error: no acceptable C compiler found in $PATH See</code>config.log’ for more details.你的机器里没有安装任何C语言编译器，可以安装gcc。 可以在安装盘里找到gcc相关的包进行安装，不过会比较繁琐，因为关联的包会比较多。 如果可以上网，使用yum安装是比较好的选择： yum install gcc<br>可是执行<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">[root@localhost ~]# yum -y install gcc</span><br><span class="line">Loaded plugins: katello, product-id, security, subscription-manager</span><br><span class="line">Updating certificate-based repositories.</span><br><span class="line">Unable to read consumer identity</span><br><span class="line">Setting up Install Process</span><br><span class="line">No package gcc available.</span><br><span class="line">Nothing to do</span><br></pre></td></tr></table></figure></p>
-<p>如果是这种情况，可以换一个repo,比如163或者aliyun的，执行完成之后再执行：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">yum -y install gcc</span><br><span class="line">yum install -y gcc gcc-c++</span><br></pre></td></tr></table></figure></p>
-<h3 id="Nginx相关"><a href="#Nginx相关" class="headerlink" title="Nginx相关"></a>Nginx相关</h3><h4 id="Nginx-error-while-loading-shared-libraries-libpcre-so-1解决"><a href="#Nginx-error-while-loading-shared-libraries-libpcre-so-1解决" class="headerlink" title="Nginx: error while loading shared libraries: libpcre.so.1解决"></a>Nginx: error while loading shared libraries: libpcre.so.1解决</h4><p>[xxxx conf]# /usr/local/nginx/sbin/nginx<br>/usr/local/nginx/sbin/nginx: error while loading shared libraries: libpcre.so.1: cannot open shared object file: No such file or directory  </p>
-<p>确认已经安装PCRE:<br>[xxxx lib]$ cd /lib<br>[xxxx lib]$ ls <em>pcre</em><br>libpcre.so.0  libpcre.so.0.0.1<br>[xxxx nginx]$ find / -type f -name <em>libpcre.so.</em>   </p>
-<p>添加软链接:ln -s /lib/libpcre.so.0.0.1 /lib/libpcre.so.1<br>前面在一般的linux上可以解决此问题.</p>
-<p>在有的操作系统上面,安装pcre后,安装的位置为/usr/local/lib/<em>pcre</em><br>在redhat 64位机器上, nginx可能读取的pcre文件为/lib64/libpcre.so.1文件.<br>所以在改用下面的软连接: ln -s /usr/local/lib/libpcre.so.1 /lib64/</p>
+            <blockquote>
+<p>题记：本文为工作十年回顾总结系列之Java语言之枚举篇，主要内容为《Thinking in Java 》第四版和《Effective Java》第二版的阅读笔记，网上流传的最佳实践，以及个人工作总结的杂糅汇总，作为个人知识库存档备份，文中引用不再一一说明。</p>
+</blockquote>
+<h3 id="基础语法"><a href="#基础语法" class="headerlink" title="基础语法"></a>基础语法</h3><p>enum:可以将一组具名的值的有限集合创建为一种新的类型，这些具名的值可以作为常规程序组件使用。尽管enum看起来像是一种数据类型，但这个关键字只是为enum生成对应的类型时产生了某些编译器行为，所以在很大程度上，可以将enum当作其他任何类来处理。</p>
+<h4 id="常用方法"><a href="#常用方法" class="headerlink" title="常用方法"></a>常用方法</h4><p>事实上enum确实是类，并且具有自己的方法。比如：</p>
+<ul>
+<li>toString()，某个enum实例的名字；</li>
+<li>ordinal()，某个特定常量的声明顺序；</li>
+<li>static values()，按照常量的声明顺序，产生由这些常量构成的数组；</li>
+<li>getDeclaringClass()方法，返回所属的enum类。</li>
+<li>equals()和hashCode()，可以用==比较</li>
+<li>compareTo()，实现了Comparable接口，所以有该方法</li>
+<li>name()和toString()功能相同</li>
+<li>valueOf()</li>
+</ul>
+<p>enum可以添加方法，如果定义自己的方法，必须先定义enum实例序列，而且实例序列最后添加一个分号，再定义方法。<br>enum的values()是由编译器添加的static方法，如果将enum向上转型为Enum，那么values()方法就访问不到了。不过在Class中有一个getEnumConstants()方法，可以获取所有enum实例。</p>
+<h4 id="如何组织枚举？"><a href="#如何组织枚举？" class="headerlink" title="如何组织枚举？"></a>如何组织枚举？</h4><p>所有enum都继承自java.lang.Enum类。由于Java不支持多重继承，所以你的enum不能再继承其他类。但是可以同时实现一个或多个接口。虽然无法从enum继承子类（即无法扩展enum中元素，或者使用子类将enum元素分类），可能方案有：</p>
+<ul>
+<li>在一个接口内部，创建实现该接口的枚举，以此将元素进行分组，可以达到将枚举元素分类组织的目的。</li>
+<li>如果类型太多，则可以创建一个新的enum，然后用其实例包装接口中的每一个enum类。</li>
+<li>一个enum嵌套在另一个enum中。<br>-<h4 id="EnumSet"><a href="#EnumSet" class="headerlink" title="EnumSet"></a>EnumSet</h4></li>
+</ul>
+<p>Set是一种集合，只能向其中添加不重复的对象，而enum也要求其成员都是唯一的，所以enum看起来也有集合的行为。EnumSet是通过enum创建了一种替代品，替代基于传统的位标志，这种标志可以用来表示某种开关信息。EnumSet非常快速高效，优点是在说明一个二进制位是否存在时，具有更好的表达能力，并且无需担心性能。</p>
+<h4 id="EnumMap"><a href="#EnumMap" class="headerlink" title="EnumMap"></a>EnumMap</h4><p>EnumMap是一种特殊的Map,它要求其中的键（key），必须来自一个enum，其他操作与一般Map差不多。enum的每个实例作为一个键，总是存在的。但是如果没有为这个键调用put()方法来存入响应的值，其对应值就是null。与常量相关的方法相比，EnumMap有一个优点，允许改变值对象，而常量相关的方法在编译期就被固定了。</p>
+<h3 id="enum用途"><a href="#enum用途" class="headerlink" title="enum用途"></a>enum用途</h3><h4 id="在switch语句中使用"><a href="#在switch语句中使用" class="headerlink" title="在switch语句中使用"></a>在switch语句中使用</h4><p>enum有一个特别有用的特性，可以在switch语句中使用。由于switch是要在有限的可能值集合中进行选择，因此它与enum是绝佳的选择。而且在case语句中可以不用enum类型修饰enum实例。</p>
+<h4 id="随机选取"><a href="#随机选取" class="headerlink" title="随机选取"></a>随机选取</h4><p>从enum随机选取，可以利用泛型简化，使这个工作一般化。enum可以消除很多重复代码，重复会制造麻烦，因此消除重复总是有意的。</p>
+<h4 id="常量相关的方法"><a href="#常量相关的方法" class="headerlink" title="常量相关的方法"></a>常量相关的方法</h4><p>enum有一个非常有趣的特性，允许程序员为enum实例编写方法，从而为每个enum实例赋予各自不同的行为。要实现常量相关的方法，需要为enum定义一个或多个abstract方法，然后为每个enum实例实现该抽象方法。</p>
+<h4 id="使用enum的职责链"><a href="#使用enum的职责链" class="headerlink" title="使用enum的职责链"></a>使用enum的职责链</h4><p>在职责链（Chain Of Responsibility）设计模式中，程序员以多种不同的方式来解决一个问题，然后将他们链接在一起，当一个请求到来时，它遍历这个链，直到链中的某个解决方案能够处理该请求。通过常量相关的方法，可以很容易实现一个简单的职责链，比如邮局确认死信的过程。</p>
+<h4 id="使用enum的状态机"><a href="#使用enum的状态机" class="headerlink" title="使用enum的状态机"></a>使用enum的状态机</h4><p>枚举类型非常适合来创建状态机，一个状态机可以具有有限定个特定的状态，它通常根据输入，从一个状态转移到另一个状态，不过也可能存在瞬时状态(transient states),而一旦任务执行结束，状态机会立即离开瞬时状态。由于enum对其实例有严格限制，非常适合用来表现不同的状态和输入。一般而言，每个状态都具有一些相关的输出。比如自动售货机。</p>
+<h4 id="多路分发"><a href="#多路分发" class="headerlink" title="多路分发"></a>多路分发</h4><p>当处理多种交互类型时，程序会变得相当复杂。比如一个系统要分析和执行数学表达，a.plus(b)时，你并不知道a或b的确切类型，如何正确交互呢？Java只支持单路分发，也就是说如果要执行操作包含了不止一个类型未知的对象时，那么Java的动态绑定行为只能处理其中一个类型。解决上述问题的方法是多路分发，而实现多路分发有下面几种途径：</p>
+<ul>
+<li>常规方法</li>
+<li>使用enum分发</li>
+<li>使用常量相关的方法</li>
+<li>使用EnumMap分发</li>
+<li>使用二维数组</li>
+</ul>
+<h3 id="Effective-java-中几条使用建议"><a href="#Effective-java-中几条使用建议" class="headerlink" title="Effective java 中几条使用建议"></a>Effective java 中几条使用建议</h3><h4 id="第30条：用enum代替int常量"><a href="#第30条：用enum代替int常量" class="headerlink" title="第30条：用enum代替int常量"></a>第30条：用enum代替int常量</h4><h4 id="第31条：用实例域代替序数"><a href="#第31条：用实例域代替序数" class="headerlink" title="第31条：用实例域代替序数"></a>第31条：用实例域代替序数</h4><p>永远不要根据枚举的序数导出与它关联的值，而是将它保存在一个实例域中。大多数程序员不需要用ordinal方法，它是用于设计EnumSet和EnumMap这种基于枚举的通用数据结构的。</p>
+<h4 id="第32条：用EnumSet代替位域"><a href="#第32条：用EnumSet代替位域" class="headerlink" title="第32条：用EnumSet代替位域"></a>第32条：用EnumSet代替位域</h4><h4 id="第33条：用EnumMap代替序数索引"><a href="#第33条：用EnumMap代替序数索引" class="headerlink" title="第33条：用EnumMap代替序数索引"></a>第33条：用EnumMap代替序数索引</h4><h4 id="第34条：用接口模拟可伸缩的枚举"><a href="#第34条：用接口模拟可伸缩的枚举" class="headerlink" title="第34条：用接口模拟可伸缩的枚举"></a>第34条：用接口模拟可伸缩的枚举</h4><p>虽然无法编写可扩展的枚举类型，但是可以通过编写接口以及实现该接口的基础枚举类型，对它进行模拟。</p>
+<h3 id="最后的总结"><a href="#最后的总结" class="headerlink" title="最后的总结"></a>最后的总结</h3><p>总结虽然枚举类型本身不复杂，是一个小功能，但是它可以优雅而干净地解决问题。优雅和清晰很重要，正是它们区别了成功的解决方案与失败的解决方案，而失败的解决方案就是因为其他人无法理解它。</p>
 
           
         
@@ -502,7 +526,7 @@ configure: error: no acceptable C compiler found in $PATH See</code>config.log�
 
   
   <nav class="pagination">
-    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/24/">24</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
+    <a class="extend prev" rel="prev" href="/page/14/"><i class="fa fa-angle-left"></i></a><a class="page-number" href="/">1</a><span class="space">&hellip;</span><a class="page-number" href="/page/14/">14</a><span class="page-number current">15</span><a class="page-number" href="/page/16/">16</a><span class="space">&hellip;</span><a class="page-number" href="/page/25/">25</a><a class="extend next" rel="next" href="/page/16/"><i class="fa fa-angle-right"></i></a>
   </nav>
 
 
@@ -552,7 +576,7 @@ configure: error: no acceptable C compiler found in $PATH See</code>config.log�
               
                 <a href="/archives">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -648,7 +672,7 @@ configure: error: no acceptable C compiler found in $PATH See</code>config.log�
     
       <span class="post-meta-item-text">网站总字数&#58;</span>
     
-    <span title="网站总字数">49.0k字</span>
+    <span title="网站总字数">51.2k字</span>
   
 </div>
 
